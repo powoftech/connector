@@ -1,126 +1,125 @@
+import logo from '@/app/logo.svg'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
+import {
+  FaBriefcase,
+  FaGamepad,
+  FaLaptop,
+  FaNewspaper,
+  FaPlay,
+  FaUsers
+} from 'react-icons/fa'
 
-export default function Page() {
+export default async function Page() {
+  // await new Promise((resolve) => setTimeout(resolve, 1000))
+
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 sm:p-20">
-      <main className="row-start-2 flex flex-col items-center gap-8 sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-center text-sm sm:text-left">
-          <li className="mb-2">
-            Get started by editing{' '}
-            <code className="rounded bg-black/[.05] px-1 py-0.5 font-mono font-semibold dark:bg-white/[.06]">
-              src/app/page.tsx
-            </code>
-            .
+    <>
+      {/* Header */}
+      <nav className="relative m-auto flex max-w-6xl flex-wrap items-center justify-between px-4 py-3 md:flex-nowrap">
+        <Link
+          href="/"
+          className="z-0 mr-auto flex min-h-12 items-center md:z-[100]"
+        >
+          <span className="sr-only">Connector</span>
+          <div className="order-1 flex items-center gap-x-2">
+            <Image
+              src={logo}
+              alt="Connector Logo"
+              className="h-12 w-12 dark:invert"
+              priority
+            />
+            <h1 className="hidden text-2xl font-bold md:block w-44">Connector</h1>
+          </div>
+        </Link>
+        <ul className="order-last ml-auto flex w-full items-center justify-between overflow-x-auto pt-2 md:order-3 md:w-max md:justify-start md:pt-0">
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-16 flex-col items-center justify-center text-neutral-500 hover:text-primary md:mx-2"
+            >
+              <FaUsers className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                People
+              </span>
+            </Link>
           </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex flex-col items-center gap-4 sm:flex-row">
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-16 flex-col items-center justify-center text-neutral-500 hover:text-primary md:mx-2"
+            >
+              <FaBriefcase className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                Jobs
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-16 flex-col items-center justify-center text-neutral-500 hover:text-primary md:mx-2"
+            >
+              <FaNewspaper className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                Articles
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-16 flex-col items-center justify-center text-neutral-500 hover:text-primary md:mx-2"
+            >
+              <FaPlay className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                Learning
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-16 flex-col items-center justify-center text-neutral-500 hover:text-primary md:mx-2"
+            >
+              <FaGamepad className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                Games
+              </span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/"
+              className="mx-0 flex min-h-12 w-24 flex-col items-center justify-center border-l-[1px] border-r-0 border-solid border-border px-2 text-neutral-500 hover:text-primary md:mx-2 md:border-r-[1px]"
+            >
+              <FaLaptop className="flex h-6 w-6 flex-shrink-0 justify-center" />
+              <span className="text-center text-xs font-normal leading-tight">
+                Get the app
+              </span>
+            </Link>
+          </li>
+        </ul>
+        <div className="order-3 flex min-w-24 flex-shrink-0 flex-wrap justify-end gap-x-2 md:flex-nowrap">
           <Link
-            className={buttonVariants({ variant: 'default' })}
-            href="https://vercel.com/new"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/signin"
+            className={`${buttonVariants({ variant: 'outline' })} ml-6 h-min min-h-12 px-6 py-3 text-center text-base font-semibold`}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
+            Sign in
           </Link>
           <Link
-            className={buttonVariants({ variant: 'outline' })}
-            href="https://nextjs.org/docs"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/signup"
+            className={`${buttonVariants({ variant: 'default' })} h-min min-h-12 px-6 py-3 text-center text-base font-semibold`}
           >
-            Read our docs
+            Join now
           </Link>
-          {/* <Link
-            className="flex h-10 items-center justify-center gap-2 rounded-full border border-solid border-transparent bg-foreground px-4 text-sm text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] sm:h-12 sm:px-5 sm:text-base"
-            href="https://vercel.com/new"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </Link>
-          <Link
-            className="flex h-10 items-center justify-center rounded-full border border-solid border-black/[.08] px-4 text-sm transition-colors hover:border-transparent hover:bg-[#f2f2f2] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] sm:h-12 sm:min-w-44 sm:px-5 sm:text-base"
-            href="https://nextjs.org/docs"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </Link> */}
         </div>
-      </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </nav>
+      {/* Content */}
+      <div>
+        <p>Content</p>
+      </div>
+    </>
   )
 }

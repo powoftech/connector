@@ -14,6 +14,16 @@ const config: Config = {
         sans: ['var(--font-inter)'],
         mono: ['var(--font-roboto-mono)'],
       },
+      width: {
+        '128': '32rem',
+      },
+      // fontSize: {
+      //   base: '1.125rem',
+      // },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+      },
+      // shadcn/ui configuration below
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
