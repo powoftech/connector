@@ -49,7 +49,7 @@ export default function Page() {
           </a>
         </div>
       </main>
-      <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
+      {/* <footer className="row-start-3 flex flex-wrap items-center justify-center gap-6">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn"
@@ -95,7 +95,7 @@ export default function Page() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }
