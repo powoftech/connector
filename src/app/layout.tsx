@@ -17,8 +17,11 @@ const roboto_mono = Roboto_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Connector',
-  description: 'Employment-focused social media platform',
+  title: {
+    template: '%s | Connector',
+    default: 'Connector: Sign In or Sign Up',
+  },
+  description: 'Employment-Focused Social Media Platform',
 }
 
 export default function RootLayout({
@@ -35,7 +38,7 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
