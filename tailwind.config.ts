@@ -10,9 +10,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        "mobile": "425px",
+      },
       fontFamily: {
         sans: ['var(--font-inter)'],
         mono: ['var(--font-roboto-mono)'],
+        title: ['var(--font-oswald)'],
       },
       width: {
         '128': '32rem',

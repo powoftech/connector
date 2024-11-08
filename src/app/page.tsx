@@ -1,39 +1,46 @@
-import logo from '@/app/logo.svg'
+import { BannerLight } from '@/app/_images/banners'
+import { Logo } from '@/app/_images/logo'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
-import {
-  FaBriefcase,
-  FaGamepad,
-  FaLaptop,
-  FaNewspaper,
-  FaPlay,
-  FaUsers
-} from 'react-icons/fa'
+import { FaGoogle, FaMicrosoft } from 'react-icons/fa'
+// import {
+//   FaBriefcase,
+//   FaGamepad,
+//   FaLaptop,
+//   FaNewspaper,
+//   FaPlay,
+//   FaUsers,
+// } from 'react-icons/fa'
 
 export default async function Page() {
-  // await new Promise((resolve) => setTimeout(resolve, 1000))
+  // await new Promise((resolve) => setTimeout(resolve, 100000))
 
   return (
     <>
-      {/* Header */}
-      <nav className="relative m-auto flex max-w-6xl flex-wrap items-center justify-between px-4 py-3 md:flex-nowrap">
+      {/* Navigation Bar */}
+      <nav
+        className="relative m-auto flex max-w-6xl flex-nowrap items-center justify-between px-4 py-3 lg:pb-4 lg:pt-3"
+        aria-label="Primary"
+      >
         <Link
           href="/"
           className="z-0 mr-auto flex min-h-12 items-center md:z-[100]"
         >
           <span className="sr-only">Connector</span>
-          <div className="order-1 flex items-center gap-x-2">
+          <div className="order-1 flex w-max items-center gap-x-1">
             <Image
-              src={logo}
+              src={Logo}
               alt="Connector Logo"
-              className="h-12 w-12 dark:invert"
+              className="w-8 dark:invert"
               priority
             />
-            <h1 className="hidden text-2xl font-bold md:block w-44">Connector</h1>
+            <p className="mobile:block hidden w-fit font-title text-2xl font-medium leading-none">
+              CONNECTOR
+            </p>
           </div>
         </Link>
-        <ul className="order-last ml-auto flex w-full items-center justify-between overflow-x-auto pt-2 md:order-3 md:w-max md:justify-start md:pt-0">
+        {/* <ul className="order-last ml-auto flex w-full items-center justify-between overflow-x-auto pt-2 md:order-3 md:ml-8 md:mr-6 md:w-max md:justify-start md:pt-0">
           <li>
             <Link
               href="/"
@@ -100,8 +107,8 @@ export default async function Page() {
               </span>
             </Link>
           </li>
-        </ul>
-        <div className="order-3 flex min-w-24 flex-shrink-0 flex-wrap justify-end gap-x-2 md:flex-nowrap">
+        </ul> */}
+        <div className="order-3 box-border flex min-w-24 flex-shrink-0 flex-wrap justify-end gap-x-2 md:flex-nowrap">
           <Link
             href="/signin"
             className={`${buttonVariants({ variant: 'outline' })} ml-6 h-min min-h-12 px-6 py-3 text-center text-base font-semibold`}
@@ -116,10 +123,89 @@ export default async function Page() {
           </Link>
         </div>
       </nav>
-      {/* Content */}
-      <div>
-        <p>Content</p>
-      </div>
+      {/* Main Content */}
+      <main
+        className="flex flex-col items-center overflow-hidden"
+        role="main"
+        id="main-content"
+      >
+        <section className="relative flex min-h-0 w-full max-w-6xl flex-col flex-nowrap items-center justify-between px-4 pt-6 md:min-h-[36rem] md:flex-row md:pt-12">
+          <div className="relative w-full flex-shrink-0 self-start pr-0 md:w-[55%] md:pr-12">
+            <h1 className="pb-6 text-center text-3xl font-normal leading-tight text-muted-foreground md:w-128 md:pb-0 md:text-left md:text-[2.5rem]">
+              Welcome to your professional community
+            </h1>
+            <div className="mt-0 grid w-full max-w-[400px] gap-y-6 place-self-center md:mt-6 md:w-[429px] md:place-self-auto">
+              <Link
+                href="/"
+                className={`${buttonVariants({ variant: 'default' })} block h-min min-h-10 w-full px-6 py-2 text-center text-base font-semibold md:w-auto`}
+              >
+                <FaGoogle />
+                Continue with Google<span className="text-destructive">*</span>
+              </Link>
+              <Link
+                href="/"
+                className={`${buttonVariants({ variant: 'default' })} block h-min min-h-10 w-full px-6 py-2 text-center text-base font-semibold md:w-auto`}
+              >
+                <FaMicrosoft />
+                Continue with Microsoft
+                <span className="text-destructive">*</span>
+              </Link>
+              <Link
+                href="/signin"
+                className={`${buttonVariants({ variant: 'outline' })} block h-min min-h-10 w-full px-6 py-2 text-center text-base font-semibold md:w-auto`}
+              >
+                Sign in with email
+              </Link>
+
+              <p className="pb-4 text-center text-xs text-muted-foreground">
+                By continuing, you agree to our{' '}
+                <Link
+                  // href="/legal/terms-of-use"
+                  href="/"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Terms of Use
+                </Link>{' '}
+                and{' '}
+                <Link
+                  // href="/legal/privacy-policy"
+                  href="/"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Privacy Policy
+                </Link>
+                .
+              </p>
+            </div>
+            <p className="my-4 hidden w-full text-center md:block md:w-[25rem]">
+              New to Connector?{' '}
+              <Link href="/signup" className="font-bold hover:underline">
+                Join now
+              </Link>
+            </p>
+          </div>
+          <Image
+            src={BannerLight}
+            alt="Banner Illustration"
+            className="relative z-[-100] hidden h-[26rem] w-auto place-self-start dark:invert md:block"
+            priority
+          />
+          {/* <Image
+            src={BannerDark}
+            alt="Banner Illustration"
+            className="hidden dark:block "
+            priority
+          />
+          <Image
+            src={BannerLight}
+            alt="Banner Illustration"
+            className="dark:hidden"
+            priority
+          /> */}
+        </section>
+      </main>
+      {/* Footer */}
+      <footer></footer>
     </>
   )
 }

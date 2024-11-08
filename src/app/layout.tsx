@@ -1,6 +1,7 @@
+import { IconDark, IconLight } from '@/app/_images/icons'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
-import { Inter, Roboto_Mono } from 'next/font/google'
+import { Inter, Oswald, Roboto_Mono } from 'next/font/google'
 import './globals.css'
 
 // Setup Inter and Roboto Mono from next/font/google
@@ -16,12 +17,33 @@ const roboto_mono = Roboto_Mono({
   variable: '--font-roboto-mono',
 })
 
+const oswald = Oswald({
+  subsets: ['latin'],
+  weight: 'variable',
+  variable: '--font-oswald',
+})
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Connector',
-    default: 'Connector: Sign In or Sign Up',
+    default: 'Connector | Job Search and Professional Networking',
   },
-  description: 'Employment-Focused Social Media Platform',
+  description:
+    'Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.',
+  icons: [
+    {
+      rel: 'icon',
+      media: '(prefers-color-scheme: light)',
+      url: IconLight.src,
+      type: 'image/png',
+    },
+    {
+      rel: 'icon',
+      media: '(prefers-color-scheme: dark)',
+      url: IconDark.src,
+      type: 'image/png',
+    },
+  ],
 }
 
 export default function RootLayout({
@@ -33,12 +55,12 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${roboto_mono.variable}`}
+      className={`${inter.variable} ${roboto_mono.variable} ${oswald.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${inter.className} antialiased`}>
+      <body className={`${inter.className} antialiased`} dir="ltr">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
