@@ -6,7 +6,7 @@ import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 import {
-  IoLogoGithub,
+  IoLogoApple,
   IoLogoGoogle,
   IoLogoMicrosoft,
   IoMail,
@@ -26,7 +26,7 @@ export default async function Page() {
   return (
     <>
       {/* Navigation Bar */}
-      <nav
+      <header
         className="relative m-auto flex max-w-6xl flex-nowrap items-center justify-between px-4 py-3 lg:pb-4 lg:pt-3"
         aria-label="Primary"
       >
@@ -124,19 +124,19 @@ export default async function Page() {
          */}
         <div className="order-3 box-border flex min-w-24 flex-shrink-0 flex-wrap justify-end gap-x-2 md:flex-nowrap">
           <Link
-            href="/signin"
+            href="/sign-in"
             className={`${buttonVariants({ variant: 'outline' })} ml-6 h-min min-h-12 px-6 py-3 text-center text-base font-semibold`}
           >
             Sign In
           </Link>
           <Link
-            href="/signup"
+            href="/sign-up"
             className={`${buttonVariants({ variant: 'default' })} h-min min-h-12 px-6 py-3 text-center text-base font-semibold`}
           >
             Join Now
           </Link>
         </div>
-      </nav>
+      </header>
 
       {/* Main Content */}
       <main
@@ -145,15 +145,15 @@ export default async function Page() {
         id="main-content"
       >
         <section className="relative flex min-h-0 w-full max-w-6xl flex-col flex-nowrap items-center justify-between px-4 pt-6 md:min-h-[36rem] md:flex-row md:pt-12">
-          <div className="relative w-full flex-shrink-0 self-start pr-0 md:w-[55%] md:pr-12">
-            <h1 className="pb-6 text-center text-3xl font-normal leading-tight text-muted-foreground md:w-128 md:pb-0 md:text-left md:text-[2.5rem]">
+          <div className="relative w-full flex-shrink-0 self-start md:w-[55%] lg:w-[50%] xl:w-[45%]">
+            <h1 className="pb-6 text-center text-3xl font-normal leading-tight text-muted-foreground md:w-max md:pb-0 md:text-left md:text-[2.5rem]">
               Welcome to your
               <br />
               professional community
             </h1>
             <div className="mx-auto mt-0 grid w-full max-w-[400px] gap-y-6 md:mx-0 md:mt-6 md:w-[429px]">
               <Link
-                href="/signin"
+                href="/sign-in"
                 className={`${buttonVariants({ variant: 'outline' })} block h-min min-h-10 w-full px-6 py-2 text-center text-base font-semibold md:w-auto`}
               >
                 <IoMail />
@@ -189,8 +189,8 @@ export default async function Page() {
                 href="/"
                 className={`${buttonVariants({ variant: 'default' })} block h-min min-h-10 w-full px-6 py-2 text-center text-base font-semibold md:w-auto`}
               >
-                <IoLogoGithub />
-                GitHub
+                <IoLogoApple />
+                Apple
               </Link>
 
               <p className="pb-4 text-center text-xs text-muted-foreground">
@@ -213,11 +213,17 @@ export default async function Page() {
                 .
               </p>
             </div>
+            <p className="my-4 w-full text-center md:w-[25rem]">
+              New to Connector?{' '}
+              <Link href="/sign-up" className="font-bold hover:underline">
+                Join now
+              </Link>
+            </p>
           </div>
           <Image
             src={BannerLight.default}
             alt="Banner Illustration"
-            className="relative z-[-100] hidden h-[26rem] w-auto place-self-start dark:invert md:block"
+            className="relative z-[-100] hidden h-[30rem] w-auto place-self-start dark:invert md:block"
             priority
           />
         </section>
@@ -225,13 +231,20 @@ export default async function Page() {
 
       {/* Footer */}
       <div className="border-t"></div>
-      <footer className="relative m-auto flex max-w-6xl flex-nowrap items-center justify-between px-4 py-3 ">
+      <footer className="relative m-auto flex max-w-6xl flex-nowrap items-center justify-between px-4 py-3">
         <div className="box-border flex flex-shrink flex-row items-center justify-start gap-2">
           <Image
             src={LogoLight.default}
             alt="Connector Logo"
-            height={28}
-            className="dark:invert"
+            className="hidden h-7 w-auto dark:invert sm:block"
+            priority
+          />
+          <Image
+            src={Icon.default}
+            alt="Connector Icon"
+            // height={32}
+            // width={32}
+            className="block h-7 w-auto dark:invert sm:hidden"
             priority
           />
           <p className="text-lg font-light">© {new Date().getFullYear()}</p>

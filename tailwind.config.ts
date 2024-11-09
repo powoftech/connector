@@ -11,7 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        "mobile": "425px",
+        mobile: '425px',
       },
       fontFamily: {
         sans: ['var(--font-inter)'],

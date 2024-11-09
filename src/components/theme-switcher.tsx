@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { IoMoon, IoOptions, IoSunny } from 'react-icons/io5'
+import { IoCog, IoMoon, IoSunny } from 'react-icons/io5'
 
 export default function ThemeSwitcher() {
   const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system')
@@ -66,7 +66,7 @@ export default function ThemeSwitcher() {
         }`}
         aria-label="System theme"
       >
-        <IoOptions className="h-5 w-5" />
+        <IoCog className="h-5 w-5" />
       </button>
       <button
         onClick={() => handleThemeChange('light')}
