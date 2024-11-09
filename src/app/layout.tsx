@@ -1,4 +1,3 @@
-import { IconDark, IconLight } from '@/app/_images/icons'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Inter, Oswald, Roboto_Mono } from 'next/font/google'
@@ -30,20 +29,6 @@ export const metadata: Metadata = {
   },
   description:
     'Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.',
-  icons: [
-    {
-      rel: 'icon',
-      media: '(prefers-color-scheme: light)',
-      url: IconLight.src,
-      type: 'image/png',
-    },
-    {
-      rel: 'icon',
-      media: '(prefers-color-scheme: dark)',
-      url: IconDark.src,
-      type: 'image/png',
-    },
-  ],
 }
 
 export default function RootLayout({

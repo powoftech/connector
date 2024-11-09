@@ -1,4 +1,4 @@
-import { BannerLight } from '@/app/_images/banners'
+import { BannerLight } from '@/app/_images/banner'
 import { Logo } from '@/app/_images/logo'
 import { buttonVariants } from '@/components/ui/button'
 import Image from 'next/image'
