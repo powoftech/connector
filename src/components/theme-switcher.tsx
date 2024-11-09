@@ -1,64 +1,25 @@
 'use client'
 
+import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { IoCog, IoMoon, IoSunny } from 'react-icons/io5'
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<'light' | 'dark' | 'system'>('system')
+  const [mounted, setMounted] = useState(false)
+  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
-    // Get initial theme from localStorage or system preference
-    const savedTheme = localStorage.getItem('theme') as
-      | 'light'
-      | 'dark'
-      | 'system'
-      | null
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light'
-
-    const initialTheme = savedTheme || 'system'
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle(
-      'dark',
-      initialTheme === 'dark' ||
-        (initialTheme === 'system' && systemTheme === 'dark'),
-    )
+    setMounted(true)
   }, [])
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-
-    const handleChange = () => {
-      if (theme === 'system') {
-        document.documentElement.classList.toggle('dark', mediaQuery.matches)
-      }
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [theme])
-
-  const handleThemeChange = (newTheme: 'light' | 'dark' | 'system') => {
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-
-    if (newTheme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light'
-      document.documentElement.classList.toggle('dark', systemTheme === 'dark')
-    } else {
-      document.documentElement.classList.toggle('dark', newTheme === 'dark')
-    }
+  
+  if (!mounted) {
+    return null
   }
 
   return (
     <div className="flex items-center gap-1 rounded-full border border-input bg-background shadow-sm">
       <button
-        onClick={() => handleThemeChange('system')}
+        onClick={() => setTheme('system')}
         className={`rounded-full p-1.5 ${
           theme === 'system'
             ? 'bg-primary text-primary-foreground shadow-sm'
@@ -69,7 +30,7 @@ export default function ThemeSwitcher() {
         <IoCog className="h-5 w-5" />
       </button>
       <button
-        onClick={() => handleThemeChange('light')}
+        onClick={() => setTheme('light')}
         className={`rounded-full p-1.5 ${
           theme === 'light'
             ? 'bg-primary text-primary-foreground shadow-sm'
@@ -80,7 +41,7 @@ export default function ThemeSwitcher() {
         <IoSunny className="h-5 w-5" />
       </button>
       <button
-        onClick={() => handleThemeChange('dark')}
+        onClick={() => setTheme('dark')}
         className={`rounded-full p-1.5 ${
           theme === 'dark'
             ? 'bg-primary text-primary-foreground shadow-sm'
