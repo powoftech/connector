@@ -1,6 +1,7 @@
 'use client'
 
-import { Logo } from '@/app/_images/logo'
+import { Icon } from '@/app/_images/icon'
+import { LogoLight } from '@/app/_images/logo'
 import { Progress } from '@/components/ui/progress'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -32,17 +33,20 @@ export default function Loading() {
   return (
     <div className="flex h-screen items-center justify-center text-center">
       <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
-        <div className="flex w-full flex-row items-center justify-center gap-3">
-          <Image
-            src={Logo}
-            alt="Connector Logo"
-            className="w-24 dark:invert"
-            priority
-          />
-          <p className="hidden font-title text-7xl font-medium md:block">
-            CONNECTOR
-          </p>
-        </div>
+        <Image
+          src={LogoLight.default}
+          alt="Connector Logo"
+          height={96}
+          className="hidden dark:invert md:block"
+          priority
+        />
+        <Image
+          src={Icon.default}
+          alt="Connector Logo"
+          height={96}
+          className="block dark:invert md:hidden"
+          priority
+        />
         <Progress value={progress} className="w-48 md:w-128" />
       </div>
     </div>
