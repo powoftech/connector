@@ -1,7 +1,8 @@
 'use client'
 
 import Footer from '@/app/_components/footer'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Icon } from '@/app/_images/icon'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -15,7 +16,6 @@ import {
   IoLogoGoogle,
   IoLogoMicrosoft,
 } from 'react-icons/io5'
-import { Icon } from '@/app/_images/icon'
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false)
@@ -127,17 +127,22 @@ export default function Page() {
                 Sign In
               </Button>
             </form>
-            <Link
-              href="/forgot-password"
-              className={`${buttonVariants({ variant: 'link' })} mx-auto w-full pt-10`}
-            >
-              Forgot password?
-            </Link>
+            <div className='mx-auto w-full text-center pt-6'>
+              <Link
+                href="/forgot-password"
+                className={`underline`}
+              >
+                Forgot password?
+              </Link>
+            </div>
           </CardContent>
           <CardFooter className="">
-            <p className="mx-auto h-full w-full text-center">
-              New to Connector?{' '}
-              <Link href="/signup" className="font-semibold hover:underline">
+            <p className="mx-auto h-full w-full text-center space-y-1">
+              <span className='text-muted-foreground'>New to Connector? </span>
+              <Link
+                href="/signup"
+                className="block font-semibold underline sm:inline"
+              >
                 Join now
               </Link>
             </p>

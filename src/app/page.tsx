@@ -66,7 +66,7 @@ export default async function Page() {
                   <Link
                     // href="/legal/terms-of-service"
                     href="/"
-                    className="font-medium text-primary hover:underline"
+                    className="font-medium text-primary underline"
                   >
                     Terms of Service
                   </Link>{' '}
@@ -74,16 +74,21 @@ export default async function Page() {
                   <Link
                     // href="/legal/privacy-policy"
                     href="/"
-                    className="font-medium text-primary hover:underline"
+                    className="font-medium text-primary underline"
                   >
                     Privacy Policy
                   </Link>
                   .
                 </p>
               </div>
-              <p className="w-full text-center md:w-3/4">
-                New to Connector?{' '}
-                <Link href="/signup" className="font-semibold hover:underline">
+              <p className="w-full space-y-1 text-center md:w-3/4">
+                <span className="text-muted-foreground">
+                  New to Connector?{' '}
+                </span>
+                <Link
+                  href="/signup"
+                  className="block font-semibold underline md:inline"
+                >
                   Join now
                 </Link>
               </p>
