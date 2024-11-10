@@ -33,10 +33,12 @@ export default function Page() {
                 priority
               />
             </Link>
-            <p className="text-2xl font-semibold">Sign In to Connector</p>
+            <p className="text-center text-2xl font-bold sm:text-4xl">
+              Sign in to Connector
+            </p>
           </CardHeader>
-          <CardContent className="p-6">
-            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-6 sm:w-1/2">
+          <CardContent>
+            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-6 sm:w-1/2 sm:min-w-[432px]">
               <Button
                 variant={'outline'}
                 size={'lg'}
@@ -65,7 +67,7 @@ export default function Page() {
               </Button>
             </div>
 
-            <div className="relative mx-auto py-12 md:w-3/4">
+            <div className="relative mx-auto py-12 sm:w-2/3 sm:min-w-[432px]">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t" />
               </div>
@@ -77,7 +79,7 @@ export default function Page() {
             </div>
 
             <form
-              className="mx-auto flex w-full flex-col items-center gap-y-6 sm:w-1/2"
+              className="mx-auto flex w-full flex-col items-center gap-y-6 sm:w-1/2 sm:min-w-[432px]"
               onSubmit={() => {}}
             >
               <div className="grid w-full items-center gap-3">
@@ -98,6 +100,7 @@ export default function Page() {
                     id="password"
                     placeholder="Password"
                     className="h-12 rounded pr-12"
+                    minLength={6}
                     required
                   />
                   <Button
@@ -127,18 +130,15 @@ export default function Page() {
                 Sign In
               </Button>
             </form>
-            <div className='mx-auto w-full text-center pt-6'>
-              <Link
-                href="/forgot-password"
-                className={`underline`}
-              >
+            <div className="mx-auto w-full pt-6 text-center">
+              <Link href="/forgot-password" className={`underline`}>
                 Forgot password?
               </Link>
             </div>
           </CardContent>
-          <CardFooter className="">
-            <p className="mx-auto h-full w-full text-center space-y-1">
-              <span className='text-muted-foreground'>New to Connector? </span>
+          <CardFooter>
+            <p className="mx-auto h-full w-full space-y-1 py-4 text-center">
+              <span className="text-muted-foreground">New to Connector? </span>
               <Link
                 href="/signup"
                 className="block font-semibold underline sm:inline"
@@ -148,33 +148,6 @@ export default function Page() {
             </p>
           </CardFooter>
         </Card>
-
-        {/* <div className="mt-8 space-y-4 text-center">
-          <p className="text-sm text-muted-foreground">
-            By clicking Continue, you agree to LinkedIn&apos;s{' '}
-            <Link href="#" className="text-primary hover:underline">
-              User Agreement
-            </Link>
-            ,{' '}
-            <Link href="#" className="text-primary hover:underline">
-              Privacy Policy
-            </Link>
-            , and{' '}
-            <Link href="#" className="text-primary hover:underline">
-              Cookie Policy
-            </Link>
-            .
-          </p>
-          <p className="text-base">
-            New to LinkedIn?{' '}
-            <Link
-              href="#"
-              className="font-semibold text-primary hover:underline"
-            >
-              Join now
-            </Link>
-          </p>
-        </div> */}
       </main>
 
       <Footer />
