@@ -6,8 +6,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
   IoLogoApple,
+  IoLogoGithub,
   IoLogoGoogle,
-  IoLogoMicrosoft,
   IoMail,
 } from 'react-icons/io5'
 
@@ -53,12 +53,12 @@ export default async function Page() {
                   Google
                 </Button>
                 <Button size={'lg'}>
-                  <IoLogoMicrosoft />
-                  Microsoft
-                </Button>
-                <Button size={'lg'}>
                   <IoLogoApple />
                   Apple
+                </Button>
+                <Button size={'lg'}>
+                  <IoLogoGithub />
+                  GitHub
                 </Button>
 
                 <p className="pb-4 text-center text-xs text-muted-foreground">

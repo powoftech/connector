@@ -13,8 +13,8 @@ import {
   IoEyeOffOutline,
   IoEyeOutline,
   IoLogoApple,
+  IoLogoGithub,
   IoLogoGoogle,
-  IoLogoMicrosoft,
 } from 'react-icons/io5'
 
 export default function Page() {
@@ -124,16 +124,6 @@ export default function Page() {
                 <IoLogoGoogle />
                 <span className="m-auto">Continue with Google</span>
               </Button>
-
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoMicrosoft className="h-96" />
-                <span className="m-auto">Continue with Microsoft</span>
-              </Button>
-
               <Button
                 variant={'outline'}
                 size={'lg'}
@@ -141,6 +131,14 @@ export default function Page() {
               >
                 <IoLogoApple />
                 <span className="m-auto">Continue with Apple</span>
+              </Button>
+              <Button
+                variant={'outline'}
+                size={'lg'}
+                className="flex h-12 w-full"
+              >
+                <IoLogoGithub className="h-96" />
+                <span className="m-auto">Continue with GitHub</span>
               </Button>
             </div>
           </CardContent>

@@ -14,7 +14,7 @@ export default function NotFound() {
           </h1>
           <p>We couldn&apos;t find the page you were looking for.</p>
           <Link
-            href="/feed"
+            href="/"
             className={`${buttonVariants({ variant: 'outline', size: 'lg' })}`}
           >
             Go to your feed
