@@ -11,24 +11,13 @@ export default function ThemeSwitcher() {
   useEffect(() => {
     setMounted(true)
   }, [])
-  
+
   if (!mounted) {
     return null
   }
 
   return (
-    <div className="flex items-center gap-1 rounded-full border border-input bg-background shadow-sm">
-      <button
-        onClick={() => setTheme('system')}
-        className={`rounded-full p-1.5 ${
-          theme === 'system'
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
-        }`}
-        aria-label="System theme"
-      >
-        <IoCog className="h-5 w-5" />
-      </button>
+    <div className="flex items-center rounded-full border border-input bg-background shadow-sm">
       <button
         onClick={() => setTheme('light')}
         className={`rounded-full p-1.5 ${
@@ -39,6 +28,17 @@ export default function ThemeSwitcher() {
         aria-label="Light theme"
       >
         <IoSunny className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => setTheme('system')}
+        className={`rounded-full p-1.5 ${
+          theme === 'system'
+            ? 'bg-primary text-primary-foreground shadow-sm'
+            : 'text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
+        }`}
+        aria-label="System theme"
+      >
+        <IoCog className="h-5 w-5" />
       </button>
       <button
         onClick={() => setTheme('dark')}

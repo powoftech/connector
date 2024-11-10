@@ -1,6 +1,5 @@
-// import { ThemeProvider } from '@/components/theme-provider'
-import { ThemeProvider } from 'next-themes'
 import type { Metadata } from 'next'
+import { ThemeProvider } from 'next-themes'
 import { Inter, Oswald, Roboto_Mono } from 'next/font/google'
 import './globals.css'
 
