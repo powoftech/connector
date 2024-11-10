@@ -15,7 +15,7 @@ import {
   IoLogoGoogle,
   IoLogoMicrosoft,
 } from 'react-icons/io5'
-import { Icon } from '../_images/icon'
+import { Icon } from '@/app/_images/icon'
 
 export default function Page() {
   const [showPassword, setShowPassword] = useState(false)
