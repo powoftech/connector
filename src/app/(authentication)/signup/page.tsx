@@ -1,7 +1,7 @@
 'use client'
 
 import Footer from '@/app/_components/footer'
-import { Icon } from '@/app/_images/icon'
+import { LogoLight } from '@/app/_images/logo'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -27,59 +27,19 @@ export default function Page() {
           <CardHeader className="flex items-center gap-y-2">
             <Link href="/" className="">
               <Image
-                src={Icon.default}
+                src={LogoLight.default}
                 alt="Connector logo"
                 className="h-10 w-auto dark:invert"
                 priority
               />
             </Link>
-            <p className="text-center text-2xl font-bold sm:text-4xl">
-              Join Connector now!
-            </p>
+            {/* <p className="text-center text-2xl font-bold sm:text-4xl">
+              Sign In to Connector
+            </p> */}
           </CardHeader>
           <CardContent>
-            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-6 sm:w-1/2 sm:min-w-[432px]">
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoGoogle />
-                <span className="m-auto">Continue with Google</span>
-              </Button>
-
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoMicrosoft className="h-96" />
-                <span className="m-auto">Continue with Microsoft</span>
-              </Button>
-
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoApple />
-                <span className="m-auto">Continue with Apple</span>
-              </Button>
-            </div>
-
-            <div className="relative mx-auto py-12 sm:w-2/3 sm:min-w-[432px]">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t" />
-              </div>
-              <div className="relative flex justify-center text-xs uppercase">
-                {/* <span className="bg-background px-2 text-muted-foreground">
-                  or
-                </span> */}
-              </div>
-            </div>
-
             <form
-              className="mx-auto flex w-full flex-col items-center gap-y-6 sm:w-1/2 sm:min-w-[432px]"
+              className="mx-auto flex w-full flex-col items-center gap-y-4 sm:w-1/2 sm:min-w-[432px]"
               onSubmit={() => {}}
             >
               <div className="grid w-full items-center gap-3">
@@ -121,23 +81,71 @@ export default function Page() {
                   </Button>
                 </div>
               </div>
+              <p className="text-center text-xs leading-5 text-muted-foreground">
+                By clicking Agree & Join or Continue, you agree to
+                <br />
+                Connector&apos;s{' '}
+                <Link href="/" className="font-medium text-primary underline">
+                  Terms of Service
+                </Link>
+                , and{' '}
+                <Link href="/" className="font-medium text-primary underline">
+                  Privacy Policy
+                </Link>
+                .
+              </p>
               <Button
                 size={'lg'}
                 type="submit"
                 className="h-12 w-full"
                 onSubmit={() => {}}
               >
-                Sign In
+                Agree & Join
               </Button>
             </form>
-            <div className="mx-auto w-full pt-6 text-center">
-              <Link href="/forgot-password" className={`underline`}>
-                Forgot password?
-              </Link>
+
+            <div className="relative mx-auto py-8 sm:w-2/3 sm:min-w-[432px]">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-background px-2 text-muted-foreground">
+                  or
+                </span>
+              </div>
+            </div>
+
+            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-4 sm:w-1/2 sm:min-w-[432px]">
+              <Button
+                variant={'outline'}
+                size={'lg'}
+                className="flex h-12 w-full"
+              >
+                <IoLogoGoogle />
+                <span className="m-auto">Continue with Google</span>
+              </Button>
+
+              <Button
+                variant={'outline'}
+                size={'lg'}
+                className="flex h-12 w-full"
+              >
+                <IoLogoMicrosoft className="h-96" />
+                <span className="m-auto">Continue with Microsoft</span>
+              </Button>
+
+              <Button
+                variant={'outline'}
+                size={'lg'}
+                className="flex h-12 w-full"
+              >
+                <IoLogoApple />
+                <span className="m-auto">Continue with Apple</span>
+              </Button>
             </div>
           </CardContent>
           <CardFooter>
-            <p className="mx-auto h-full w-full space-y-1 py-4 text-center">
+            <p className="mx-auto h-full w-full space-y-1 py-8 text-center">
               <span className="text-muted-foreground">
                 Already on Connector?{' '}
               </span>
