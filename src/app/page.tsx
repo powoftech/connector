@@ -11,11 +11,13 @@ export default function Page() {
     <>
       <Header showSignIn={true} showSignUp={true} className="" />
 
-      <div className="flex flex-col items-center">
-        <Hero />
-        <Features />
-        <CTA />
-      </div>
+      <main className="">
+        <div className="grid">
+          <Hero />
+          <Features />
+          <CTA />
+        </div>
+      </main>
 
       <Footer />
     </>

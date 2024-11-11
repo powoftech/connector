@@ -14,7 +14,7 @@ import {
 
 export default function Features() {
   return (
-    <div className="relative h-screen min-h-fit w-full bg-white bg-grid-small-black/[0.2] dark:bg-black dark:bg-grid-small-white/[0.2] sm:h-[50vh]">
+    <div className="relative min-h-[50vh] w-full bg-white bg-grid-small-black/[0.2] dark:bg-black dark:bg-grid-small-white/[0.2]">
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black"></div>
 
       <div className="relative z-20 m-auto flex h-full max-w-screen-xl flex-col items-center justify-center gap-6 bg-gradient-to-b from-neutral-200 to-neutral-500 bg-clip-text p-6 text-transparent sm:gap-12">
