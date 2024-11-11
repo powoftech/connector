@@ -2,21 +2,10 @@
 
 import { Icon } from '@/app/_images/icon'
 import { LogoLight } from '@/app/_images/logo'
-import { AuroraBackground } from '@/components/ui/aurora-background'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-
-// import {
-//     IoBriefcase,
-//     IoGameController,
-//     IoLaptop,
-//     IoNewspaper,
-//     IoPeople,
-//     IoPlay,
-// } from 'react-icons/io5'
 
 export default function Header({
   className,

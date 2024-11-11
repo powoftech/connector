@@ -1,8 +1,7 @@
 'use client'
 import { BackgroundBeams } from '@/components/ui/background-beams'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
-import React from 'react'
 
 export default function CTA() {
   return (
