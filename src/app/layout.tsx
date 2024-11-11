@@ -25,7 +25,7 @@ const oswald = Oswald({
 export const metadata: Metadata = {
   title: {
     template: '%s | Connector',
-    default: 'Connector | Job Search and Professional Networking',
+    default: 'Connector',
   },
   description:
     'Manage your professional identity. Build and engage with your professional network. Access knowledge, insights and opportunities.',

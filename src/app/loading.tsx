@@ -32,22 +32,22 @@ export default function Loading() {
 
   return (
     <div className="flex h-screen items-center justify-center text-center">
-      <div className="flex flex-col items-center justify-center gap-8 md:gap-12">
+      <div className="flex flex-col items-center justify-center gap-8 sm:gap-12">
         <Image
           src={LogoLight.default}
           alt="Connector Logo"
           height={96}
-          className="hidden dark:invert md:block"
+          className="hidden dark:invert sm:block"
           priority
         />
         <Image
           src={Icon.default}
           alt="Connector Logo"
           height={96}
-          className="block dark:invert md:hidden"
+          className="block dark:invert sm:hidden"
           priority
         />
-        <Progress value={progress} className="w-48 md:w-128" />
+        <Progress value={progress} className="w-48 sm:w-128" />
       </div>
     </div>
   )

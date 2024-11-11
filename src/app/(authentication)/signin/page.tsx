@@ -1,6 +1,7 @@
 'use client'
 
 import Footer from '@/app/_components/footer'
+import Header from '@/app/_components/header'
 import { LogoLight } from '@/app/_images/logo'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
@@ -12,7 +13,6 @@ import { useState } from 'react'
 import {
   IoEyeOffOutline,
   IoEyeOutline,
-  IoLogoApple,
   IoLogoGithub,
   IoLogoGoogle,
 } from 'react-icons/io5'
@@ -22,7 +22,9 @@ export default function Page() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center from-secondary to-background sm:bg-gradient-to-b sm:p-12">
+      <Header />
+
+      <main className="flex min-h-[calc(100vh-64px-64px)] flex-col items-center to-background sm:bg-gradient-to-b sm:from-secondary sm:p-12">
         <Card className="min-h-fit w-full rounded-none border-none shadow-none sm:m-auto sm:max-w-4xl sm:rounded-xl sm:border-solid sm:border-border sm:shadow">
           <CardHeader className="flex items-center gap-y-2">
             <Link href="/" className="">
@@ -39,27 +41,27 @@ export default function Page() {
           </CardHeader>
           <CardContent>
             <form
-              className="mx-auto flex w-full flex-col items-center gap-y-4 sm:w-1/2 sm:min-w-[432px]"
+              className="mx-auto flex w-full flex-col items-center gap-4 sm:w-1/2 sm:min-w-[432px]"
               onSubmit={() => {}}
             >
-              <div className="grid w-full items-center gap-3">
+              <div className="grid w-full items-center gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   type="email"
                   id="email"
                   placeholder="Email"
-                  className="h-12 rounded"
+                  className="h-12"
                   required
                 />
               </div>
-              <div className="grid w-full items-center gap-1.5">
+              <div className="grid w-full items-center gap-2">
                 <Label htmlFor="password">Password</Label>
                 <div className="relative w-full">
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     placeholder="Password"
-                    className="h-12 rounded pr-12"
+                    className="h-12 pr-12"
                     minLength={6}
                     required
                   />
@@ -67,7 +69,7 @@ export default function Page() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-12 w-12 rounded text-primary"
+                    className="absolute right-0 top-0 h-12 w-12 text-primary"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -107,7 +109,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-4 sm:w-1/2 sm:min-w-[432px]">
+            <div className="mx-auto flex w-full flex-col items-center justify-between gap-4 sm:w-1/2 sm:min-w-[432px]">
               <p className="text-center text-xs leading-5 text-muted-foreground">
                 By clicking Continue, you agree to
                 <br />
@@ -128,14 +130,6 @@ export default function Page() {
               >
                 <IoLogoGoogle />
                 <span className="m-auto">Continue with Google</span>
-              </Button>
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoApple />
-                <span className="m-auto">Continue with Apple</span>
               </Button>
               <Button
                 variant={'outline'}

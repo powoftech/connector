@@ -12,7 +12,6 @@ import { useState } from 'react'
 import {
   IoEyeOffOutline,
   IoEyeOutline,
-  IoLogoApple,
   IoLogoGithub,
   IoLogoGoogle,
 } from 'react-icons/io5'
@@ -39,10 +38,10 @@ export default function Page() {
           </CardHeader>
           <CardContent>
             <form
-              className="mx-auto flex w-full flex-col items-center gap-y-4 sm:w-1/2 sm:min-w-[432px]"
+              className="mx-auto flex w-full flex-col items-center gap-4 sm:w-1/2 sm:min-w-[432px]"
               onSubmit={() => {}}
             >
-              <div className="grid w-full items-center gap-3">
+              <div className="grid w-full items-center gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   type="email"
@@ -52,14 +51,14 @@ export default function Page() {
                   required
                 />
               </div>
-              <div className="grid w-full items-center gap-1.5">
+              <div className="grid w-full items-center gap-2">
                 <Label htmlFor="password">Password (6+ characters)</Label>
                 <div className="relative w-full">
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     id="password"
                     placeholder="Password"
-                    className="h-12 rounded pr-12"
+                    className="h-12 pr-12"
                     minLength={6}
                     required
                   />
@@ -67,7 +66,7 @@ export default function Page() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    className="absolute right-0 top-0 h-12 w-12 rounded text-primary"
+                    className="absolute right-0 top-0 h-12 w-12 text-primary"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -115,7 +114,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="mx-auto flex w-full flex-col items-center justify-between gap-y-4 sm:w-1/2 sm:min-w-[432px]">
+            <div className="mx-auto flex w-full flex-col items-center justify-between gap-4 sm:w-1/2 sm:min-w-[432px]">
               <Button
                 variant={'outline'}
                 size={'lg'}
@@ -123,14 +122,6 @@ export default function Page() {
               >
                 <IoLogoGoogle />
                 <span className="m-auto">Continue with Google</span>
-              </Button>
-              <Button
-                variant={'outline'}
-                size={'lg'}
-                className="flex h-12 w-full"
-              >
-                <IoLogoApple />
-                <span className="m-auto">Continue with Apple</span>
               </Button>
               <Button
                 variant={'outline'}

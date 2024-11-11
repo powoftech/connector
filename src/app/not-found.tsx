@@ -5,14 +5,17 @@ import Header from './_components/header'
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen">
+    <>
       <Header />
-      <main className="flex h-[calc(100vh-72px-1px-60px)] min-h-fit">
-        <div className="m-auto flex flex-col items-center gap-y-8">
+
+      <main className="flex min-h-[calc(100vh-64px-64px)] flex-col items-center">
+        <div className="m-auto flex flex-col items-center gap-6 p-6">
           <h1 className="w-full text-center text-4xl font-extrabold">
             Page not found
           </h1>
-          <p>We couldn&apos;t find the page you were looking for.</p>
+          <p className="w-full text-center">
+            We couldn&apos;t find the page you were looking for.
+          </p>
           <Link
             href="/"
             className={`${buttonVariants({ variant: 'outline', size: 'lg' })}`}
@@ -21,7 +24,8 @@ export default function NotFound() {
           </Link>
         </div>
       </main>
+
       <Footer />
-    </div>
+    </>
   )
 }

@@ -1,10 +1,11 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { IoCog, IoMoon, IoSunny } from 'react-icons/io5'
 
-export default function ThemeSwitcher() {
+export default function ThemeSwitcher({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
@@ -17,39 +18,44 @@ export default function ThemeSwitcher() {
   }
 
   return (
-    <div className="flex items-center rounded-full border border-input bg-background shadow-sm">
+    <div
+      className={cn(
+        'm-0 box-border flex h-fit w-fit rounded-full p-0 shadow-[0_0_0_1px] shadow-border',
+        className,
+      )}
+    >
       <button
         onClick={() => setTheme('light')}
-        className={`rounded-full p-1.5 ${
+        className={`relative box-border flex h-fit w-fit rounded-full p-1.5 ${
           theme === 'light'
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
+            ? 'bg-background shadow-[0_0_0_1px] shadow-border'
+            : 'text-muted-foreground hover:text-primary'
         }`}
         aria-label="Light theme"
       >
-        <IoSunny className="h-5 w-5" />
+        <IoSunny className="m-auto h-5 w-5" />
       </button>
       <button
         onClick={() => setTheme('system')}
-        className={`rounded-full p-1.5 ${
+        className={`relative box-border flex h-fit w-fit rounded-full p-1.5 ${
           theme === 'system'
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
+            ? 'bg-background shadow-[0_0_0_1px] shadow-border'
+            : 'text-muted-foreground hover:text-primary'
         }`}
         aria-label="System theme"
       >
-        <IoCog className="h-5 w-5" />
+        <IoCog className="m-auto h-5 w-5" />
       </button>
       <button
         onClick={() => setTheme('dark')}
-        className={`rounded-full p-1.5 ${
+        className={`relative box-border flex h-fit w-fit rounded-full p-1.5 ${
           theme === 'dark'
-            ? 'bg-primary text-primary-foreground shadow-sm'
-            : 'text-secondary-foreground hover:bg-accent hover:text-accent-foreground'
+            ? 'bg-background shadow-[0_0_0_1px] shadow-border'
+            : 'text-muted-foreground hover:text-primary'
         }`}
         aria-label="Dark theme"
       >
-        <IoMoon className="h-5 w-5" />
+        <IoMoon className="m-auto h-5 w-5" />
       </button>
     </div>
   )
