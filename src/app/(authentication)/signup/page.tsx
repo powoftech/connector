@@ -1,12 +1,18 @@
 'use client'
 
 import Footer from '@/app/_components/footer'
-import { LogoLight } from '@/app/_images/logo'
+import Header from '@/app/_components/header'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import {
@@ -21,17 +27,15 @@ export default function Page() {
 
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center from-secondary to-background sm:bg-gradient-to-b sm:p-12">
+      <Header />
+
+      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center sm:bg-gradient-to-b sm:from-background sm:to-border sm:p-12">
         <Card className="min-h-fit w-full rounded-none border-none shadow-none sm:m-auto sm:max-w-4xl sm:rounded-xl sm:border-solid sm:border-border sm:shadow">
-          <CardHeader className="flex items-center gap-y-2">
-            <Link href="/" className="">
-              <Image
-                src={LogoLight.default}
-                alt="Connector logo"
-                className="h-10 w-auto dark:invert"
-                priority
-              />
-            </Link>
+          <CardHeader className="items-center justify-center">
+            <CardTitle>Join Now</CardTitle>
+            <CardDescription>
+              Make the most of your professional life
+            </CardDescription>
             {/* <p className="text-center text-2xl font-bold sm:text-4xl">
               Sign In to Connector
             </p> */}
