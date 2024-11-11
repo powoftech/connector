@@ -9,9 +9,13 @@ export default function Page() {
 
   return (
     <>
-      <Header showSignIn={true} showSignUp={true} className="" />
+      <Header
+        showSignIn={true}
+        showSignUp={true}
+        className="fixed z-50 bg-background/75 backdrop-blur"
+      />
 
-      <main className="">
+      <main className="pt-16">
         <div className="grid">
           <Hero />
           <Features />
