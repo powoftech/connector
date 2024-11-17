@@ -1,5 +1,3 @@
-'use client'
-
 import { Icon } from '@/app/_images/icon'
 import { LogoLight } from '@/app/_images/logo'
 import { buttonVariants } from '@/components/ui/button'
@@ -9,12 +7,10 @@ import Link from 'next/link'
 
 export default function Header({
   className,
-  showSignIn = false,
-  showSignUp = false,
+  showJoin = false,
 }: {
   className?: string
-  showSignIn?: boolean
-  showSignUp?: boolean
+  showJoin?: boolean
 }) {
   return (
     <header className={cn('flex h-16 w-full flex-row items-center', className)}>
@@ -40,17 +36,9 @@ export default function Header({
         </Link>
 
         <div className="flex flex-shrink-0 flex-row flex-nowrap items-center gap-3">
-          {showSignIn && (
+          {showJoin && (
             <Link
-              href="/signin"
-              className={`${buttonVariants({ variant: 'ghost' })}`}
-            >
-              Sign In
-            </Link>
-          )}
-          {showSignUp && (
-            <Link
-              href="/signup"
+              href="/join"
               className={`${buttonVariants({ variant: 'default' })}`}
             >
               Join Now

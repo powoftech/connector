@@ -5,16 +5,159 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+
+  accounts Account[]
+  sessions Session[]
+  profile  Profile?
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String   @map("user_id")
+  sessionToken String   @unique @map("session_token")
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+model Profile {
+  id        String  @id @default(cuid())
+  userId    String  @unique @map("user_id")
+  customURL String? @map("custom_url")
+  headline  String?
+  about     String?
+  role      Role    @default(EMPLOYEE)
+  city      String?
+  country   String?
+
+  education  Education[]
+  experience Experience[]
+  skills     SkillsOnProfiles[]
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("profiles")
+}
+
+enum Role {
+  EMPLOYEE  @map("Employee")
+  RECRUITER @map("Recruiter")
+}
+
+model Education {
+  id          String    @id @default(cuid())
+  profileId   String    @map("profile_id")
+  school      String
+  degree      String?
+  field       String?
+  start       DateTime
+  end         DateTime?
+  grade       String?
+  description String?
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("education")
+}
+
+model Experience {
+  id             String          @id @default(cuid())
+  profileId      String          @map("profile_id")
+  title          String
+  company        String
+  employmentType EmploymentType? @map("employment_type")
+  location       String?
+  locationType   LocationType?   @map("location_type")
+  start          DateTime
+  end            DateTime?
+  description    String?
+
+  profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+
+  @@map("experience")
+}
+
+enum EmploymentType {
+  FULL_TIME      @map("Full-time")
+  PART_TIME      @map("Part-time")
+  SELF_EMPLOYED  @map("Self-employed")
+  FREELANCE      @map("Freelance")
+  CONTRACT       @map("Contract")
+  INTERNSHIP     @map("Internship")
+  APPRENTICESHIP @map("Apprenticeship")
+  SEASONAL       @map("Seasonal")
+}
+
+enum LocationType {
+  ONSITE @map("On-site")
+  HYBRID @map("Hybrid")
+  REMOTE @map("Remote")
+}
+
+model Skill {
+  id       String             @id @default(cuid())
+  name     String
+  profiles SkillsOnProfiles[]
+
+  @@map("skills")
+}
+
+model SkillsOnProfiles {
+  profileId String
+  skillId   String
+
+  Profile Profile @relation(fields: [profileId], references: [id])
+  Skill   Skill   @relation(fields: [skillId], references: [id])
+
+  @@id([profileId, skillId])
+  @@map("profiles_skills")
 }

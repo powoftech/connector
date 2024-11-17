@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { cn } from '@/lib/utils'
 import { useRef } from 'react'
 

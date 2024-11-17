@@ -10,8 +10,7 @@ export default function Page() {
   return (
     <>
       <Header
-        showSignIn={true}
-        showSignUp={true}
+        showJoin={true}
         className="fixed z-50 bg-background/75 backdrop-blur"
       />
 

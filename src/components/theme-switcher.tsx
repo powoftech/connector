@@ -13,9 +13,7 @@ export default function ThemeSwitcher({ className }: { className?: string }) {
     setMounted(true)
   }, [])
 
-  if (!mounted) {
-    return null
-  }
+  if (!mounted) return null
 
   return (
     <div
