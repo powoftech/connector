@@ -229,8 +229,13 @@ export default function Main() {
                           <CountryCombobox
                             field={field}
                             onCountryChange={() => {
-                              // Reset city field when country changes
-                              profileForm.setValue("city", "");
+                              // profileForm.setValue("city", "");
+                              profileForm.resetField("city", {
+                                keepDirty: false,
+                                keepTouched: true,
+                                keepError: false,
+                                defaultValue: "",
+                              });
                             }}
                           />
                         </FormControl>

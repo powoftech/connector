@@ -176,11 +176,6 @@ export function CityCombobox({
   >([]);
 
   useEffect(() => {
-    // Reset cities when country changes
-    setCities([]);
-
-    console.log(`${countryName} is the country name`);
-
     if (!countryName || countryName === "") {
       return;
     }
@@ -208,7 +203,7 @@ export function CityCombobox({
           className="flex w-full justify-between"
           disabled={!countryName}
         >
-          {field.value
+          {field.value && field.value !== ""
             ? cities.find((city) => city.value === field.value)?.label
             : "Select city..."}
           <ChevronsUpDown className="opacity-50" />
