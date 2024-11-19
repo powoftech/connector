@@ -1,19 +1,19 @@
-import { Icon } from '@/app/_images/icon'
-import { LogoLight } from '@/app/_images/logo'
-import { buttonVariants } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Icon } from "@/app/_images/icon";
+import { LogoLight } from "@/app/_images/logo";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Header({
   className,
   showJoin = false,
 }: {
-  className?: string
-  showJoin?: boolean
+  className?: string;
+  showJoin?: boolean;
 }) {
   return (
-    <header className={cn('flex h-16 w-full flex-row items-center', className)}>
+    <header className={cn("flex h-16 w-full flex-row items-center", className)}>
       <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between px-6">
         <Link href="/" className="flex flex-shrink-0">
           <span className="sr-only">Connector</span>
@@ -39,7 +39,10 @@ export default function Header({
           {showJoin && (
             <Link
               href="/join"
-              className={`${buttonVariants({ variant: 'default' })}`}
+              className={cn(
+                ` ${buttonVariants({ variant: "default" })} `,
+                "rounded-full"
+              )}
             >
               Join Now
             </Link>
@@ -47,5 +50,5 @@ export default function Header({
         </div>
       </div>
     </header>
-  )
+  );
 }

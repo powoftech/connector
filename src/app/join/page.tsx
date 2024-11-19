@@ -1,14 +1,14 @@
-import Footer from '@/app/_components/footer'
-import Header from '@/app/_components/header'
-import getSession from '@/lib/get-session'
-import { redirect } from 'next/navigation'
-import Main from './_components/main'
+import Footer from "@/app/_components/footer";
+import Header from "@/app/_components/header";
+import Main from "@/app/join/_components/main";
+import getSession from "@/lib/get-session";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const session = await getSession()
+  const session = await getSession();
 
   if (!!session) {
-    redirect('/feed')
+    redirect("/feed");
   }
 
   return (
@@ -19,5 +19,5 @@ export default async function Page() {
 
       <Footer />
     </>
-  )
+  );
 }

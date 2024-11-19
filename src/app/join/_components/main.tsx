@@ -1,8 +1,12 @@
-'use client'
+"use client";
 
-import { SocialButton } from '@/app/join/_components/social-button'
-import { AuthProvider, signInWithRedirect } from '@/app/join/actions'
-import { Button } from '@/components/ui/button'
+import { OAuthButton } from "@/app/join/_components/oauth-button";
+import {
+  OAuthProvider,
+  signInMagicLinks,
+  signInOAuth,
+} from "@/app/join/actions";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -10,7 +14,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -18,79 +22,89 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
-import { useToast } from '@/hooks/use-toast'
-import { EmailFormSchema } from '@/lib/definitions'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Loader2 } from 'lucide-react'
-import Link from 'next/link'
-import { useTransition } from 'react'
-import { useForm } from 'react-hook-form'
-import { z } from 'zod'
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useToast } from "@/hooks/use-toast";
+import { EmailFormInputs, EmailFormSchema } from "@/lib/definitions";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useTransition } from "react";
+import { useForm } from "react-hook-form";
 
 export default function Main() {
-  const { toast } = useToast()
-  const [isPending, startTransition] = useTransition()
+  const { toast } = useToast();
+  const [isPending, startTransition] = useTransition();
 
-  const emailForm = useForm<z.infer<typeof EmailFormSchema>>({
+  const emailForm = useForm<EmailFormInputs>({
     resolver: zodResolver(EmailFormSchema),
-    defaultValues: {
-      email: '',
-    },
-  })
+  });
 
-  function handleSignIn(
-    provider: AuthProvider,
-    data?: z.infer<typeof EmailFormSchema>,
-  ) {
-    startTransition(() => {
+  const handleSubmitOAuth = (provider: OAuthProvider) => {
+    startTransition(async () => {
       try {
-        signInWithRedirect(provider, data)
-        toast({
-          title: 'Success',
-          description: `We've sent a verification email to ${data?.email}.`,
-        })
+        await signInOAuth(provider);
       } catch (error) {
-        console.error('Error signing in:', error)
+        console.error("Error signing in:", error);
         toast({
-          title: 'Error',
-          description: 'An error occurred while signing in.',
-          variant: 'destructive',
-        })
+          title: "Error",
+          description: "An error occurred while signing in.",
+          variant: "destructive",
+        });
       }
-    })
-  }
+    });
+  };
+
+  const handleSubmitMagicLinks = emailForm.handleSubmit((data) => {
+    startTransition(async () => {
+      try {
+        await signInMagicLinks("resend", data);
+        toast({
+          title: "Success",
+          description: `We've sent a verification email to ${data?.email}.`,
+        });
+      } catch (error) {
+        console.error("Error signing in:", error);
+        toast({
+          title: "Error",
+          description: "An error occurred while signing in.",
+          variant: "destructive",
+        });
+      } finally {
+        emailForm.reset();
+      }
+    });
+  });
 
   return (
     <>
-      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center sm:p-12">
-        <Card className="min-h-fit border-none shadow-none sm:m-auto sm:border-solid sm:border-border sm:shadow">
-          <CardHeader className="sm:items-center sm:justify-center">
+      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center sm:p-6">
+        <Card className="min-h-fit w-full border-none shadow-none sm:m-auto sm:w-auto sm:border-solid sm:border-border sm:shadow">
+          <CardHeader className="">
             <CardTitle>Join Now</CardTitle>
             <CardDescription>
               Make the most of your professional life.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-6">
             {/* Socials */}
-            <div className="mx-auto flex w-full flex-col items-center justify-between gap-4 sm:w-1/2 sm:min-w-[432px]">
-              <SocialButton
+            <div className="mx-auto w-full space-y-3">
+              <OAuthButton
                 provider="google"
-                providerName="Google"
+                displayName="Google"
+                handleSubmit={handleSubmitOAuth}
                 isPending={isPending}
-                onSignIn={handleSignIn}
               />
-              <SocialButton
+              <OAuthButton
                 provider="github"
-                providerName="GitHub"
+                displayName="GitHub"
+                handleSubmit={handleSubmitOAuth}
                 isPending={isPending}
-                onSignIn={handleSignIn}
               />
             </div>
 
             {/* Divider */}
-            <div className="relative mx-auto py-8 sm:w-2/3 sm:min-w-[432px]">
+            <div className="relative mx-auto w-full sm:min-w-[480px]">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t" />
               </div>
@@ -103,21 +117,14 @@ export default function Main() {
 
             <Form {...emailForm}>
               <form
-                className="mx-auto flex w-full flex-col items-center gap-4 sm:w-1/2 sm:min-w-[432px]"
-                onSubmit={emailForm.handleSubmit((data) => {
-                  try {
-                    handleSignIn('resend', data)
-                  } catch {
-                  } finally {
-                    emailForm.reset()
-                  }
-                })}
+                className="mx-auto w-full space-y-3"
+                onSubmit={handleSubmitMagicLinks}
               >
                 <FormField
                   control={emailForm.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="w-full">
+                    <FormItem className="space-y-1">
                       <FormLabel>Email address</FormLabel>
                       <FormControl>
                         <Input
@@ -131,9 +138,8 @@ export default function Main() {
                   )}
                 ></FormField>
                 <Button
-                  size="lg"
                   type="submit"
-                  className="w-full"
+                  className="w-full rounded-full"
                   disabled={isPending}
                 >
                   {isPending && <Loader2 className="animate-spin" />}
@@ -143,15 +149,15 @@ export default function Main() {
             </Form>
           </CardContent>
           <CardFooter>
-            <p className="mx-auto h-full w-full text-center text-xs leading-5 text-muted-foreground">
-              By joining, you agree to our{' '}
+            <p className="mx-auto h-full w-full text-wrap text-center text-xs leading-5 text-muted-foreground">
+              By joining, you agree to our{" "}
               <Link
                 href="#"
                 className="font-medium text-primary hover:underline"
               >
                 Terms of Service
-              </Link>{' '}
-              and{' '}
+              </Link>{" "}
+              and{" "}
               <Link
                 href="#"
                 className="font-medium text-primary hover:underline"
@@ -163,5 +169,5 @@ export default function Main() {
         </Card>
       </main>
     </>
-  )
+  );
 }

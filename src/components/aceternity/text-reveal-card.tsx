@@ -1,8 +1,8 @@
-'use client'
-import { cn } from '@/lib/utils'
-import { motion } from 'framer-motion'
-import React, { memo, useEffect, useRef, useState } from 'react'
-import { twMerge } from 'tailwind-merge'
+"use client";
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
+import React, { memo, useEffect, useRef, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 export const TextRevealCard = ({
   text,
@@ -10,53 +10,53 @@ export const TextRevealCard = ({
   children,
   className,
 }: {
-  text: string
-  revealText: string
-  children?: React.ReactNode
-  className?: string
+  text: string;
+  revealText: string;
+  children?: React.ReactNode;
+  className?: string;
 }) => {
-  const [widthPercentage, setWidthPercentage] = useState(0)
-  const cardRef = useRef<HTMLDivElement | any>(null)
-  const [left, setLeft] = useState(0)
-  const [localWidth, setLocalWidth] = useState(0)
-  const [isMouseOver, setIsMouseOver] = useState(false)
+  const [widthPercentage, setWidthPercentage] = useState(0);
+  const cardRef = useRef<HTMLDivElement | any>(null);
+  const [left, setLeft] = useState(0);
+  const [localWidth, setLocalWidth] = useState(0);
+  const [isMouseOver, setIsMouseOver] = useState(false);
 
   useEffect(() => {
     if (cardRef.current) {
       const { left, width: localWidth } =
-        cardRef.current.getBoundingClientRect()
-      setLeft(left)
-      setLocalWidth(localWidth)
+        cardRef.current.getBoundingClientRect();
+      setLeft(left);
+      setLocalWidth(localWidth);
     }
-  }, [])
+  }, []);
 
   function mouseMoveHandler(event: any) {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { clientX } = event
+    const { clientX } = event;
     if (cardRef.current) {
-      const relativeX = clientX - left
-      setWidthPercentage((relativeX / localWidth) * 100)
+      const relativeX = clientX - left;
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
   function mouseLeaveHandler() {
-    setIsMouseOver(false)
-    setWidthPercentage(0)
+    setIsMouseOver(false);
+    setWidthPercentage(0);
   }
   function mouseEnterHandler() {
-    setIsMouseOver(true)
+    setIsMouseOver(true);
   }
   function touchMoveHandler(event: React.TouchEvent<HTMLDivElement>) {
-    event.preventDefault()
-    const clientX = event.touches[0]!.clientX
+    event.preventDefault();
+    const clientX = event.touches[0]!.clientX;
     if (cardRef.current) {
-      const relativeX = clientX - left
-      setWidthPercentage((relativeX / localWidth) * 100)
+      const relativeX = clientX - left;
+      setWidthPercentage((relativeX / localWidth) * 100);
     }
   }
 
-  const rotateDeg = (widthPercentage - 50) * 0.1
+  const rotateDeg = (widthPercentage - 50) * 0.1;
   return (
     <div
       onMouseEnter={mouseEnterHandler}
@@ -67,8 +67,8 @@ export const TextRevealCard = ({
       onTouchMove={touchMoveHandler}
       ref={cardRef}
       className={cn(
-        'relative w-[40rem] overflow-hidden rounded-lg border border-white/[0.08] bg-[#1d1c20] p-8',
-        className,
+        "relative w-[40rem] overflow-hidden rounded-lg border border-white/[0.08] bg-[#1d1c20] p-8",
+        className
       )}
     >
       {children}
@@ -76,7 +76,7 @@ export const TextRevealCard = ({
       <div className="relative flex h-40 items-center overflow-hidden">
         <motion.div
           style={{
-            width: '100%',
+            width: "100%",
           }}
           animate={
             isMouseOver
@@ -93,7 +93,7 @@ export const TextRevealCard = ({
         >
           <p
             style={{
-              textShadow: '4px 4px 15px rgba(0,0,0,0.5)',
+              textShadow: "4px 4px 15px rgba(0,0,0,0.5)",
             }}
             className="bg-gradient-to-b from-white to-neutral-300 bg-clip-text py-10 text-base font-bold text-transparent text-white sm:text-[3rem]"
           >
@@ -118,39 +118,39 @@ export const TextRevealCard = ({
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const TextRevealCardTitle = ({
   children,
   className,
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) => {
   return (
-    <h2 className={twMerge('mb-2 text-lg text-white', className)}>
+    <h2 className={twMerge("mb-2 text-lg text-white", className)}>
       {children}
     </h2>
-  )
-}
+  );
+};
 
 export const TextRevealCardDescription = ({
   children,
   className,
 }: {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }) => {
   return (
-    <p className={twMerge('text-sm text-[#a9a9a9]', className)}>{children}</p>
-  )
-}
+    <p className={twMerge("text-sm text-[#a9a9a9]", className)}>{children}</p>
+  );
+};
 
 const Stars = () => {
-  const randomMove = () => Math.random() * 4 - 2
-  const randomOpacity = () => Math.random()
-  const random = () => Math.random()
+  const randomMove = () => Math.random() * 4 - 2;
+  const randomOpacity = () => Math.random();
+  const random = () => Math.random();
   return (
     <div className="absolute inset-0">
       {[...Array(80)].map((_, i) => (
@@ -165,23 +165,23 @@ const Stars = () => {
           transition={{
             duration: random() * 10 + 20,
             repeat: Infinity,
-            ease: 'linear',
+            ease: "linear",
           }}
           style={{
-            position: 'absolute',
+            position: "absolute",
             top: `${random() * 100}%`,
             left: `${random() * 100}%`,
             width: `2px`,
             height: `2px`,
-            backgroundColor: 'white',
-            borderRadius: '50%',
+            backgroundColor: "white",
+            borderRadius: "50%",
             zIndex: 1,
           }}
           className="inline-block"
         ></motion.span>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export const MemoizedStars = memo(Stars)
+export const MemoizedStars = memo(Stars);

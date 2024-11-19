@@ -1,19 +1,19 @@
-import { Icon } from '@/app/_images/icon'
-import ThemeSwitcher from '@/components/theme-switcher'
-import { cn } from '@/lib/utils'
-import Image from 'next/image'
-import Link from 'next/link'
+import { Icon } from "@/app/_images/icon";
+import ThemeSwitcher from "@/components/theme-switcher";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer({ className }: { className?: string }) {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <>
       {/* shadow-[inset_0_1px_0_0] shadow-border */}
       <footer
         className={cn(
-          'flex h-fit flex-col shadow-[inset_0_1px_0_0] shadow-border',
-          className,
+          "flex h-fit flex-col shadow-[inset_0_1px_0_0] shadow-border",
+          className
         )}
       >
         <div className="mx-auto flex h-full w-full max-w-screen-xl flex-col gap-4 px-6 py-4">
@@ -54,5 +54,5 @@ export default function Footer({ className }: { className?: string }) {
         </div>
       </footer>
     </>
-  )
+  );
 }

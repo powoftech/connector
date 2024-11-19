@@ -1,28 +1,24 @@
-'use server'
+"use server";
 
-import { signIn } from '@/auth'
-import { EmailFormSchema } from '@/lib/definitions'
-import { z } from 'zod'
+import { signIn } from "@/auth";
+import { EmailFormInputs } from "@/lib/definitions";
 
-export type AuthProvider = 'google' | 'github' | 'resend'
+export type OAuthProvider = "google" | "github";
+export type MagicLinksProvider = "resend";
 
-interface SignInOptions {
-  redirectTo: string
-  redirect?: boolean
-  email?: string | null
+const DEFAULT_REDIRECT_TO = "/feed";
+
+export async function signInOAuth(provider: OAuthProvider) {
+  await signIn(provider, { redirectTo: DEFAULT_REDIRECT_TO, redirect: true });
 }
 
-const DEFAULT_REDIRECT_TO = '/feed'
-
-export async function signInWithRedirect(
-  provider: AuthProvider,
-  data?: z.infer<typeof EmailFormSchema>,
-): Promise<void> {
-  const signInOptions: SignInOptions = {
+export async function signInMagicLinks(
+  provider: MagicLinksProvider,
+  data: EmailFormInputs
+) {
+  await signIn(provider, {
+    email: data.email,
     redirectTo: DEFAULT_REDIRECT_TO,
-    redirect: !data,
-    email: data?.email || null,
-  }
-
-  await signIn(provider, signInOptions)
+    redirect: false,
+  });
 }

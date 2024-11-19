@@ -1,7 +1,8 @@
-import { buttonVariants } from '@/components/ui/button'
-import Link from 'next/link'
-import Footer from './_components/footer'
-import Header from './_components/header'
+import Footer from "@/app/_components/footer";
+import Header from "@/app/_components/header";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -18,7 +19,10 @@ export default function NotFound() {
           </p>
           <Link
             href="/"
-            className={`${buttonVariants({ variant: 'outline', size: 'lg' })}`}
+            className={cn(
+              `${buttonVariants({ variant: "outline" })}`,
+              "rounded-full"
+            )}
           >
             Go to your feed
           </Link>
@@ -27,5 +31,5 @@ export default function NotFound() {
 
       <Footer />
     </>
-  )
+  );
 }

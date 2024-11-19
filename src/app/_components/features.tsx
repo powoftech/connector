@@ -4,13 +4,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from "@/components/ui/card";
 import {
   IoBriefcaseOutline,
   IoGlobeOutline,
   IoPeopleOutline,
   IoSparklesOutline,
-} from 'react-icons/io5'
+} from "react-icons/io5";
 
 export default function Features() {
   return (
@@ -34,6 +34,7 @@ export default function Features() {
               </CardDescription>
             </CardContent>
           </Card>
+
           <Card>
             <CardHeader>
               <IoBriefcaseOutline className="mb-2 h-8 w-8" />
@@ -45,6 +46,7 @@ export default function Features() {
               </CardDescription>
             </CardContent>
           </Card>
+
           <Card>
             <CardHeader>
               <IoGlobeOutline className="mb-2 h-8 w-8" />
@@ -56,6 +58,7 @@ export default function Features() {
               </CardDescription>
             </CardContent>
           </Card>
+
           <Card>
             <CardHeader>
               <IoSparklesOutline className="mb-2 h-8 w-8" />
@@ -71,5 +74,5 @@ export default function Features() {
         </div>
       </div>
     </div>
-  )
+  );
 }

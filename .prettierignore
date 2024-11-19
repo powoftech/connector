@@ -63,4 +63,4 @@ turbopack/crates/turbopack-tests/tests/**/output*
 turbopack/
 
 # shadcn/ui
-src/components/ui/
+src/components/ui/*.tsx

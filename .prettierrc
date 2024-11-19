@@ -3,12 +3,12 @@
     "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss"
   ],
-  "endOfLine": "lf",
+  "endOfLine": "crlf",
   "printWidth": 80,
-  "semi": false,
-  "singleQuote": true,
+  "semi": true,
+  "singleQuote": false,
   "tabWidth": 2,
-  "trailingComma": "all",
+  "trailingComma": "es5",
   "useTabs": false,
   "organizeImportsSkipDestructiveCodeActions": true
 }

@@ -1,5 +1,5 @@
-'use client'
-import { BackgroundBeams } from '@/components/aceternity/background-beams'
+"use client";
+import { BackgroundBeams } from "@/components/aceternity/background-beams";
 
 export default function CTA() {
   return (
@@ -13,14 +13,8 @@ export default function CTA() {
           Join Connector, the professional network that empowers your career
           growth and connects you with opportunities worldwide.
         </p>
-        {/* <Link
-          href="/signup"
-          className={`${buttonVariants({ variant: 'default' })} relative z-10 bg-neutral-50 text-neutral-950 hover:bg-neutral-50/90`}
-        >
-          Join Now
-        </Link> */}
       </div>
       <BackgroundBeams />
     </div>
-  )
+  );
 }

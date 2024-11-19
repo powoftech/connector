@@ -1,8 +1,8 @@
-'use client'
+"use client";
 
-import { AuroraBackground } from '@/components/aceternity/aurora-background'
-import { motion } from 'framer-motion'
-import React from 'react'
+import { AuroraBackground } from "@/components/aceternity/aurora-background";
+import { motion } from "framer-motion";
+import React from "react";
 
 export default function Hero() {
   return (
@@ -13,7 +13,7 @@ export default function Hero() {
         transition={{
           delay: 0.3,
           duration: 0.8,
-          ease: 'easeInOut',
+          ease: "easeInOut",
         }}
         className="m-auto flex min-h-fit w-full max-w-screen-xl flex-shrink-0 flex-col items-center justify-center gap-6 p-6 text-center text-5xl font-bold leading-none text-foreground sm:gap-10 sm:text-8xl"
       >
@@ -22,5 +22,5 @@ export default function Hero() {
         <p>Advance.</p>
       </motion.div>
     </AuroraBackground>
-  )
+  );
 }

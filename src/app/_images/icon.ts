@@ -1,1 +1,1 @@
-export * as Icon from '@/app/_images/icon.svg'
+export * as Icon from "@/app/_images/icon.svg";

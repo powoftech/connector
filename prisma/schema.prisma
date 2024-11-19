@@ -21,12 +21,18 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
+  role          Role      
 
   accounts Account[]
   sessions Session[]
   profile  Profile?
 
   @@map("users")
+}
+
+enum Role {
+  JOBSEEKER @map("Jobseeker")
+  RECRUITER @map("Recruiter")
 }
 
 model Account {
@@ -75,22 +81,18 @@ model Profile {
   customURL String? @map("custom_url")
   headline  String?
   about     String?
-  role      Role    @default(EMPLOYEE)
-  city      String?
-  country   String?
+  countryid String?
+  cityid    String?
+
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  country Country? @relation(fields: [countryid], references: [id])
+  city    City?    @relation(fields: [cityid], references: [id])
 
   education  Education[]
   experience Experience[]
-  skills     SkillsOnProfiles[]
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skills     Skill[]
 
   @@map("profiles")
-}
-
-enum Role {
-  EMPLOYEE  @map("Employee")
-  RECRUITER @map("Recruiter")
 }
 
 model Education {
@@ -138,26 +140,37 @@ enum EmploymentType {
 }
 
 enum LocationType {
-  ONSITE @map("On-site")
+  ON_SITE @map("On-site")
   HYBRID @map("Hybrid")
   REMOTE @map("Remote")
 }
 
 model Skill {
-  id       String             @id @default(cuid())
+  id       String    @id @default(cuid())
   name     String
-  profiles SkillsOnProfiles[]
+  profiles Profile[]
 
   @@map("skills")
 }
 
-model SkillsOnProfiles {
-  profileId String
-  skillId   String
+model Country {
+  id   String @id @default(cuid())
+  name String
+  code String
 
-  Profile Profile @relation(fields: [profileId], references: [id])
-  Skill   Skill   @relation(fields: [skillId], references: [id])
+  cities   City[]
+  profiles Profile[]
 
-  @@id([profileId, skillId])
-  @@map("profiles_skills")
+  @@map("countries")
+}
+
+model City {
+  id        String @id @default(cuid())
+  countryId String @map("country_id")
+  name      String
+
+  country  Country   @relation(fields: [countryId], references: [id], onDelete: Cascade)
+  profiles Profile[]
+
+  @@map("cities")
 }
