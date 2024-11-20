@@ -82,9 +82,7 @@ export default function Main() {
 
   return (
     <>
-      <main
-        className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center sm:p-6"
-      >
+      <main className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center sm:p-6">
         <Card className="min-h-fit w-full border-none shadow-none sm:m-auto sm:w-auto sm:border-solid sm:border-border sm:shadow">
           <CardHeader className="text-center">
             <CardTitle>Join Now</CardTitle>
