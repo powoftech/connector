@@ -6,7 +6,7 @@ services:
     image: postgres:16-alpine
     # user: root
     environment:
-      - POSTGRES_USER=root
+      - POSTGRES_USER=default
       - POSTGRES_PASSWORD=password
       - POSTGRES_DB=platform
     # volumes:

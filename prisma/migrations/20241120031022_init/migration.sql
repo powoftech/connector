@@ -14,7 +14,7 @@ CREATE TABLE "users" (
     "email" TEXT,
     "email_verified" TIMESTAMP(3),
     "image" TEXT,
-    "role" "Role" NOT NULL DEFAULT 'Jobseeker',
+    "role" "Role" NOT NULL,
 
     CONSTRAINT "users_pkey" PRIMARY KEY ("id")
 );
@@ -61,8 +61,8 @@ CREATE TABLE "profiles" (
     "custom_url" TEXT,
     "headline" TEXT,
     "about" TEXT,
-    "city" TEXT,
-    "country" TEXT,
+    "countryid" TEXT,
+    "cityid" TEXT,
 
     CONSTRAINT "profiles_pkey" PRIMARY KEY ("id")
 );
@@ -107,11 +107,27 @@ CREATE TABLE "skills" (
 );
 
 -- CreateTable
-CREATE TABLE "profiles_skills" (
-    "profileId" TEXT NOT NULL,
-    "skillId" TEXT NOT NULL,
+CREATE TABLE "countries" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "code" TEXT NOT NULL,
 
-    CONSTRAINT "profiles_skills_pkey" PRIMARY KEY ("profileId","skillId")
+    CONSTRAINT "countries_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "cities" (
+    "id" TEXT NOT NULL,
+    "country_id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+
+    CONSTRAINT "cities_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "_ProfileToSkill" (
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
 );
 
 -- CreateIndex
@@ -129,6 +145,12 @@ CREATE UNIQUE INDEX "verification_tokens_identifier_token_key" ON "verification_
 -- CreateIndex
 CREATE UNIQUE INDEX "profiles_user_id_key" ON "profiles"("user_id");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "_ProfileToSkill_AB_unique" ON "_ProfileToSkill"("A", "B");
+
+-- CreateIndex
+CREATE INDEX "_ProfileToSkill_B_index" ON "_ProfileToSkill"("B");
+
 -- AddForeignKey
 ALTER TABLE "accounts" ADD CONSTRAINT "accounts_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -139,13 +161,22 @@ ALTER TABLE "sessions" ADD CONSTRAINT "sessions_user_id_fkey" FOREIGN KEY ("user
 ALTER TABLE "profiles" ADD CONSTRAINT "profiles_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_countryid_fkey" FOREIGN KEY ("countryid") REFERENCES "countries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_cityid_fkey" FOREIGN KEY ("cityid") REFERENCES "cities"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "education" ADD CONSTRAINT "education_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "profiles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "experience" ADD CONSTRAINT "experience_profile_id_fkey" FOREIGN KEY ("profile_id") REFERENCES "profiles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "profiles_skills" ADD CONSTRAINT "profiles_skills_profileId_fkey" FOREIGN KEY ("profileId") REFERENCES "profiles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "cities" ADD CONSTRAINT "cities_country_id_fkey" FOREIGN KEY ("country_id") REFERENCES "countries"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "profiles_skills" ADD CONSTRAINT "profiles_skills_skillId_fkey" FOREIGN KEY ("skillId") REFERENCES "skills"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "_ProfileToSkill" ADD CONSTRAINT "_ProfileToSkill_A_fkey" FOREIGN KEY ("A") REFERENCES "profiles"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "_ProfileToSkill" ADD CONSTRAINT "_ProfileToSkill_B_fkey" FOREIGN KEY ("B") REFERENCES "skills"("id") ON DELETE CASCADE ON UPDATE CASCADE;

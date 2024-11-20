@@ -10,9 +10,9 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  // directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
@@ -21,7 +21,6 @@ model User {
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  role          Role      
 
   accounts Account[]
   sessions Session[]
@@ -79,14 +78,15 @@ model Profile {
   id        String  @id @default(cuid())
   userId    String  @unique @map("user_id")
   customURL String? @map("custom_url")
+  role      Role
   headline  String?
   about     String?
-  countryid String?
-  cityid    String?
+  countryId String? @map("country_id")
+  cityId    String? @map("city_id")
 
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  country Country? @relation(fields: [countryid], references: [id])
-  city    City?    @relation(fields: [cityid], references: [id])
+  country Country? @relation(fields: [countryId], references: [id])
+  city    City?    @relation(fields: [cityId], references: [id])
 
   education  Education[]
   experience Experience[]
@@ -141,8 +141,8 @@ enum EmploymentType {
 
 enum LocationType {
   ON_SITE @map("On-site")
-  HYBRID @map("Hybrid")
-  REMOTE @map("Remote")
+  HYBRID  @map("Hybrid")
+  REMOTE  @map("Remote")
 }
 
 model Skill {

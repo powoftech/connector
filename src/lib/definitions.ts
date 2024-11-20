@@ -7,6 +7,26 @@ export const EmailFormSchema = z.object({
 
 export type EmailFormInputs = z.infer<typeof EmailFormSchema>;
 
+export const ProfileSchema = z.object({
+  name: z
+    .string()
+    .min(2, { message: "Display name must be 2 or more characters long" }),
+  role: z.nativeEnum(Role),
+  headline: z
+    .string()
+    .max(220, { message: "Exceeded maximum character length of 200" })
+    .optional(),
+  about: z
+    .string()
+    .max(2600, { message: "Exceeded maximum character length of 2,600" })
+    .optional(),
+  country: z.string().min(2, { message: "Country is required" }),
+  city: z.string().min(2, { message: "City is required" }),
+  // education: z.array(EducationSchema).optional(),
+  // experience: z.array(ExperienceSchema).optional(),
+  // skills: z.array(z.string()).optional(),
+});
+
 export const EducationSchema = z.object({
   school: z
     .string()
@@ -36,24 +56,6 @@ export const ExperienceSchema = z.object({
   description: z.string(),
 });
 
-export const ProfileSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Display name must be 2 or more characters long" }),
-  role: z.nativeEnum(Role),
-  headline: z
-    .string()
-    .max(220, { message: "Exceeded maximum character length of 200" })
-    .optional(),
-  about: z
-    .string()
-    .max(2600, { message: "Exceeded maximum character length of 2,600" })
-    .optional(),
-  country: z.string().min(2, { message: "Country is required" }),
-  city: z.string().min(2, { message: "City is required" }),
-  education: z.array(EducationSchema).optional(),
-  experience: z.array(ExperienceSchema).optional(),
-  skills: z.array(z.string()).optional(),
-});
-
 export type ProfileInputs = z.infer<typeof ProfileSchema>;
+export type EducationInputs = z.infer<typeof EducationSchema>;
+export type ExperienceInputs = z.infer<typeof ExperienceSchema>;

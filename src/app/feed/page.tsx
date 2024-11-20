@@ -1,20 +1,32 @@
 import { signOut } from "@/auth";
 import { Button } from "@/components/ui/button";
 import getSession from "@/lib/get-session";
+import prisma from "@/lib/prisma";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Feed",
+};
 
 export default async function Page() {
   const session = await getSession();
 
-  if (!session) {
+  if (!session || !session.user || !session.user.id) {
     redirect("/join");
   }
 
-  const user = session?.user;
+  const profile = await prisma.profile.findUnique({
+    where: { userId: session.user.id },
+  });
+
+  if (!profile) {
+    redirect("/get-started");
+  }
 
   return (
     <>
-      <pre>{JSON.stringify(user, null, 2)}</pre>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
       <form
         action={async () => {
           "use server";

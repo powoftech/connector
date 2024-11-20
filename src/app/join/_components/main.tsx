@@ -36,11 +36,7 @@ export default function Main() {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
-  const emailForm = useForm<EmailFormInputs>({
-    resolver: zodResolver(EmailFormSchema),
-  });
-
-  const handleSubmitOAuth = (provider: OAuthProvider) => {
+  function handleSubmitOAuth(provider: OAuthProvider) {
     startTransition(async () => {
       try {
         await signInOAuth(provider);
@@ -53,9 +49,13 @@ export default function Main() {
         });
       }
     });
-  };
+  }
 
-  const handleSubmitMagicLinks = emailForm.handleSubmit((data) => {
+  const emailForm = useForm<EmailFormInputs>({
+    resolver: zodResolver(EmailFormSchema),
+  });
+
+  function onSubmitMagicLinks(data: EmailFormInputs) {
     startTransition(async () => {
       try {
         await signInMagicLinks("resend", data);
@@ -74,7 +74,7 @@ export default function Main() {
         emailForm.reset();
       }
     });
-  });
+  }
 
   return (
     <>
@@ -118,7 +118,7 @@ export default function Main() {
             <Form {...emailForm}>
               <form
                 className="mx-auto w-full space-y-3"
-                onSubmit={handleSubmitMagicLinks}
+                onSubmit={emailForm.handleSubmit(onSubmitMagicLinks)}
               >
                 <FormField
                   control={emailForm.control}
