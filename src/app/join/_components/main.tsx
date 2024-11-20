@@ -31,6 +31,7 @@ import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
+import { IoMailOutline } from "react-icons/io5";
 
 export default function Main() {
   const { toast } = useToast();
@@ -53,6 +54,9 @@ export default function Main() {
 
   const emailForm = useForm<EmailFormInputs>({
     resolver: zodResolver(EmailFormSchema),
+    defaultValues: {
+      email: "",
+    },
   });
 
   function onSubmitMagicLinks(data: EmailFormInputs) {
@@ -61,7 +65,7 @@ export default function Main() {
         await signInMagicLinks("resend", data);
         toast({
           title: "Success",
-          description: `We've sent a verification email to ${data?.email}.`,
+          description: `We have sent a verification email to ${data.email}.`,
         });
       } catch (error) {
         console.error("Error signing in:", error);
@@ -80,15 +84,15 @@ export default function Main() {
     <>
       <main className="flex min-h-[calc(100vh-64px)] flex-col items-center sm:p-6">
         <Card className="min-h-fit w-full border-none shadow-none sm:m-auto sm:w-auto sm:border-solid sm:border-border sm:shadow">
-          <CardHeader className="">
+          <CardHeader className="text-center">
             <CardTitle>Join Now</CardTitle>
             <CardDescription>
               Make the most of your professional life.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="grid gap-4">
             {/* Socials */}
-            <div className="mx-auto w-full space-y-3">
+            <div className="mx-auto grid w-full gap-4">
               <OAuthButton
                 provider="google"
                 displayName="Google"
@@ -104,7 +108,7 @@ export default function Main() {
             </div>
 
             {/* Divider */}
-            <div className="relative mx-auto w-full sm:min-w-[480px]">
+            <div className="relative mx-auto w-full">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t" />
               </div>
@@ -117,14 +121,14 @@ export default function Main() {
 
             <Form {...emailForm}>
               <form
-                className="mx-auto w-full space-y-3"
+                className="mx-auto grid w-full gap-6"
                 onSubmit={emailForm.handleSubmit(onSubmitMagicLinks)}
               >
                 <FormField
                   control={emailForm.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="space-y-1">
+                    <FormItem>
                       <FormLabel>Email address</FormLabel>
                       <FormControl>
                         <Input
@@ -137,30 +141,30 @@ export default function Main() {
                     </FormItem>
                   )}
                 ></FormField>
-                <Button
-                  type="submit"
-                  className="w-full rounded-full"
-                  disabled={isPending}
-                >
-                  {isPending && <Loader2 className="animate-spin" />}
-                  <span className="m-auto">Continue with Email</span>
+                <Button type="submit" className="w-full" disabled={isPending}>
+                  {isPending ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    <IoMailOutline />
+                  )}
+                  Continue with Email
                 </Button>
               </form>
             </Form>
           </CardContent>
           <CardFooter>
-            <p className="mx-auto h-full w-full text-wrap text-center text-xs leading-5 text-muted-foreground">
+            <p className="mx-auto h-full w-full text-wrap px-8 text-center text-sm text-muted-foreground">
               By joining, you agree to our{" "}
               <Link
                 href="#"
-                className="font-medium text-primary hover:underline"
+                className="underline underline-offset-4 hover:text-primary"
               >
                 Terms of Service
               </Link>{" "}
               and{" "}
               <Link
                 href="#"
-                className="font-medium text-primary hover:underline"
+                className="underline underline-offset-4 hover:text-primary"
               >
                 Privacy Policy
               </Link>

@@ -33,12 +33,12 @@ export function OAuthButton({
     >
       <Button
         variant="outline"
-        className="w-full rounded-full"
+        className="w-full"
         type="submit"
         disabled={isPending}
       >
         {isPending ? <Loader2 className="animate-spin" /> : <Icon />}
-        <span className="m-auto">Continue with {displayName}</span>
+        Continue with {displayName}
       </Button>
     </form>
   );
