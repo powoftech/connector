@@ -3,7 +3,6 @@
 import {
   CityCombobox,
   CountryCombobox,
-  RoleCombobox,
 } from "@/app/get-started/_components/comboboxes";
 import { submitProfileForm } from "@/app/get-started/actions";
 import { Button } from "@/components/ui/button";
@@ -25,10 +24,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { ProfileInputs, ProfileSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Role } from "@prisma/client";
 import { Loader2 } from "lucide-react";
 import { Metadata } from "next";
 import { User } from "next-auth";
@@ -38,6 +45,11 @@ import { useForm } from "react-hook-form";
 export const metadata: Metadata = {
   title: "Get Started",
 };
+
+const roles = Object.values(Role).map((role) => ({
+  label: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase(),
+  value: role,
+}));
 
 export default function Main({ user }: { user: User }) {
   const { toast } = useToast();
@@ -58,8 +70,13 @@ export default function Main({ user }: { user: User }) {
       await submitProfileForm(user.id, data);
       toast({
         title: "Success",
-        description:
-          "Your profile has been submitted. You can now access the platform.",
+        description: (
+          <p className="whitespace-pre">
+            {
+              "Your profile has been submitted.\nYou can now access the platform."
+            }
+          </p>
+        ),
       });
       router.push("/feed");
     } catch (error) {
@@ -86,13 +103,13 @@ export default function Main({ user }: { user: User }) {
             <form
               id="profile-form"
               onSubmit={profileForm.handleSubmit(onSubmit)}
-              className="space-y-3 sm:grid sm:grid-cols-2 sm:gap-6 sm:space-y-0"
+              className="grid gap-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4"
             >
               <FormField
                 control={profileForm.control}
                 name="name"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>Display name</FormLabel>
                     <FormControl>
                       <Input {...field} />
@@ -108,11 +125,28 @@ export default function Main({ user }: { user: User }) {
                 control={profileForm.control}
                 name="role"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>Role</FormLabel>
-                    <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select role..." />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {roles.map((role) => (
+                          <SelectItem key={role.value} value={role.value}>
+                            {role.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    {/* <FormControl>
                       <RoleCombobox field={field} />
-                    </FormControl>
+                    </FormControl> */}
                     <FormDescription>
                       This will be your main role in the platform.
                     </FormDescription>
@@ -124,7 +158,7 @@ export default function Main({ user }: { user: User }) {
                 control={profileForm.control}
                 name="country"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>Country/Region</FormLabel>
                     <FormControl>
                       <CountryCombobox
@@ -150,7 +184,7 @@ export default function Main({ user }: { user: User }) {
                 control={profileForm.control}
                 name="city"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>City</FormLabel>
                     <FormControl>
                       <CityCombobox
@@ -167,7 +201,7 @@ export default function Main({ user }: { user: User }) {
                 control={profileForm.control}
                 name="headline"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>Headline (optional)</FormLabel>
                     <FormControl>
                       <Input {...field} />
@@ -183,7 +217,7 @@ export default function Main({ user }: { user: User }) {
                 control={profileForm.control}
                 name="about"
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
                     <FormLabel>About (optional)</FormLabel>
                     <FormControl>
                       <Textarea {...field} />
@@ -200,6 +234,7 @@ export default function Main({ user }: { user: User }) {
             </form>
           </Form>
         </CardContent>
+
         <CardFooter>
           <Button
             form="profile-form"

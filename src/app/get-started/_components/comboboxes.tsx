@@ -16,80 +16,17 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { City, Country, Role } from "@prisma/client";
+import { City, Country } from "@prisma/client";
 import { ChevronsUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
 
-export function RoleCombobox({
-  field,
-}: {
-  field: { value: string; onChange: (value: string) => void };
-}) {
-  const [open, setOpen] = useState(false);
-  const roles = Object.values(Role).map((role) => ({
-    label: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase(),
-    value: role,
-  }));
-
-  return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          role="combobox"
-          aria-expanded={open}
-          className="flex w-full justify-between"
-        >
-          {field.value
-            ? roles.find((role) => role.value === field.value)?.label
-            : "Select role..."}
-          <ChevronsUpDown className="opacity-50" />
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="p-0"
-        style={{ width: "var(--radix-popover-trigger-width)" }}
-      >
-        <Command>
-          <CommandInput placeholder="Search role..." />
-          <CommandList>
-            <CommandEmpty>No role found.</CommandEmpty>
-            <CommandGroup>
-              {roles.map((role) => (
-                <CommandItem
-                  key={role.value}
-                  value={role.value}
-                  onSelect={() => {
-                    // setValue(currentValue === value ? '' : currentValue)
-                    // setOpen(false)
-                    field.onChange(role.value);
-                    setOpen(false);
-                  }}
-                >
-                  {role.label}
-                  <IoCheckmark
-                    className={cn(
-                      "ml-auto",
-                      field.value === role.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
-  );
-}
-
 export function CountryCombobox({
   field,
-  onCountryChange, // Add new prop
+  onCountryChange,
 }: {
   field: { value: string; onChange: (value: string) => void };
-  onCountryChange?: () => void; // Add new prop type
+  onCountryChange?: () => void;
 }) {
   const [open, setOpen] = useState(false);
   const [countries, setCountries] = useState<
@@ -137,8 +74,6 @@ export function CountryCombobox({
                   key={country.value}
                   value={country.value}
                   onSelect={() => {
-                    // setValue(currentValue === value ? '' : currentValue)
-                    // setOpen(false)
                     field.onChange(country.value);
                     setOpen(false);
                     onCountryChange?.();
@@ -223,8 +158,6 @@ export function CityCombobox({
                   key={city.value}
                   value={city.value}
                   onSelect={() => {
-                    // setValue(currentValue === value ? '' : currentValue)
-                    // setOpen(false)
                     field.onChange(city.value);
                     setOpen(false);
                   }}
