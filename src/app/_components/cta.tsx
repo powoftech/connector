@@ -9,7 +9,7 @@ export default function CTA() {
           Ready to Elevate
           <br className="lg:hidden" /> Your Career?
         </p>
-        <p className="relative z-10 mx-auto my-2 w-full text-center text-neutral-500 md:text-xl">
+        <p className="relative z-10 mx-auto my-2 w-full text-center text-neutral-500 sm:text-xl">
           Join Connector, the professional network that empowers your career
           growth and connects you with opportunities worldwide.
         </p>

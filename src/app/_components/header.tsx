@@ -39,10 +39,7 @@ export default function Header({
           {showJoin && (
             <Link
               href="/join"
-              className={cn(
-                ` ${buttonVariants({ variant: "default" })} `,
-                "rounded-full"
-              )}
+              className={cn(` ${buttonVariants({ variant: "default" })} `, "")}
             >
               Join Now
             </Link>
