@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { HEADER_HEIGHT } from "@/lib/constants";
 import { EmailFormInputs, EmailFormSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -84,7 +83,7 @@ export default function Main() {
   return (
     <>
       <main
-        className={`flex min-h-[calc(100vh-${HEADER_HEIGHT}px)] flex-col items-center sm:p-6`}
+        className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center sm:p-6"
       >
         <Card className="min-h-fit w-full border-none shadow-none sm:m-auto sm:w-auto sm:border-solid sm:border-border sm:shadow">
           <CardHeader className="text-center">

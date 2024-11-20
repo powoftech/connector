@@ -1,13 +1,11 @@
 "use client";
 
 import { AuroraBackground } from "@/components/aceternity/aurora-background";
-import { HEADER_HEIGHT } from "@/lib/constants";
 import { motion } from "framer-motion";
-import React from "react";
 
 export default function Hero() {
   return (
-    <AuroraBackground className={`min-h-[calc(100vh-${HEADER_HEIGHT}px)]`}>
+    <AuroraBackground className="min-h-[calc(100vh-var(--header-height))]">
       <motion.div
         initial={{ opacity: 0.0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

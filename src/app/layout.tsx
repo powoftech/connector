@@ -40,7 +40,17 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${inter.className} antialiased`} dir="ltr">
+      <body
+        className={`${inter.className} antialiased`}
+        dir="ltr"
+        style={
+          {
+            "--header-height": `56px`,
+            "--footer-height-mobile": `164px`,
+            "--footer-height-desktop": `108px`,
+          } as React.CSSProperties
+        }
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

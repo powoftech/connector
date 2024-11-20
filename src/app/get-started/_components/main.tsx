@@ -33,7 +33,6 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { HEADER_HEIGHT } from "@/lib/constants";
 import { ProfileInputs, ProfileSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Role } from "@prisma/client";
@@ -92,9 +91,7 @@ export default function Main({ user }: { user: User }) {
   }
 
   return (
-    <main
-      className={`flex min-h-[calc(100vh-${HEADER_HEIGHT}px)] flex-col items-center sm:p-6`}
-    >
+    <main className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center sm:p-6">
       <Card className="h-full w-full border-none shadow-none sm:m-auto sm:max-w-screen-lg sm:border-solid sm:border-border sm:shadow">
         <CardHeader>
           <CardTitle>Get Started</CardTitle>
