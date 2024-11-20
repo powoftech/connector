@@ -13,8 +13,8 @@ export default function Header({
   showJoin?: boolean;
 }) {
   return (
-    <header className={cn("flex h-16 w-full flex-row items-center", className)}>
-      <div className="mx-auto flex w-full max-w-screen-xl flex-row items-center justify-between px-6">
+    <header className={cn("flex h-14 w-full flex-row items-center", className)}>
+      <div className="mx-auto flex w-full max-w-screen-2xl flex-row items-center justify-between px-6">
         <Link href="/" className="flex flex-shrink-0">
           <span className="sr-only">Connector</span>
           <Image

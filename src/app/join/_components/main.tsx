@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { HEADER_HEIGHT } from "@/lib/constants";
 import { EmailFormInputs, EmailFormSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
@@ -82,7 +83,9 @@ export default function Main() {
 
   return (
     <>
-      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center sm:p-6">
+      <main
+        className={`flex min-h-[calc(100vh-${HEADER_HEIGHT}px)] flex-col items-center sm:p-6`}
+      >
         <Card className="min-h-fit w-full border-none shadow-none sm:m-auto sm:w-auto sm:border-solid sm:border-border sm:shadow">
           <CardHeader className="text-center">
             <CardTitle>Join Now</CardTitle>
@@ -164,7 +167,7 @@ export default function Main() {
               and{" "}
               <Link
                 href="#"
-                className="underline underline-offset-4 hover:text-primary"
+                className="underline-offset-4max underline hover:text-primary"
               >
                 Privacy Policy
               </Link>
