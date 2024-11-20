@@ -9,7 +9,7 @@ export default function NotFound() {
     <>
       <Header />
 
-      <main className="flex min-h-[calc(100vh-64px-64px)] flex-col items-center">
+      <main className="flex min-h-[calc(100vh-64px-164px)] flex-col items-center sm:min-h-[calc(100vh-64px-100px)]">
         <div className="m-auto flex flex-col items-center gap-6 p-6">
           <h1 className="w-full text-center text-4xl font-extrabold">
             Page not found
