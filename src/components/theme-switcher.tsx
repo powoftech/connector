@@ -5,6 +5,19 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { IoCog, IoMoon, IoSunny } from "react-icons/io5";
 
+/**
+ * ThemeSwitcher component allows users to switch between light, dark, and system themes.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} [props.className] - Optional additional class names for the component.
+ *
+ * @returns {JSX.Element | null} The rendered ThemeSwitcher component or null if not mounted.
+ *
+ * @example
+ * <ThemeSwitcher className="custom-class" />
+ *
+ * @component
+ */
 export default function ThemeSwitcher({ className }: { className?: string }) {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();

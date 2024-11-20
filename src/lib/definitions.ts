@@ -4,7 +4,6 @@ import { z } from "zod";
 export const EmailFormSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
 });
-
 export type EmailFormInputs = z.infer<typeof EmailFormSchema>;
 
 export const ProfileSchema = z.object({
@@ -26,6 +25,7 @@ export const ProfileSchema = z.object({
   // experience: z.array(ExperienceSchema).optional(),
   // skills: z.array(z.string()).optional(),
 });
+export type ProfileInputs = z.infer<typeof ProfileSchema>;
 
 export const EducationSchema = z.object({
   school: z
@@ -40,6 +40,7 @@ export const EducationSchema = z.object({
   grade: z.string(),
   description: z.string(),
 });
+export type EducationInputs = z.infer<typeof EducationSchema>;
 
 export const ExperienceSchema = z.object({
   title: z.string().min(2, { message: "Title is required" }),
@@ -55,7 +56,4 @@ export const ExperienceSchema = z.object({
   end: z.date(),
   description: z.string(),
 });
-
-export type ProfileInputs = z.infer<typeof ProfileSchema>;
-export type EducationInputs = z.infer<typeof EducationSchema>;
 export type ExperienceInputs = z.infer<typeof ExperienceSchema>;
