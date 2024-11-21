@@ -30,6 +30,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             select: {
               customURL: true,
               role: true,
+              headline: true,
+              about: true,
+              country: {
+                select: {
+                  name: true,
+                },
+              },
+              city: {
+                select: {
+                  name: true,
+                },
+              },
             },
           }),
         },

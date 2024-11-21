@@ -1,6 +1,6 @@
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
-import Main from "@/app/join/_components/main";
+import Main from "@/app/join/main";
 import getSession from "@/lib/get-session";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";

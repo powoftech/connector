@@ -115,7 +115,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
         <div className="mx-auto flex w-full max-w-[100vw] flex-row items-center justify-between gap-2 px-6">
           <div className="flex w-[360px] min-w-fit flex-row items-center justify-between gap-2">
             <Link
-              href="/"
+              href={`/`}
               className="flex flex-shrink-0 items-center justify-between"
             >
               <span className="sr-only hidden">Connector</span>
@@ -144,7 +144,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
             </Button>
           </div>
 
-          <div className="hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-2 overflow-hidden sm:flex">
+          <div className="hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-1.5 overflow-hidden sm:flex sm:w-[700px]">
             {navigationItems.map((item) => (
               <NavigationItem
                 key={item.href}
@@ -156,20 +156,20 @@ export default function PlatformHeader({ className }: { className?: string }) {
           </div>
 
           {session.status === "loading" ? (
-            <Skeleton className="h-10 w-[360px] min-w-fit rounded-full" />
+            <Skeleton className="h-10 w-[300px] min-w-fit rounded-full" />
           ) : (
-            <div className="flex min-w-fit flex-row items-center justify-end gap-2 sm:w-[360px]">
+            <div className="flex min-w-fit flex-row items-center justify-end gap-2 sm:w-[300px]">
               {session.data?.user.profile.role === Role.RECRUITER && (
                 <>
                   <Button
                     asChild
                     size="default"
                     variant="secondary"
-                    className="group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-fit hover:px-4 hover:py-2 sm:flex"
+                    className="group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 sm:flex"
                   >
-                    <Link href="/job-posting">
+                    <Link href={`/job-posting`}>
                       <LuPencil />
-                      <span className="hidden transition-all duration-1000 ease-in-out group-hover:inline">
+                      <span className="mx-auto hidden overflow-hidden transition-all duration-1000 ease-in-out group-hover:inline">
                         Post a job
                       </span>
                     </Link>
@@ -180,7 +180,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     variant="secondary"
                     className="rounded-full sm:hidden"
                   >
-                    <Link href="/job-posting">
+                    <Link href={`/job-posting`}>
                       <LuPencil />
                     </Link>
                   </Button>
@@ -190,20 +190,14 @@ export default function PlatformHeader({ className }: { className?: string }) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar className="cursor-pointer select-none border">
-                    <AvatarImage
-                      src={
-                        session.data?.user?.image
-                          ? session.data?.user?.image
-                          : "https://github.com/powoftech.png"
-                      }
-                    />
+                    <AvatarImage src={session.data?.user?.image} />
                     <AvatarFallback>
                       {session.data?.user?.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="-mr-10 mt-[60px]"
+                  className="-mr-10 mt-[60px] w-[calc(40px+8px+128px)]"
                   side="left"
                   sideOffset={0}
                 >
@@ -212,7 +206,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuGroup>
-                    <Link href={"/"}></Link>
+                    <Link href={`/`}></Link>
                     <DropdownMenuItem
                       className="cursor-pointer"
                       onClick={() =>

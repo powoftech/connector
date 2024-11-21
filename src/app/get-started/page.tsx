@@ -1,6 +1,6 @@
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
-import Main from "@/app/get-started/_components/main";
+import Main from "@/app/get-started/main";
 import getSession from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";

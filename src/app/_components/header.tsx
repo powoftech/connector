@@ -16,7 +16,7 @@ export default function Header({
     <header className={cn("flex h-16 w-full flex-row items-center", className)}>
       <div className="mx-auto flex w-full max-w-screen-2xl flex-row items-center justify-between px-6">
         <Link
-          href="/"
+          href={`/`}
           className="flex flex-shrink-0 items-center justify-between"
         >
           <span className="sr-only hidden">Connector</span>
@@ -37,7 +37,7 @@ export default function Header({
         <div className="flex flex-shrink-0 flex-row flex-nowrap items-center gap-2">
           {showJoin && (
             <Link
-              href="/join"
+              href={`/join`}
               className={cn(
                 ` ${buttonVariants({ variant: "default" })} `,
                 "rounded-full"

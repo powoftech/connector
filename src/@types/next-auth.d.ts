@@ -12,6 +12,14 @@ declare module "next-auth" {
       profile: {
         customURL: string;
         role: string;
+        headline: string;
+        about: string;
+        country: {
+          name: string;
+        };
+        city: {
+          name: string;
+        };
       };
     };
   }

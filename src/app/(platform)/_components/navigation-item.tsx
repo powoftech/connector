@@ -21,7 +21,7 @@ export default function NavigationItem({
   return (
     <div
       className={cn(
-        "flex h-full w-28 min-w-fit items-center justify-center py-1",
+        "flex h-full w-[calc(700px/5)] min-w-fit items-center justify-center py-1",
         isActive ? "shadow-[inset_0px_-2px_0px_0px] shadow-foreground" : ""
       )}
     >
