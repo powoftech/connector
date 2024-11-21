@@ -1,4 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter, Roboto_Mono } from "next/font/google";
@@ -35,7 +37,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${roboto_mono.variable}`}
+      className={`${inter.variable} ${roboto_mono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
     >
       <head>
         <meta name="color-scheme" content="light dark" />
