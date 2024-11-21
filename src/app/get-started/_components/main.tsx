@@ -36,11 +36,11 @@ import { useToast } from "@/hooks/use-toast";
 import { ProfileInputs, ProfileSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Role } from "@prisma/client";
-import { Loader2 } from "lucide-react";
 import { Metadata } from "next";
 import { User } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { LuLoader2 } from "react-icons/lu";
 
 export const metadata: Metadata = {
   title: "Get Started",
@@ -242,7 +242,7 @@ export default function Main({ user }: { user: User }) {
             disabled={profileForm.formState.isSubmitting}
           >
             {profileForm.formState.isSubmitting && (
-              <Loader2 className="animate-spin" />
+              <LuLoader2 className="animate-spin" />
             )}
             Submit
           </Button>

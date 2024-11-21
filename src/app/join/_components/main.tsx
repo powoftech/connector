@@ -27,11 +27,11 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { EmailFormInputs, EmailFormSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { IoMailOutline } from "react-icons/io5";
+import { LuLoader2 } from "react-icons/lu";
 
 export default function Main() {
   const { toast } = useToast();
@@ -143,7 +143,7 @@ export default function Main() {
                 ></FormField>
                 <Button type="submit" className="w-full" disabled={isPending}>
                   {isPending ? (
-                    <Loader2 className="animate-spin" />
+                    <LuLoader2 className="animate-spin" />
                   ) : (
                     <IoMailOutline />
                   )}
@@ -164,7 +164,7 @@ export default function Main() {
               and{" "}
               <Link
                 href="#"
-                className="underline-offset-4max underline hover:text-primary"
+                className="underline underline-offset-4 hover:text-primary"
               >
                 Privacy Policy
               </Link>

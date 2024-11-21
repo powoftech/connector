@@ -1,7 +1,7 @@
 import { OAuthProvider } from "@/app/join/actions";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
 import { IoLogoGithub, IoLogoGoogle } from "react-icons/io5";
+import { LuLoader2 } from "react-icons/lu";
 
 interface OAuthButtonProps {
   provider: OAuthProvider;
@@ -37,7 +37,7 @@ export function OAuthButton({
         type="submit"
         disabled={isPending}
       >
-        {isPending ? <Loader2 className="animate-spin" /> : <Icon />}
+        {isPending ? <LuLoader2 className="animate-spin" /> : <Icon />}
         Continue with {displayName}
       </Button>
     </form>

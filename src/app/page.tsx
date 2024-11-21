@@ -3,18 +3,24 @@ import Features from "@/app/_components/features";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
 import Hero from "@/app/_components/hero";
+import getSession from "@/lib/get-session";
+import { redirect } from "next/navigation";
 
-export default function Page() {
-  // await new Promise((resolve) => setTimeout(resolve, 100000))
+export default async function Page() {
+  const session = await getSession();
+
+  if (session) {
+    redirect("/feed");
+  }
 
   return (
     <>
       <Header
         showJoin={true}
-        className="fixed z-50 bg-background/75 backdrop-blur"
+        className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:border-border"
       />
 
-      <main className="pt-[var(--header-height)]">
+      <main>
         <div className="grid">
           <Hero />
           <Features />

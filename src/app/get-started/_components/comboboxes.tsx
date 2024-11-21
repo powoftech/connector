@@ -17,9 +17,9 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { City, Country } from "@prisma/client";
-import { ChevronsUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
+import { LuChevronsUpDown } from "react-icons/lu";
 
 export function CountryCombobox({
   field,
@@ -57,7 +57,7 @@ export function CountryCombobox({
           {field.value
             ? countries.find((country) => country.value === field.value)?.label
             : "Select country or region..."}
-          <ChevronsUpDown className="opacity-50" />
+          <LuChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -141,7 +141,7 @@ export function CityCombobox({
           {field.value && field.value !== ""
             ? cities.find((city) => city.value === field.value)?.label
             : "Select city..."}
-          <ChevronsUpDown className="opacity-50" />
+          <LuChevronsUpDown className="opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
