@@ -14,7 +14,7 @@ export default function Hero() {
           duration: 0.8,
           ease: "easeInOut",
         }}
-        className="m-auto flex min-h-fit w-full max-w-screen-2xl flex-shrink-0 flex-col items-center justify-center gap-6 p-6 text-center text-5xl font-bold leading-none text-foreground sm:gap-10 sm:text-8xl"
+        className="m-auto flex min-h-fit w-full max-w-screen-2xl flex-shrink-0 flex-col items-center justify-center gap-8 p-6 text-center text-6xl font-bold leading-none text-foreground lg:gap-10 lg:text-8xl"
       >
         <p>Connect.</p>
         <p>Collaborate.</p>
