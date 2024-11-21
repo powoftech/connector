@@ -5,8 +5,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  
-
   return (
     <>
       <div className="h-[calc(200vh-var(--header-height))]"></div>

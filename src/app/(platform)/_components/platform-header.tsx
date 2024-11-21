@@ -324,4 +324,3 @@ export default function PlatformHeader({ className }: { className?: string }) {
     </>
   );
 }
-
