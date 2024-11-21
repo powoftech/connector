@@ -14,7 +14,7 @@ export default function Footer({ className }: { className?: string }) {
           className
         )}
       >
-        <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col gap-4 p-6">
+        <div className="mx-auto flex h-full w-full max-w-screen-2xl flex-col gap-4 px-6 py-3">
           <div className="mx-auto flex min-h-6 w-full flex-row items-center justify-between">
             <div className="flex flex-shrink-0 items-center gap-2">
               <p className="text-center text-sm text-muted-foreground">

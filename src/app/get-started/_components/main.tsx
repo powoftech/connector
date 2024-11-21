@@ -17,7 +17,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -40,6 +39,7 @@ import { Metadata } from "next";
 import { User } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { IoEnterOutline } from "react-icons/io5";
 import { LuLoader2 } from "react-icons/lu";
 
 export const metadata: Metadata = {
@@ -114,9 +114,9 @@ export default function Main({ user }: { user: User }) {
                     <FormControl>
                       <Input {...field} />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                       This is your public display name.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -144,12 +144,9 @@ export default function Main({ user }: { user: User }) {
                         ))}
                       </SelectContent>
                     </Select>
-                    {/* <FormControl>
-                      <RoleCombobox field={field} />
-                    </FormControl> */}
-                    <FormDescription>
+                    {/* <FormDescription>
                       This will be your main role in the platform.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -173,9 +170,9 @@ export default function Main({ user }: { user: User }) {
                         }}
                       />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                       Your current country or region.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -192,7 +189,7 @@ export default function Main({ user }: { user: User }) {
                         countryName={profileForm.getValues("country")}
                       />
                     </FormControl>
-                    <FormDescription>Your current city.</FormDescription>
+                    {/* <FormDescription>Your current city.</FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -204,11 +201,14 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>Headline (optional)</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input
+                        {...field}
+                        placeholder="A catchy phrase to describe yourself."
+                      />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                       A catchy phrase to describe yourself.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -220,13 +220,17 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>About (optional)</FormLabel>
                     <FormControl>
-                      <Textarea {...field} />
+                      <Textarea
+                        {...field}
+                        className="min-h-[120px] sm:min-h-20"
+                        placeholder="You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences."
+                      />
                     </FormControl>
-                    <FormDescription>
+                    {/* <FormDescription>
                       You can write about your years of experience, industry, or
                       skills. People also talk about their achievements or
                       previous job experiences.
-                    </FormDescription>
+                    </FormDescription> */}
                     <FormMessage />
                   </FormItem>
                 )}
@@ -235,14 +239,16 @@ export default function Main({ user }: { user: User }) {
           </Form>
         </CardContent>
 
-        <CardFooter>
+        <CardFooter className="justify-end">
           <Button
             form="profile-form"
             type="submit"
             disabled={profileForm.formState.isSubmitting}
           >
-            {profileForm.formState.isSubmitting && (
+            {profileForm.formState.isSubmitting ? (
               <LuLoader2 className="animate-spin" />
+            ) : (
+              <IoEnterOutline />
             )}
             Submit
           </Button>

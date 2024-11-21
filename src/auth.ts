@@ -16,5 +16,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       maxAge: 60 * 60,
     }),
   ],
+  callbacks: {
+    session: async ({ session }) => {
+      return {
+        ...session,
+        user: {
+          id: session.user.id,
+          email: session.user.email,
+          name: session.user.name,
+          image: session.user.image,
+          profile: await prisma.profile.findUnique({
+            where: { userId: session.user.id },
+            select: {
+              customURL: true,
+              role: true,
+            },
+          }),
+        },
+      };
+    },
+  },
   trustHost: true,
 });

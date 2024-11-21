@@ -13,33 +13,35 @@ export default function Header({
   showJoin?: boolean;
 }) {
   return (
-    <header className={cn("flex h-14 w-full flex-row items-center", className)}>
+    <header className={cn("flex h-16 w-full flex-row items-center", className)}>
       <div className="mx-auto flex w-full max-w-screen-2xl flex-row items-center justify-between px-6">
-        <Link href="/" className="flex flex-shrink-0">
-          <span className="sr-only">Connector</span>
+        <Link
+          href="/"
+          className="flex flex-shrink-0 items-center justify-between"
+        >
+          <span className="sr-only hidden">Connector</span>
           <Image
             src={LogoLight.default}
             alt="Connector Logo"
-            // height={32}
-            // width={150}
-            className="hidden h-8 w-auto dark:invert sm:block"
+            className="hidden h-9 w-auto dark:invert sm:block"
             priority
           />
           <Image
             src={Icon.default}
             alt="Connector Icon"
-            // height={32}
-            // width={32}
-            className="block h-8 w-auto dark:invert sm:hidden"
+            className="block h-9 w-auto dark:invert sm:hidden"
             priority
           />
         </Link>
 
-        <div className="flex flex-shrink-0 flex-row flex-nowrap items-center gap-3">
+        <div className="flex flex-shrink-0 flex-row flex-nowrap items-center gap-2">
           {showJoin && (
             <Link
               href="/join"
-              className={cn(` ${buttonVariants({ variant: "default" })} `, "")}
+              className={cn(
+                ` ${buttonVariants({ variant: "default" })} `,
+                "rounded-full"
+              )}
             >
               Join Now
             </Link>

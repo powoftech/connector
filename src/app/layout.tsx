@@ -47,9 +47,9 @@ export default function RootLayout({
         dir="ltr"
         style={
           {
-            "--header-height": `56px`,
-            "--footer-height-mobile": `164px`,
-            "--footer-height-desktop": `108px`,
+            "--header-height": `64px`,
+            "--footer-height-desktop": `84px`,
+            "--footer-height-mobile": `140px`,
           } as React.CSSProperties
         }
       >
