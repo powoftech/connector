@@ -1,4 +1,4 @@
-// import { NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
 // import prisma from "@/lib/prisma";
 // import csv from "csv-parser";
@@ -73,3 +73,7 @@
 //     );
 //   }
 // }
+
+export async function POST() {
+  return NextResponse.json({ message: "Success" }, { status: 200 });
+}
