@@ -34,7 +34,13 @@ export default function MainFeed() {
               <Link href={`/in/${session.data?.user.id}`} className="w-full">
                 <CardTitle className="flex flex-row items-center gap-3 text-xl font-medium">
                   <Avatar className="h-8 w-8 shrink-0 select-none">
-                    <AvatarImage src={session.data?.user?.image} />
+                    <AvatarImage
+                      src={
+                        session.data?.user?.image
+                          ? session.data?.user?.image
+                          : "https://github.com/shadcn.png"
+                      }
+                    />
                     <AvatarFallback>
                       {session.data?.user?.name?.charAt(0).toUpperCase()}
                     </AvatarFallback>
@@ -111,7 +117,7 @@ export default function MainFeed() {
         {/* Feed */}
         <div
           className={cn(
-            "mt-4 flex h-[2000px] w-full rounded-md bg-gradient-to-b from-cyan-500 to-blue-500",
+            "my-4 flex h-[2000px] w-full rounded-md bg-gradient-to-b from-cyan-500 to-blue-500",
             "md:w-[var(--main-content-width)]"
           )}
         ></div>
@@ -119,7 +125,7 @@ export default function MainFeed() {
         {/* Right Sidebar */}
         <div
           className={cn(
-            "mt-4 hidden h-[2000px] w-[var(--right-sidebar-width)] flex-shrink-0 rounded-md bg-gradient-to-b from-purple-500 to-pink-500",
+            "my-4 hidden h-[2000px] w-[var(--right-sidebar-width)] flex-shrink-0 rounded-md bg-gradient-to-b from-purple-500 to-pink-500",
             "lg:flex lg:w-[calc(var(--right-sidebar-width)-120px)]",
             "xl:w-[var(--right-sidebar-width)]"
           )}

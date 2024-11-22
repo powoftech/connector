@@ -5,6 +5,7 @@ import {
   NavigationItemMobile,
 } from "@/app/(platform)/_components/navigation-item";
 import { Icon } from "@/app/_images/icon";
+import { HoverBorderGradient } from "@/components/aceternity/hover-border-gradient";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -44,21 +45,23 @@ import {
   IoChatbubbleEllipses,
   IoChatbubbleEllipsesOutline,
   IoChevronDown,
-  IoCog,
-  IoContrast,
+  IoContrastOutline,
+  IoCreateOutline,
   IoHome,
   IoHomeOutline,
-  IoMoon,
+  IoLaptopOutline,
+  IoLogOutOutline,
+  IoMoonOutline,
   IoNotifications,
   IoNotificationsOutline,
-  IoPencil,
   IoPeople,
   IoPeopleOutline,
-  IoSearch,
+  IoPersonOutline,
   IoSearchOutline,
-  IoSunny,
+  IoSettingsOutline,
+  IoSunnyOutline,
+  IoTimeOutline,
 } from "react-icons/io5";
-import { LuHistory, LuLogOut, LuSettings, LuUser } from "react-icons/lu";
 
 const navigationItems = [
   {
@@ -140,22 +143,28 @@ export default function PlatformHeader({ className }: { className?: string }) {
                 priority
               />
             </Link>
-            <Button
-              variant="outline"
-              className="w-full rounded-full"
-              onClick={() => setOpen(true)}
+
+            <HoverBorderGradient
+              as={"div"}
+              className="w-full rounded-full bg-inherit"
             >
-              <IoSearch />
-              <span className="mr-auto">Search</span>
-              <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono xl:flex">
-                <kbd className="flex items-center rounded-md border px-1">
-                  Ctrl
-                </kbd>
-                <kbd className="flex items-center rounded-md border px-1">
-                  /
-                </kbd>
-              </div>
-            </Button>
+              <Button
+                variant="outline"
+                className="w-full rounded-full border-0 text-base font-normal text-muted-foreground transition-all duration-100 ease-in-out hover:bg-background hover:opacity-75 active:opacity-50 [&_svg]:size-6"
+                onClick={() => setOpen(true)}
+              >
+                <IoSearchOutline />
+                <span className="mr-auto">Search</span>
+                <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono xl:flex">
+                  <kbd className="flex items-center rounded-md border px-1">
+                    Ctrl
+                  </kbd>
+                  <kbd className="flex items-center rounded-md border px-1">
+                    /
+                  </kbd>
+                </div>
+              </Button>
+            </HoverBorderGradient>
           </div>
 
           <div
@@ -195,31 +204,29 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   <Button
                     asChild
                     size="default"
-                    variant="secondary"
+                    variant="ghost"
                     className={cn(
-                      "group w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 md:flex [&_svg]:size-5"
+                      "group hidden w-10 rounded-full transition-all duration-300 ease-in-out hover:w-36 lg:flex [&_svg]:size-6"
                     )}
                   >
                     <Link href={`/job-posting`}>
-                      <IoPencil />
+                      <IoCreateOutline />
                       <span className="mx-auto hidden overflow-hidden transition-all duration-1000 ease-in-out group-hover:inline">
-                        Post a job
+                        Job posting
                       </span>
                     </Link>
                   </Button>
-                  {/* <Button
+
+                  <Button
                     asChild
                     size="icon"
-                    variant="secondary"
-                    className={cn(
-                      "rounded-full md:hidden",
-                      `${pathname === "/job-posting" && "border-2 border-foreground"}`
-                    )}
+                    variant="ghost"
+                    className={cn("rounded-full lg:hidden [&_svg]:size-6")}
                   >
                     <Link href={`/job-posting`}>
-                      <LuPencil />
+                      <IoCreateOutline />
                     </Link>
-                  </Button> */}
+                  </Button>
                 </>
               )}
 
@@ -246,7 +253,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+128px)]"
+                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+144px)]"
                   side="left"
                   sideOffset={0}
                 >
@@ -262,7 +269,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                         router.push(`/in/${session.data?.user?.id}`)
                       }
                     >
-                      <LuUser />
+                      <IoPersonOutline />
                       <span>Profile</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -270,7 +277,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                       onClick={() => router.push(`/history`)}
                       disabled
                     >
-                      <LuHistory />
+                      <IoTimeOutline />
                       <span>History</span>
                     </DropdownMenuItem>
                     <DropdownMenuItem
@@ -278,37 +285,37 @@ export default function PlatformHeader({ className }: { className?: string }) {
                       onClick={() => router.push(`/settings`)}
                       disabled
                     >
-                      <LuSettings />
+                      <IoSettingsOutline />
                       <span>Settings</span>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>
                   <DropdownMenuSeparator />
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>
-                      <IoContrast />
-                      <span>Display</span>
+                      <IoContrastOutline />
+                      <span>Theme</span>
                     </DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
                       <DropdownMenuSubContent>
                         <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "system" && "font-bold"}`}
+                          className={`cursor-pointer ${theme === "system" && "bg-accent"}`}
                           onClick={() => setTheme("system")}
                         >
-                          <IoCog />
-                          <span>Automatic</span>
+                          <IoLaptopOutline />
+                          <span>System</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "light" && "font-bold"}`}
+                          className={`cursor-pointer ${theme === "light" && "bg-accent"}`}
                           onClick={() => setTheme("light")}
                         >
-                          <IoSunny />
+                          <IoSunnyOutline />
                           <span>Light</span>
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "dark" && "font-bold"}`}
+                          className={`cursor-pointer ${theme === "dark" && "bg-accent"}`}
                           onClick={() => setTheme("dark")}
                         >
-                          <IoMoon />
+                          <IoMoonOutline />
                           <span>Dark</span>
                         </DropdownMenuItem>
                       </DropdownMenuSubContent>
@@ -319,7 +326,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     className="cursor-pointer"
                     onClick={() => signOut({ redirectTo: "/" })}
                   >
-                    <LuLogOut />
+                    <IoLogOutOutline />
                     <span>Log out</span>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -333,11 +340,14 @@ export default function PlatformHeader({ className }: { className?: string }) {
         open={open}
         onOpenChange={setOpen}
         className={cn(
-          "top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] translate-y-[0%] rounded-md",
+          "top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] max-w-[calc(var(--main-content-width)+2*8px)] -translate-x-1/2 translate-y-0 rounded-md",
           "md:top-[calc(var(--header-height)+8px)] md:w-full"
         )}
       >
-        <CommandInput placeholder="Search" />
+        <CommandInput
+          placeholder="Search"
+          className="flex w-[200rem] flex-shrink-0"
+        />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">

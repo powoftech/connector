@@ -26,7 +26,9 @@ export default async function PlatformLayout({
   return (
     <SessionProvider>
       <PlatformHeader className="top-0 z-40 border-b border-border bg-background md:sticky md:shadow-md" />
-      {children}
+      <div className="h-full w-full pb-[var(--header-height)] md:pb-0">
+        {children}
+      </div>
     </SessionProvider>
   );
 }
