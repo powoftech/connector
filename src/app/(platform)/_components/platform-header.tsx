@@ -297,7 +297,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        className="top-[25%] w-[calc(100%-24px)] rounded-md md:top-[50%] md:w-full"
+        className="top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] translate-y-[0%] rounded-md md:top-[50%] md:w-full md:translate-y-[-50%]"
       >
         <CommandInput placeholder="Search" />
         <CommandList>
