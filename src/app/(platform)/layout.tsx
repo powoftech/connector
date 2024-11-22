@@ -25,7 +25,7 @@ export default async function PlatformLayout({
 
   return (
     <SessionProvider>
-      <PlatformHeader className="sticky top-0 z-50 border-b border-border bg-background" />
+      <PlatformHeader className="sticky top-0 z-50 border-b border-border bg-background shadow-md" />
       {children}
     </SessionProvider>
   );
