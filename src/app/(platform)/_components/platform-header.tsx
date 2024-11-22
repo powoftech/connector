@@ -169,7 +169,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     size="default"
                     variant="secondary"
                     className={cn(
-                      "group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 md:flex [&_svg]:size-5",
+                      "group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-36 hover:px-4 hover:py-2 md:flex [&_svg]:size-5",
                       `${pathname === "/job-posting" && "border-2 border-foreground"}`
                     )}
                   >
@@ -199,7 +199,10 @@ export default function PlatformHeader({ className }: { className?: string }) {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Avatar
-                    className={`cursor-pointer select-none border border-secondary`}
+                    className={cn(
+                      "cursor-pointer select-none border border-secondary",
+                      `${pathname === `/in/${session.data?.user.id}` && "border-2 border-foreground"}`
+                    )}
                   >
                     <AvatarImage src={session.data?.user?.image} />
                     <AvatarFallback>
@@ -208,7 +211,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+128px)]"
+                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+144px)]"
                   side="left"
                   sideOffset={0}
                 >
@@ -294,7 +297,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        className="w-[calc(100%-48px)] rounded-md sm:w-full"
+        className="top-[25%] w-[calc(100%-24px)] rounded-md md:top-[50%] md:w-full"
       >
         <CommandInput placeholder="Search" />
         <CommandList>

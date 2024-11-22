@@ -11,7 +11,6 @@ import { IoBookmark, IoCalendar } from "react-icons/io5";
 
 export default function Main() {
   const session = useSession();
-  console.log(session);
 
   return (
     <>
@@ -22,35 +21,40 @@ export default function Main() {
           <main>
             <div className="flex flex-row items-start justify-between gap-2 px-6">
               {/* Left Sidebar */}
-              <div className="sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-32px)] flex-shrink-0 flex-col items-center rounded-md bg-background md:flex md:w-[calc(var(--left-sidebar-width)-120px)] lg:w-[calc(var(--left-sidebar-width)-60px)] xl:w-[var(--left-sidebar-width)]">
-                <Link href={`/in/${session.data?.user.id}`} className="w-full">
-                  <Card className="w-full">
-                    <CardHeader className="">
-                      <CardTitle className="flex flex-row items-center gap-3 truncate text-xl font-medium leading-none">
-                        <Avatar className="h-8 w-8 select-none">
+              <div className="sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-32px)] flex-shrink-0 flex-col items-center overflow-y-auto rounded-md bg-background md:flex md:w-[calc(var(--left-sidebar-width)-120px)] lg:w-[calc(var(--left-sidebar-width)-60px)] xl:w-[var(--left-sidebar-width)]">
+                <Card className="w-full">
+                  <CardHeader className="">
+                    <Link
+                      href={`/in/${session.data?.user.id}`}
+                      className="w-full"
+                    >
+                      <CardTitle className="flex flex-row items-center gap-3 text-xl font-medium">
+                        <Avatar className="h-8 w-8 shrink-0 select-none">
                           <AvatarImage src={session.data?.user?.image} />
                           <AvatarFallback>
                             {session.data?.user?.name?.charAt(0).toUpperCase()}
                           </AvatarFallback>
                         </Avatar>
-                        <span>{session.data?.user.name}</span>
+                        <span className="truncate">
+                          {session.data?.user.name}
+                        </span>
                       </CardTitle>
-                    </CardHeader>
-                    <CardContent className="grid gap-2">
-                      {!session.data?.user.profile?.headline ||
-                      session.data?.user.profile?.headline === "" ? (
-                        <Skeleton className="h-[20px] w-full" />
-                      ) : (
-                        session.data?.user.profile?.headline
-                      )}
-                      <p className="text-sm text-muted-foreground">
-                        {session.data?.user.profile.city.name}
-                      </p>
-                    </CardContent>
-                    {/* <CardFooter>
+                    </Link>
+                  </CardHeader>
+                  <CardContent className="grid gap-2">
+                    {!session.data?.user.profile?.headline ||
+                    session.data?.user.profile?.headline === "" ? (
+                      <Skeleton className="h-[20px] w-full" />
+                    ) : (
+                      session.data?.user.profile?.headline
+                    )}
+                    <p className="text-sm text-muted-foreground">
+                      {session.data?.user.profile.city.name}
+                    </p>
+                  </CardContent>
+                  {/* <CardFooter>
                   </CardFooter> */}
-                  </Card>
-                </Link>
+                </Card>
 
                 <Separator className="my-4 w-[calc(100%-24px)]" />
 
@@ -104,6 +108,8 @@ export default function Main() {
 
               {/* Feed */}
               <div className="my-4 flex h-[2000px] w-full rounded-md bg-gradient-to-b from-cyan-500 to-blue-500 md:w-[var(--main-content-width)]"></div>
+
+              {/* Right Sidebar */}
               <div className="my-4 hidden h-[2000px] w-[var(--right-sidebar-width)] flex-shrink-0 rounded-md bg-gradient-to-b from-purple-500 to-pink-500 lg:flex lg:w-[calc(var(--right-sidebar-width)-120px)] xl:w-[var(--right-sidebar-width)]"></div>
             </div>
           </main>
