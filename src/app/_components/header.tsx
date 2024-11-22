@@ -13,7 +13,12 @@ export default function Header({
   showJoin?: boolean;
 }) {
   return (
-    <header className={cn("flex h-16 w-full flex-row items-center", className)}>
+    <header
+      className={cn(
+        "flex h-[var(--header-height)] w-full flex-row items-center",
+        className
+      )}
+    >
       <div className="mx-auto flex w-full max-w-screen-2xl flex-row items-center justify-between px-6">
         <Link
           href={`/`}
@@ -23,13 +28,13 @@ export default function Header({
           <Image
             src={LogoLight.default}
             alt="Connector Logo"
-            className="hidden h-9 w-auto dark:invert sm:block"
+            className="hidden h-8 w-auto dark:invert sm:block"
             priority
           />
           <Image
             src={Icon.default}
             alt="Connector Icon"
-            className="block h-9 w-auto dark:invert sm:hidden"
+            className="block h-8 w-auto dark:invert sm:hidden"
             priority
           />
         </Link>

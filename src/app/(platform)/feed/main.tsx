@@ -22,12 +22,12 @@ export default function Main() {
           <main>
             <div className="flex flex-row items-start justify-between gap-2 px-6">
               {/* Left Sidebar */}
-              <div className="sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-32px)] w-[calc(360px)] min-w-fit flex-col items-center rounded-md bg-background lg:flex">
+              <div className="sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-32px)] flex-shrink-0 flex-col items-center rounded-md bg-background md:flex md:w-[calc(var(--left-sidebar-width)-120px)] lg:w-[calc(var(--left-sidebar-width)-60px)] xl:w-[var(--left-sidebar-width)]">
                 <Link href={`/in/${session.data?.user.id}`} className="w-full">
                   <Card className="w-full">
                     <CardHeader className="">
-                      <CardTitle className="flex flex-row items-center gap-3 text-xl font-medium leading-none">
-                        <Avatar className="h-9 w-9 select-none">
+                      <CardTitle className="flex flex-row items-center gap-3 truncate text-xl font-medium leading-none">
+                        <Avatar className="h-8 w-8 select-none">
                           <AvatarImage src={session.data?.user?.image} />
                           <AvatarFallback>
                             {session.data?.user?.name?.charAt(0).toUpperCase()}
@@ -52,14 +52,14 @@ export default function Main() {
                   </Card>
                 </Link>
 
-                <Separator className="my-4 w-[calc(100%-12px)]" />
+                <Separator className="my-4 w-[calc(100%-24px)]" />
 
                 <div className="flex w-full flex-col">
                   <Button
                     asChild
                     size="lg"
                     variant="ghost"
-                    className="h-[60px] w-full justify-start gap-3 px-6 text-xl font-medium leading-none tracking-tight [&_svg]:size-8"
+                    className="h-14 w-full justify-start gap-3 px-6 text-lg font-medium leading-none tracking-tight [&_svg]:size-7"
                   >
                     <Link href={`/my-items`}>
                       <IoBookmark />
@@ -71,7 +71,7 @@ export default function Main() {
                     asChild
                     size="lg"
                     variant="ghost"
-                    className="h-[60px] w-full justify-start gap-3 px-6 text-xl font-medium leading-none tracking-tight [&_svg]:size-8"
+                    className="h-14 w-full justify-start gap-3 px-6 text-lg font-medium leading-none tracking-tight [&_svg]:size-7"
                   >
                     <Link href={`/events`}>
                       <IoCalendar />
@@ -80,7 +80,7 @@ export default function Main() {
                   </Button>
                 </div>
 
-                <Separator className="my-4 w-[calc(100%-12px)]" />
+                <Separator className="my-4 w-[calc(100%-24px)]" />
 
                 <div className="flex-grow"></div>
 
@@ -103,8 +103,8 @@ export default function Main() {
               </div>
 
               {/* Feed */}
-              <div className="my-4 flex h-[2000px] w-full rounded-md bg-chart-1 bg-gradient-to-b from-cyan-500 to-blue-500 lg:w-[700px]"></div>
-              <div className="my-4 hidden h-[2000px] w-[300px] rounded-md bg-chart-2 bg-gradient-to-b from-purple-500 to-pink-500 lg:flex"></div>
+              <div className="my-4 flex h-[2000px] w-full rounded-md bg-gradient-to-b from-cyan-500 to-blue-500 md:w-[var(--main-content-width)]"></div>
+              <div className="my-4 hidden h-[2000px] w-[var(--right-sidebar-width)] flex-shrink-0 rounded-md bg-gradient-to-b from-purple-500 to-pink-500 lg:flex lg:w-[calc(var(--right-sidebar-width)-120px)] xl:w-[var(--right-sidebar-width)]"></div>
             </div>
           </main>
         </>

@@ -110,10 +110,13 @@ export default function PlatformHeader({ className }: { className?: string }) {
   return (
     <>
       <header
-        className={cn("flex h-16 w-full flex-row items-center", className)}
+        className={cn(
+          "flex h-[var(--header-height)] w-full flex-row items-center",
+          className
+        )}
       >
         <div className="mx-auto flex w-full max-w-[100vw] flex-row items-center justify-between gap-2 px-6">
-          <div className="flex w-[360px] min-w-fit flex-row items-center justify-between gap-2">
+          <div className="flex w-full min-w-fit flex-row items-center justify-between gap-2 md:w-[calc(var(--left-sidebar-width)-120px)] md:flex-shrink-0 lg:w-[calc(var(--left-sidebar-width)-60px)] xl:w-[var(--left-sidebar-width)]">
             <Link
               href={`/`}
               className="flex flex-shrink-0 items-center justify-between"
@@ -122,7 +125,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
               <Image
                 src={Icon.default}
                 alt="Connector Icon"
-                className="h-9 w-auto dark:invert"
+                className="h-8 w-auto dark:invert"
                 priority
               />
             </Link>
@@ -133,7 +136,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
             >
               <IoSearch />
               <span className="mr-auto">Search</span>
-              <div className="hidden flex-row gap-1 sm:flex">
+              <div className="hidden flex-row gap-1 lg:flex">
                 <kbd className="pointer-events-none flex select-none items-center rounded border px-1.5 font-mono">
                   Ctrl
                 </kbd>
@@ -144,7 +147,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
             </Button>
           </div>
 
-          <div className="hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-1.5 overflow-hidden sm:flex sm:w-[700px]">
+          <div className="hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-2 overflow-hidden md:flex md:w-[var(--main-content-width)]">
             {navigationItems.map((item) => (
               <NavigationItem
                 key={item.href}
@@ -156,16 +159,19 @@ export default function PlatformHeader({ className }: { className?: string }) {
           </div>
 
           {session.status === "loading" ? (
-            <Skeleton className="h-10 w-[300px] min-w-fit rounded-full" />
+            <Skeleton className="h-10 w-fit min-w-[88px] rounded-full lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0 xl:w-[var(--right-sidebar-width)]" />
           ) : (
-            <div className="flex min-w-fit flex-row items-center justify-end gap-2 sm:w-[300px]">
+            <div className="flex w-fit min-w-fit flex-row items-center justify-end gap-2 lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0 xl:w-[var(--right-sidebar-width)]">
               {session.data?.user.profile.role === Role.RECRUITER && (
                 <>
                   <Button
                     asChild
                     size="default"
                     variant="secondary"
-                    className="group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 sm:flex"
+                    className={cn(
+                      "group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 md:flex [&_svg]:size-5",
+                      `${pathname === "/job-posting" && "border-2 border-foreground"}`
+                    )}
                   >
                     <Link href={`/job-posting`}>
                       <LuPencil />
@@ -178,7 +184,10 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     asChild
                     size="icon"
                     variant="secondary"
-                    className="rounded-full sm:hidden"
+                    className={cn(
+                      "rounded-full md:hidden",
+                      `${pathname === "/job-posting" && "border-2 border-foreground"}`
+                    )}
                   >
                     <Link href={`/job-posting`}>
                       <LuPencil />
@@ -189,7 +198,9 @@ export default function PlatformHeader({ className }: { className?: string }) {
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Avatar className="cursor-pointer select-none border">
+                  <Avatar
+                    className={`cursor-pointer select-none border border-secondary`}
+                  >
                     <AvatarImage src={session.data?.user?.image} />
                     <AvatarFallback>
                       {session.data?.user?.name?.charAt(0).toUpperCase()}
@@ -197,7 +208,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="-mr-10 mt-[60px] w-[calc(40px+8px+128px)]"
+                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+128px)]"
                   side="left"
                   sideOffset={0}
                 >
@@ -283,7 +294,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        className="w-[calc(100%-48px)] sm:w-full"
+        className="w-[calc(100%-48px)] rounded-md sm:w-full"
       >
         <CommandInput placeholder="Search" />
         <CommandList>

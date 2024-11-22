@@ -1,8 +1,8 @@
+import PlatformHeader from "@/app/(platform)/_components/platform-header";
 import getSession from "@/lib/get-session";
 import prisma from "@/lib/prisma";
 import { SessionProvider } from "next-auth/react";
 import { redirect } from "next/navigation";
-import PlatformHeader from "./_components/platform-header";
 
 export default async function PlatformLayout({
   children,
