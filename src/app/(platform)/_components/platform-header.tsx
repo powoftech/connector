@@ -1,6 +1,9 @@
 "use client";
 
-import NavigationItem from "@/app/(platform)/_components/navigation-item";
+import {
+  NavigationItemDesktop,
+  NavigationItemMobile,
+} from "@/app/(platform)/_components/navigation-item";
 import { Icon } from "@/app/_images/icon";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -40,6 +43,7 @@ import {
   IoBriefcaseOutline,
   IoChatbubbleEllipses,
   IoChatbubbleEllipsesOutline,
+  IoChevronDown,
   IoCog,
   IoContrast,
   IoHome,
@@ -47,34 +51,33 @@ import {
   IoMoon,
   IoNotifications,
   IoNotificationsOutline,
+  IoPencil,
   IoPeople,
   IoPeopleOutline,
   IoSearch,
   IoSearchOutline,
   IoSunny,
 } from "react-icons/io5";
-import {
-  LuHistory,
-  LuLogOut,
-  LuPencil,
-  LuSettings,
-  LuUser,
-} from "react-icons/lu";
+import { LuHistory, LuLogOut, LuSettings, LuUser } from "react-icons/lu";
 
 const navigationItems = [
   {
+    name: "Home",
     href: "/feed",
     icon: { filled: <IoHome />, outline: <IoHomeOutline /> },
   },
   {
+    name: "My Network",
     href: "/mynetwork",
     icon: { filled: <IoPeople />, outline: <IoPeopleOutline /> },
   },
   {
+    name: "Jobs",
     href: "/jobs",
     icon: { filled: <IoBriefcase />, outline: <IoBriefcaseOutline /> },
   },
   {
+    name: "Messaging",
     href: "/messaging",
     icon: {
       filled: <IoChatbubbleEllipses />,
@@ -82,6 +85,7 @@ const navigationItems = [
     },
   },
   {
+    name: "Notifications",
     href: "/notifications",
     icon: { filled: <IoNotifications />, outline: <IoNotificationsOutline /> },
   },
@@ -116,7 +120,14 @@ export default function PlatformHeader({ className }: { className?: string }) {
         )}
       >
         <div className="mx-auto flex w-full max-w-[100vw] flex-row items-center justify-between gap-2 px-6">
-          <div className="flex w-full min-w-fit flex-row items-center justify-between gap-2 md:w-[calc(var(--left-sidebar-width)-120px)] md:flex-shrink-0 lg:w-[calc(var(--left-sidebar-width)-60px)] xl:w-[var(--left-sidebar-width)]">
+          <div
+            className={cn(
+              "flex w-full min-w-fit flex-row items-center justify-between gap-2",
+              "md:w-[calc(var(--left-sidebar-width)-120px)] md:flex-shrink-0",
+              "lg:w-[calc(var(--left-sidebar-width)-60px)]",
+              "xl:w-[var(--left-sidebar-width)]"
+            )}
+          >
             <Link
               href={`/`}
               className="flex flex-shrink-0 items-center justify-between"
@@ -136,20 +147,25 @@ export default function PlatformHeader({ className }: { className?: string }) {
             >
               <IoSearch />
               <span className="mr-auto">Search</span>
-              <div className="hidden flex-row gap-1 lg:flex">
-                <kbd className="pointer-events-none flex select-none items-center rounded border px-1.5 font-mono">
+              <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono xl:flex">
+                <kbd className="flex items-center rounded-md border px-1">
                   Ctrl
                 </kbd>
-                <kbd className="pointer-events-none flex select-none items-center rounded border px-1.5 font-mono">
+                <kbd className="flex items-center rounded-md border px-1">
                   /
                 </kbd>
               </div>
             </Button>
           </div>
 
-          <div className="hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-2 overflow-hidden md:flex md:w-[var(--main-content-width)]">
+          <div
+            className={cn(
+              "hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-1 overflow-hidden",
+              "md:flex md:w-[var(--main-content-width)]"
+            )}
+          >
             {navigationItems.map((item) => (
-              <NavigationItem
+              <NavigationItemDesktop
                 key={item.href}
                 href={item.href}
                 currentPath={pathname}
@@ -159,9 +175,21 @@ export default function PlatformHeader({ className }: { className?: string }) {
           </div>
 
           {session.status === "loading" ? (
-            <Skeleton className="h-10 w-fit min-w-[88px] rounded-full lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0 xl:w-[var(--right-sidebar-width)]" />
+            <Skeleton
+              className={cn(
+                "h-10 w-fit min-w-[40px] rounded-full",
+                "lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
+                "xl:w-[var(--right-sidebar-width)]"
+              )}
+            />
           ) : (
-            <div className="flex w-fit min-w-fit flex-row items-center justify-end gap-2 lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0 xl:w-[var(--right-sidebar-width)]">
+            <div
+              className={cn(
+                "flex w-fit min-w-fit flex-row items-center justify-end gap-2",
+                "lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
+                "xl:w-[var(--right-sidebar-width)]"
+              )}
+            >
               {session.data?.user.profile.role === Role.RECRUITER && (
                 <>
                   <Button
@@ -169,18 +197,17 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     size="default"
                     variant="secondary"
                     className={cn(
-                      "group hidden w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-36 hover:px-4 hover:py-2 md:flex [&_svg]:size-5",
-                      `${pathname === "/job-posting" && "border-2 border-foreground"}`
+                      "group w-10 rounded-full p-0 transition-all duration-300 ease-in-out hover:w-32 hover:px-4 hover:py-2 md:flex [&_svg]:size-5"
                     )}
                   >
                     <Link href={`/job-posting`}>
-                      <LuPencil />
+                      <IoPencil />
                       <span className="mx-auto hidden overflow-hidden transition-all duration-1000 ease-in-out group-hover:inline">
                         Post a job
                       </span>
                     </Link>
                   </Button>
-                  <Button
+                  {/* <Button
                     asChild
                     size="icon"
                     variant="secondary"
@@ -192,26 +219,34 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     <Link href={`/job-posting`}>
                       <LuPencil />
                     </Link>
-                  </Button>
+                  </Button> */}
                 </>
               )}
 
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Avatar
-                    className={cn(
-                      "cursor-pointer select-none border border-secondary",
-                      `${pathname === `/in/${session.data?.user.id}` && "border-2 border-foreground"}`
-                    )}
-                  >
-                    <AvatarImage src={session.data?.user?.image} />
-                    <AvatarFallback>
-                      {session.data?.user?.name?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
+                  <div className="group relative h-10 w-10 cursor-pointer active:scale-95">
+                    <Avatar
+                      className={cn(
+                        "select-none shadow-[inset_0px_0px_0px_1px] shadow-border group-hover:hover:brightness-90 group-active:active:brightness-75"
+                      )}
+                    >
+                      <AvatarImage
+                        src={
+                          session.data?.user?.image
+                            ? session.data?.user?.image
+                            : "https://github.com/shadcn.png"
+                        }
+                      />
+                      <AvatarFallback>
+                        {session.data?.user?.name?.charAt(0).toUpperCase()}
+                      </AvatarFallback>
+                    </Avatar>
+                    <IoChevronDown className="absolute bottom-0 right-0 h-4 w-4 translate-x-[20%] translate-y-[20%] rounded-full border-2 border-background bg-secondary" />
+                  </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent
-                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+144px)]"
+                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+128px)]"
                   side="left"
                   sideOffset={0}
                 >
@@ -297,7 +332,10 @@ export default function PlatformHeader({ className }: { className?: string }) {
       <CommandDialog
         open={open}
         onOpenChange={setOpen}
-        className="top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] translate-y-[0%] rounded-md md:top-[50%] md:w-full md:translate-y-[-50%]"
+        className={cn(
+          "top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] translate-y-[0%] rounded-md",
+          "md:top-[calc(var(--header-height)+8px)] md:w-full"
+        )}
       >
         <CommandInput placeholder="Search" />
         <CommandList>
@@ -329,6 +367,18 @@ export default function PlatformHeader({ className }: { className?: string }) {
           </CommandGroup> */}
         </CommandList>
       </CommandDialog>
+
+      <nav className="fixed bottom-0 z-50 flex h-[var(--header-height)] w-screen flex-row bg-background shadow-[inset_0px_1px_0px_0px] shadow-border md:hidden">
+        {navigationItems.map((item) => (
+          <NavigationItemMobile
+            key={item.href}
+            href={item.href}
+            name={item.name}
+            currentPath={pathname}
+            icon={item.icon}
+          />
+        ))}
+      </nav>
     </>
   );
 }

@@ -1,14 +1,9 @@
-import Main from "@/app/(platform)/feed/main";
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Feed",
-};
+import MainFeed from "@/app/(platform)/feed/main-feed";
 
 export default function Page() {
   return (
     <>
-      <Main />
+      <MainFeed />
     </>
   );
 }
