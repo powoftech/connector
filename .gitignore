@@ -39,3 +39,4 @@ certificates
 
 .env
 .env.example
+.vscode

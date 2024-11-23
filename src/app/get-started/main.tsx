@@ -67,7 +67,9 @@ export default function Main({ user }: { user: User }) {
       if (!user?.id) {
         throw new Error("User ID is missing.");
       }
+
       await submitProfileForm(user.id, data);
+
       toast({
         title: "Success",
         description: (
@@ -81,12 +83,12 @@ export default function Main({ user }: { user: User }) {
       router.push("/feed");
     } catch (error) {
       console.error("Error signing in:", error);
+
       toast({
         title: "Error",
         description: "An error occurred while submitting your profile.",
         variant: "destructive",
       });
-    } finally {
     }
   }
 

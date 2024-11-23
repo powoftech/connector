@@ -1,6 +1,6 @@
 import PlatformHeader from "@/app/(platform)/_components/platform-header";
+import { getProfileExisted } from "@/app/(platform)/actions";
 import getSession from "@/lib/get-session";
-import prisma from "@/lib/prisma";
 import { SessionProvider } from "next-auth/react";
 import { redirect } from "next/navigation";
 
@@ -15,11 +15,9 @@ export default async function PlatformLayout({
     redirect("/join");
   }
 
-  const profile = await prisma.profile.findUnique({
-    where: { userId: session.user.id },
-  });
+  const isProfileExisted = await getProfileExisted(session.user.id);
 
-  if (!profile) {
+  if (!isProfileExisted) {
     redirect("/get-started");
   }
 

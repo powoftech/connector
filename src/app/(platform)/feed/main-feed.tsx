@@ -8,7 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { IoBookmark, IoCalendar } from "react-icons/io5";
+import { IoBookmark, IoCalendar, IoNewspaper, IoPeople } from "react-icons/io5";
 
 export default function MainFeed() {
   const session = useSession();
@@ -30,7 +30,7 @@ export default function MainFeed() {
         >
           <Card className="w-full">
             <CardHeader className="">
-              <Link href={`/in/${session.data?.user.id}`} className="w-full">
+              <Link href={`/in`} className="w-full">
                 <CardTitle className="flex flex-row items-center gap-3 text-xl font-medium">
                   <Avatar className="h-8 w-8 shrink-0 select-none">
                     <AvatarImage
@@ -70,9 +70,10 @@ export default function MainFeed() {
               asChild
               size="lg"
               variant="ghost"
-              className="h-14 w-full justify-start gap-3 px-6 text-lg font-medium leading-none tracking-tight [&_svg]:size-7"
+              className="h-12 w-full justify-start gap-3 px-6 text-base font-medium leading-none tracking-tight [&_svg]:size-6"
             >
-              <Link href={`/my-items`}>
+              <Link href={"#"}>
+                {/* <Link href={`/my-items`}> */}
                 <IoBookmark />
                 <span>Saved Items</span>
               </Link>
@@ -82,9 +83,36 @@ export default function MainFeed() {
               asChild
               size="lg"
               variant="ghost"
-              className="h-14 w-full justify-start gap-3 px-6 text-lg font-medium leading-none tracking-tight [&_svg]:size-7"
+              className="h-12 w-full justify-start gap-3 px-6 text-base font-medium leading-none tracking-tight [&_svg]:size-6"
             >
-              <Link href={`/events`}>
+              <Link href={"#"}>
+                {/* <Link href={`/groups`}> */}
+                <IoPeople />
+                <span>Groups</span>
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              size="lg"
+              variant="ghost"
+              className="h-12 w-full justify-start gap-3 px-6 text-base font-medium leading-none tracking-tight [&_svg]:size-6"
+            >
+              <Link href={"#"}>
+                {/* <Link href={`/newsletters`}> */}
+                <IoNewspaper />
+                <span>Newsletters</span>
+              </Link>
+            </Button>
+
+            <Button
+              asChild
+              size="lg"
+              variant="ghost"
+              className="h-12 w-full justify-start gap-3 px-6 text-base font-medium leading-none tracking-tight [&_svg]:size-6"
+            >
+              <Link href={"#"}>
+                {/* <Link href={`/events`}> */}
                 <IoCalendar />
                 <span>Events</span>
               </Link>

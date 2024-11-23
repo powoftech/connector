@@ -77,7 +77,7 @@ model VerificationToken {
 model Profile {
   id        String  @id @default(cuid())
   userId    String  @unique @map("user_id")
-  customURL String? @map("custom_url")
+  customURL String? @unique @map("custom_url")
   role      Role
   headline  String?
   about     String?

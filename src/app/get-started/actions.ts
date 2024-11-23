@@ -2,8 +2,9 @@
 
 import { ProfileInputs } from "@/lib/definitions";
 import prisma from "@/lib/prisma";
+import { cache } from "react";
 
-export async function getCountries() {
+export const getCountries = cache(async () => {
   const countries = await prisma.country.findMany({
     select: {
       id: true,
@@ -15,9 +16,9 @@ export async function getCountries() {
   });
 
   return countries;
-}
+});
 
-export async function getCities(countryName: string) {
+export const getCities = cache(async (countryName: string) => {
   const country = await prisma.country.findFirst({
     where: {
       name: countryName,
@@ -35,29 +36,19 @@ export async function getCities(countryName: string) {
       },
     },
   });
+
   const cities = country?.cities;
 
   return cities;
-}
+});
 
 export async function submitProfileForm(userId: string, data: ProfileInputs) {
-  const user = await prisma.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      name: data.name,
-    },
-  });
-
   const country = await prisma.country.findFirst({
     where: {
       name: data.country,
     },
     select: {
       id: true,
-      name: true,
-      code: true,
     },
   });
 
@@ -67,19 +58,25 @@ export async function submitProfileForm(userId: string, data: ProfileInputs) {
     },
     select: {
       id: true,
-      name: true,
-    },
-  });
-  const profile = await prisma.profile.create({
-    data: {
-      userId: user.id,
-      role: data.role,
-      headline: data.headline,
-      about: data.about,
-      countryId: country?.id,
-      cityId: city?.id,
     },
   });
 
-  return profile;
+  await prisma.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      name: data.name,
+      profile: {
+        create: {
+          customURL: userId,
+          role: data.role,
+          headline: data.headline,
+          about: data.about,
+          countryId: country?.id,
+          cityId: city?.id,
+        },
+      },
+    },
+  });
 }

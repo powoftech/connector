@@ -22,9 +22,11 @@ export function NavigationItemDesktop({
   return (
     <div
       className={cn(
-        "flex h-full w-[calc(var(--main-content-width)/5)] min-w-fit items-center justify-center py-1",
+        "flex h-full w-[calc(var(--main-content-width)/5)] min-w-fit items-center justify-center py-1 text-muted-foreground",
         "transition-all duration-200 ease-in-out",
-        isActive ? "shadow-[inset_0px_-2px_0px_0px] shadow-foreground" : ""
+        isActive
+          ? "text-foreground shadow-[inset_0px_-2px_0px_0px] shadow-foreground"
+          : ""
       )}
     >
       <Link
@@ -53,15 +55,15 @@ export function NavigationItemMobile({
   return (
     <div
       className={cn(
-        "flex h-full w-[calc(100vw/5)] min-w-fit items-center justify-center py-1",
-        isActive ? "shadow-[inset_0px_2px_0px_0px] shadow-foreground" : ""
+        "flex h-full w-[calc(100vw/5)] min-w-fit items-center justify-center border-t border-border text-muted-foreground",
+        isActive ? "border-t-2 border-foreground text-foreground" : ""
       )}
     >
       <Link
         href={href}
         className={cn(
           buttonVariants({ size: "icon", variant: "ghost" }),
-          "flex h-full w-full flex-col items-center justify-center gap-1 overflow-hidden text-xs font-normal [&_svg]:size-6",
+          "flex h-full w-full flex-col items-center justify-center gap-1 overflow-hidden text-xs font-normal hover:bg-background [&_svg]:size-5",
           isActive ? "hover:bg-background" : ""
         )}
       >

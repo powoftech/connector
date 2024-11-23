@@ -196,6 +196,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
             <Skeleton
               className={cn(
                 "h-10 w-fit min-w-[40px] rounded-full",
+                "md:min-w-[calc(2*40px+8px)]",
                 "lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
                 "xl:w-[var(--right-sidebar-width)]"
               )}
@@ -203,7 +204,8 @@ export default function PlatformHeader({ className }: { className?: string }) {
           ) : (
             <div
               className={cn(
-                "flex w-fit min-w-[calc(2*40px+8px)] flex-row items-center justify-end gap-2",
+                "flex w-fit min-w-fit flex-row items-center justify-end gap-2",
+                "md:min-w-[calc(2*40px+8px)]",
                 "lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
                 "xl:w-[var(--right-sidebar-width)]"
               )}
@@ -274,9 +276,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
                     <Link href={`/`}></Link>
                     <DropdownMenuItem
                       className="cursor-pointer"
-                      onClick={() =>
-                        router.push(`/in/${session.data?.user?.id}`)
-                      }
+                      onClick={() => router.push(`/in`)}
                     >
                       <IoPersonOutline />
                       <span>Profile</span>
@@ -387,7 +387,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
         </CommandList>
       </CommandDialog>
 
-      <nav className="fixed bottom-0 z-50 flex h-[var(--header-height)] w-screen flex-row bg-background shadow-[inset_0px_1px_0px_0px] shadow-border md:hidden">
+      <nav className="fixed bottom-0 z-50 flex h-[var(--header-height)] w-screen flex-row bg-background md:hidden">
         {navigationItems.map((item) => (
           <NavigationItemMobile
             key={item.href}
