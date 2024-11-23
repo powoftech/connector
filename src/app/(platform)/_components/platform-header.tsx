@@ -122,18 +122,18 @@ export default function PlatformHeader({ className }: { className?: string }) {
           className
         )}
       >
-        <div className="mx-auto flex w-full max-w-[100vw] flex-row items-center justify-between gap-2 px-6">
+        <div className="mx-auto flex w-full max-w-[100vw] flex-row items-center justify-between gap-2 px-6 md:gap-4">
           <div
             className={cn(
-              "flex w-full min-w-fit flex-row items-center justify-between gap-2",
-              "md:w-[calc(var(--left-sidebar-width)-120px)] md:flex-shrink-0",
-              "lg:w-[calc(var(--left-sidebar-width)-60px)]",
+              "flex w-full min-w-fit flex-row items-center justify-start gap-2",
+              "md:w-fit",
+              "lg:w-[calc(var(--left-sidebar-width)-120px)] lg:flex-shrink-0",
               "xl:w-[var(--left-sidebar-width)]"
             )}
           >
             <Link
               href={`/`}
-              className="flex flex-shrink-0 items-center justify-between"
+              className="flex h-10 w-10 flex-shrink-0 items-center justify-center"
             >
               <span className="sr-only hidden">Connector</span>
               <Image
@@ -146,16 +146,17 @@ export default function PlatformHeader({ className }: { className?: string }) {
 
             <HoverBorderGradient
               as={"div"}
-              className="w-full rounded-full bg-inherit"
+              containerClassName="flex w-full items-center justify-center rounded-full border-0 p-0"
+              className="flex w-full items-center justify-center space-x-0 space-y-0 rounded-full border-0 p-0"
             >
               <Button
-                variant="outline"
-                className="w-full rounded-full border-0 text-base font-normal text-muted-foreground transition-all duration-100 ease-in-out hover:bg-background hover:opacity-75 active:opacity-50 [&_svg]:size-6"
+                variant={"outline"}
+                className="flex w-full rounded-full border-0 text-base font-normal text-muted-foreground shadow-[inset_0px_0px_0px_1px] shadow-border transition-all duration-100 ease-in-out hover:bg-background hover:opacity-60 active:opacity-30 md:hidden lg:flex [&_svg]:size-6"
                 onClick={() => setOpen(true)}
               >
                 <IoSearchOutline />
                 <span className="mr-auto">Search</span>
-                <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono xl:flex">
+                <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono text-sm xl:flex">
                   <kbd className="flex items-center rounded-md border px-1">
                     Ctrl
                   </kbd>
@@ -164,13 +165,21 @@ export default function PlatformHeader({ className }: { className?: string }) {
                   </kbd>
                 </div>
               </Button>
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                className="hidden h-10 w-10 rounded-full border-0 text-base font-normal text-muted-foreground shadow-[inset_0px_0px_0px_1px] shadow-border transition-all duration-100 ease-in-out hover:bg-background hover:opacity-60 active:opacity-30 md:flex lg:hidden [&_svg]:size-6"
+                onClick={() => setOpen(true)}
+              >
+                <IoSearchOutline />
+              </Button>
             </HoverBorderGradient>
           </div>
 
           <div
             className={cn(
               "hidden h-[var(--header-height)] flex-row flex-nowrap items-center justify-between gap-1 overflow-hidden",
-              "md:flex md:w-[var(--main-content-width)]"
+              "md:flex md:w-[calc(var(--main-content-width)-240px)] lg:w-[var(--main-content-width)]"
             )}
           >
             {navigationItems.map((item) => (
@@ -194,7 +203,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
           ) : (
             <div
               className={cn(
-                "flex w-fit min-w-fit flex-row items-center justify-end gap-2",
+                "flex w-fit min-w-[calc(2*40px+8px)] flex-row items-center justify-end gap-2",
                 "lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
                 "xl:w-[var(--right-sidebar-width)]"
               )}

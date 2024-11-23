@@ -19,13 +19,12 @@ export default function MainFeed() {
 
   return (
     <main>
-      <div className="flex flex-row items-start justify-between gap-2 px-6">
+      <div className="flex flex-row items-start justify-between gap-4 px-6">
         {/* Left Sidebar */}
         <div
           className={cn(
-            "sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-2*16px)] flex-shrink-0 flex-col items-center gap-4 overflow-y-auto rounded-md bg-background",
-            "md:flex md:w-[calc(var(--left-sidebar-width)-120px)]",
-            "lg:w-[calc(var(--left-sidebar-width)-60px)]",
+            "sticky top-[calc(var(--header-height)+16px)] z-10 hidden h-[calc(100vh-var(--header-height)-2*16px)] flex-col items-center gap-4 overflow-y-auto rounded-md bg-background",
+            "lg:flex lg:w-[calc(var(--left-sidebar-width)-120px)] lg:flex-shrink-0",
             "xl:w-[var(--left-sidebar-width)]"
           )}
         >
@@ -96,7 +95,7 @@ export default function MainFeed() {
 
           <div className="flex-grow"></div>
 
-          <div className="flex w-full flex-col gap-4 p-6">
+          <div className="mx-auto flex w-full flex-col gap-4 p-6">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Connector
             </p>
@@ -118,7 +117,7 @@ export default function MainFeed() {
         <div
           className={cn(
             "my-4 flex h-[2000px] w-full rounded-md bg-gradient-to-b from-cyan-500 to-blue-500",
-            "md:w-[var(--main-content-width)]"
+            "lg:w-[var(--main-content-width)]"
           )}
         ></div>
 
@@ -126,7 +125,7 @@ export default function MainFeed() {
         <div
           className={cn(
             "my-4 hidden h-[2000px] w-[var(--right-sidebar-width)] flex-shrink-0 rounded-md bg-gradient-to-b from-purple-500 to-pink-500",
-            "lg:flex lg:w-[calc(var(--right-sidebar-width)-120px)]",
+            "lg:flex lg:w-[calc(var(--right-sidebar-width)-120px)] lg:flex-shrink-0",
             "xl:w-[var(--right-sidebar-width)]"
           )}
         ></div>
