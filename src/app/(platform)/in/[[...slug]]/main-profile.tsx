@@ -45,7 +45,7 @@ export default function MainProfile({
         <main className="flex w-full flex-initial flex-shrink flex-col items-center justify-start gap-4">
           {session.status === "loading" ? (
             <AspectRatio ratio={3 / 2}>
-              <Skeleton className="h-full w-full rounded-t-md border bg-card md:rounded-md" />
+              <Skeleton className="h-full w-full rounded-t-md border md:rounded-md" />
             </AspectRatio>
           ) : (
             <>

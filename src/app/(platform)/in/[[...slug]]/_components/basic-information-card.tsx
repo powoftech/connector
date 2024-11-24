@@ -26,7 +26,7 @@ export default function BasicInformationCard({
   countryName,
 }: BasicInformationCardProps) {
   return (
-    <section className="w-full rounded-t-md border bg-card md:rounded-md">
+    <section className="w-full rounded-t-md border bg-background md:rounded-md">
       <div className="relative max-h-[204px] rounded-t-md bg-chart-3">
         <AspectRatio ratio={4 / 1}></AspectRatio>
         <Button
@@ -39,7 +39,7 @@ export default function BasicInformationCard({
       </div>
       <div className="px-6 pb-6">
         <div className="relative flex h-14 flex-row items-end justify-between">
-          <Avatar className="-mt-28 h-32 w-32 shrink-0 select-none border-4 border-card bg-foreground p-0 md:h-36 md:w-36 lg:h-40 lg:w-40">
+          <Avatar className="-mt-28 h-32 w-32 shrink-0 select-none border-4 border-background bg-background p-0 md:h-36 md:w-36 lg:h-40 lg:w-40">
             <AvatarImage src={image ?? undefined} />
             <AvatarFallback>{name?.charAt(0).toUpperCase()}</AvatarFallback>
           </Avatar>
