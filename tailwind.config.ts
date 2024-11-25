@@ -27,9 +27,6 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)"],
-        mono: ["var(--font-roboto-mono)"],
-        // sans: ['var(--font-geist-sans)'],
-        // mono: ['var(--font-geist-mono)'],
       },
       width: {
         "128": "32rem",

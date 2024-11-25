@@ -24,7 +24,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import { EmailFormInputs, EmailFormSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -32,9 +31,9 @@ import { useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { IoMailOutline } from "react-icons/io5";
 import { LuLoader2 } from "react-icons/lu";
+import { toast } from "sonner";
 
 export default function Main() {
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
   function handleSubmitOAuth(provider: OAuthProvider) {
@@ -43,11 +42,7 @@ export default function Main() {
         await signInOAuth(provider);
       } catch (error) {
         console.error("Error signing in:", error);
-        toast({
-          title: "Error",
-          description: "An error occurred while signing in.",
-          variant: "destructive",
-        });
+        toast.error("An error occurred while signing in.");
       }
     });
   }
@@ -63,17 +58,10 @@ export default function Main() {
     startTransition(async () => {
       try {
         await signInMagicLinks("resend", data);
-        toast({
-          title: "Success",
-          description: `We have sent a verification email to ${data.email}.`,
-        });
+        toast.success(`We have sent a verification email to ${data.email}.`);
       } catch (error) {
         console.error("Error signing in:", error);
-        toast({
-          title: "Error",
-          description: "An error occurred while signing in.",
-          variant: "destructive",
-        });
+        toast.error("An error occurred while signing in.");
       } finally {
         emailForm.reset();
       }
@@ -133,6 +121,7 @@ export default function Main() {
                       <FormControl>
                         <Input
                           placeholder="name@example.com"
+                          autoComplete="email"
                           {...field}
                           disabled={isPending}
                         />

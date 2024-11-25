@@ -1,5 +1,3 @@
-"use client";
-
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";

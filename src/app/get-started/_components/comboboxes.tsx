@@ -1,6 +1,5 @@
 "use client";
 
-import { getCities, getCountries } from "@/app/get-started/actions";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -16,8 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { City, Country } from "@prisma/client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
 import { LuChevronsUpDown } from "react-icons/lu";
 
@@ -29,20 +27,19 @@ export function CountryCombobox({
   onCountryChange?: () => void;
 }) {
   const [open, setOpen] = useState(false);
-  const [countries, setCountries] = useState<
-    { label: Country["name"]; value: Country["id"] }[]
-  >([]);
+  const countries = useRef<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
-    getCountries().then((countries) => {
-      setCountries(
-        Object.values(countries).map((country) => ({
-          label: country.name,
-          //   value: country.id,
-          value: country.name,
-        }))
-      );
-    });
+    async function fetchCountries() {
+      const res = await fetch("/api/countries");
+      const data: { name: string }[] = res.ok ? await res.json() : [];
+
+      countries.current = Object.values(data).map((country) => ({
+        label: country.name,
+        value: country.name,
+      }));
+    }
+    fetchCountries();
   }, []);
 
   return (
@@ -55,7 +52,8 @@ export function CountryCombobox({
           className="flex w-full justify-between"
         >
           {field.value
-            ? countries.find((country) => country.value === field.value)?.label
+            ? countries.current.find((country) => country.value === field.value)
+                ?.label
             : "Select country or region..."}
           <LuChevronsUpDown className="opacity-50" />
         </Button>
@@ -69,7 +67,7 @@ export function CountryCombobox({
           <CommandList>
             <CommandEmpty>No country or region found.</CommandEmpty>
             <CommandGroup>
-              {countries.map((country) => (
+              {countries.current.map((country) => (
                 <CommandItem
                   key={country.value}
                   value={country.value}
@@ -106,26 +104,19 @@ export function CityCombobox({
   countryName: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [cities, setCities] = useState<
-    { label: City["name"]; value: City["id"] }[]
-  >([]);
+  const cities = useRef<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
-    if (!countryName || countryName === "") {
-      return;
-    }
+    async function fetchCountries() {
+      const res = await fetch(`/api/cities?countryName=${countryName}`);
+      const data: { name: string }[] = res.ok ? await res.json() : [];
 
-    getCities(countryName).then((cities) => {
-      if (cities) {
-        setCities(
-          Object.values(cities).map((city) => ({
-            label: city.name,
-            //   value: city.id,
-            value: city.name,
-          }))
-        );
-      }
-    });
+      cities.current = Object.values(data).map((city) => ({
+        label: city.name,
+        value: city.name,
+      }));
+    }
+    fetchCountries();
   }, [countryName]);
 
   return (
@@ -139,7 +130,7 @@ export function CityCombobox({
           disabled={!countryName}
         >
           {field.value && field.value !== ""
-            ? cities.find((city) => city.value === field.value)?.label
+            ? cities.current.find((city) => city.value === field.value)?.label
             : "Select city..."}
           <LuChevronsUpDown className="opacity-50" />
         </Button>
@@ -153,7 +144,7 @@ export function CityCombobox({
           <CommandList>
             <CommandEmpty>No city found.</CommandEmpty>
             <CommandGroup>
-              {cities.map((city) => (
+              {cities.current.map((city) => (
                 <CommandItem
                   key={city.value}
                   value={city.value}

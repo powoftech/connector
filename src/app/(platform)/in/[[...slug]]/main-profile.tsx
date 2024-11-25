@@ -10,7 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import { notFound } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function MainProfile({
   profileUrl,
@@ -20,13 +20,13 @@ export default function MainProfile({
   isSelfProfile: boolean;
 }) {
   const session = useSession();
-  const [otherUser, setOtherUser] = useState<UserWithProfile>();
+  const otherUser = useRef<UserWithProfile | null>(null);
 
   useEffect(() => {
     if (!isSelfProfile) {
       getUserWithProfile(profileUrl).then((foundUser) => {
         if (foundUser) {
-          setOtherUser(foundUser);
+          otherUser.current = foundUser;
         } else {
           notFound();
         }
@@ -61,11 +61,11 @@ export default function MainProfile({
               ) : (
                 <BasicInformationCard
                   isSelfProfile={isSelfProfile}
-                  image={otherUser?.image}
-                  name={otherUser?.name}
-                  headline={otherUser?.profile?.headline}
-                  cityName={otherUser?.profile?.city?.name}
-                  countryName={otherUser?.profile?.country?.name}
+                  image={otherUser?.current?.image}
+                  name={otherUser?.current?.name}
+                  headline={otherUser?.current?.profile?.headline}
+                  cityName={otherUser?.current?.profile?.city?.name}
+                  countryName={otherUser?.current?.profile?.country?.name}
                 />
               )}
             </>

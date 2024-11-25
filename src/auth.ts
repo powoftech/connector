@@ -17,7 +17,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    session: async ({ session }) => {
+    async session({ session }) {
       return {
         ...session,
         user: {

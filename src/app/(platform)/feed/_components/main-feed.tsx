@@ -1,22 +1,11 @@
-"use client";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import UserInfoCard from "@/app/(platform)/feed/_components/user-info-card";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { IoBookmark, IoCalendar, IoNewspaper, IoPeople } from "react-icons/io5";
 
 export default function MainFeed() {
-  const session = useSession();
-
-  if (session.status === "loading") {
-    return <Skeleton className="min-h-[calc(100vh-var(--header-height))]" />;
-  }
-
   return (
     <main>
       <div className="flex flex-row items-start justify-between gap-4 px-6">
@@ -28,40 +17,7 @@ export default function MainFeed() {
             "xl:w-[var(--left-sidebar-width)]"
           )}
         >
-          <Card className="w-full">
-            <CardHeader className="">
-              <Link href={`/in`} className="w-full">
-                <CardTitle className="flex flex-row items-center gap-3 text-xl font-medium">
-                  <Avatar className="h-8 w-8 shrink-0 select-none">
-                    <AvatarImage
-                      src={
-                        session.data?.user?.image
-                          ? session.data?.user?.image
-                          : "https://github.com/shadcn.png"
-                      }
-                    />
-                    <AvatarFallback>
-                      {session.data?.user?.name?.charAt(0).toUpperCase()}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="truncate">{session.data?.user.name}</span>
-                </CardTitle>
-              </Link>
-            </CardHeader>
-            <CardContent className="grid gap-2">
-              {!session.data?.user.profile?.headline ||
-              session.data?.user.profile?.headline === "" ? (
-                <Skeleton className="h-[20px] w-full" />
-              ) : (
-                session.data?.user.profile?.headline
-              )}
-              <p className="text-sm text-muted-foreground">
-                {session.data?.user.profile.city.name}
-              </p>
-            </CardContent>
-            {/* <CardFooter>
-                  </CardFooter> */}
-          </Card>
+          <UserInfoCard />
 
           <Separator className="w-[calc(100%-24px)]" />
 

@@ -1,4 +1,4 @@
-import MainFeed from "@/app/(platform)/feed/main-feed";
+import MainFeed from "@/app/(platform)/feed/_components/main-feed";
 
 export default function Page() {
   return (

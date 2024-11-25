@@ -1,66 +1,32 @@
 "use client";
 
+import AvatarDropdownMenu from "@/app/(platform)/_components/avatar-dropdown-menu";
 import {
   NavigationItemDesktop,
   NavigationItemMobile,
 } from "@/app/(platform)/_components/navigation-item";
+import SearchBox from "@/app/(platform)/_components/search-box";
 import { Icon } from "@/app/_images/icon";
-import { HoverBorderGradient } from "@/components/aceternity/hover-border-gradient";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-  CommandSeparator,
-} from "@/components/ui/command";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { Role } from "@prisma/client";
-import { signOut, useSession } from "next-auth/react";
-import { useTheme } from "next-themes";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import {
   IoBriefcase,
   IoBriefcaseOutline,
   IoChatbubbleEllipses,
   IoChatbubbleEllipsesOutline,
-  IoChevronDown,
-  IoContrastOutline,
   IoCreateOutline,
   IoHome,
   IoHomeOutline,
-  IoLaptopOutline,
-  IoLogOutOutline,
-  IoMoonOutline,
   IoNotifications,
   IoNotificationsOutline,
   IoPeople,
   IoPeopleOutline,
-  IoPersonOutline,
-  IoSearchOutline,
-  IoSettingsOutline,
-  IoSunnyOutline,
-  IoTimeOutline,
 } from "react-icons/io5";
 
 const navigationItems = [
@@ -97,22 +63,6 @@ const navigationItems = [
 export default function PlatformHeader({ className }: { className?: string }) {
   const session = useSession();
   const pathname = usePathname();
-  const router = useRouter();
-  const { theme, setTheme } = useTheme();
-
-  const [open, setOpen] = useState(false); // Command Dialog State
-
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      // Open Command Dialog using Ctrl + / or Cmd + / on Mac
-      if (e.key === "/" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault();
-        setOpen((open) => !open);
-      }
-    };
-    document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
-  }, []);
 
   return (
     <>
@@ -144,36 +94,7 @@ export default function PlatformHeader({ className }: { className?: string }) {
               />
             </Link>
 
-            <HoverBorderGradient
-              as={"div"}
-              containerClassName="flex w-full items-center justify-center rounded-full border-0 p-0"
-              className="flex w-full items-center justify-center space-x-0 space-y-0 rounded-full border-0 p-0"
-            >
-              <Button
-                variant={"outline"}
-                className="flex w-full rounded-full border-0 text-base font-normal text-muted-foreground shadow-[inset_0px_0px_0px_1px] shadow-border transition-all duration-100 ease-in-out hover:bg-background hover:opacity-60 active:opacity-30 md:hidden lg:flex [&_svg]:size-6"
-                onClick={() => setOpen(true)}
-              >
-                <IoSearchOutline />
-                <span className="mr-auto">Search</span>
-                <div className="pointer-events-none hidden select-none flex-row gap-1 font-mono text-sm xl:flex">
-                  <kbd className="flex items-center rounded-md border px-1">
-                    Ctrl
-                  </kbd>
-                  <kbd className="flex items-center rounded-md border px-1">
-                    /
-                  </kbd>
-                </div>
-              </Button>
-              <Button
-                size={"icon"}
-                variant={"outline"}
-                className="hidden h-10 w-10 rounded-full border-0 text-base font-normal text-muted-foreground shadow-[inset_0px_0px_0px_1px] shadow-border transition-all duration-100 ease-in-out hover:bg-background hover:opacity-60 active:opacity-30 md:flex lg:hidden [&_svg]:size-6"
-                onClick={() => setOpen(true)}
-              >
-                <IoSearchOutline />
-              </Button>
-            </HoverBorderGradient>
+            <SearchBox />
           </div>
 
           <div
@@ -241,151 +162,14 @@ export default function PlatformHeader({ className }: { className?: string }) {
                 </>
               )}
 
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <div className="group relative h-10 w-10 cursor-pointer active:scale-95">
-                    <Avatar
-                      className={cn(
-                        "select-none shadow-[inset_0px_0px_0px_1px] shadow-border group-hover:hover:brightness-90 group-active:active:brightness-75"
-                      )}
-                    >
-                      <AvatarImage
-                        src={
-                          session.data?.user?.image
-                            ? session.data?.user?.image
-                            : "https://github.com/shadcn.png"
-                        }
-                      />
-                      <AvatarFallback>
-                        {session.data?.user?.name?.charAt(0).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <IoChevronDown className="absolute bottom-0 right-0 h-4 w-4 translate-x-[20%] translate-y-[20%] rounded-full border-2 border-background bg-secondary" />
-                  </div>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                  className="-mr-10 mt-[52px] w-fit min-w-[calc(40px+8px+144px)]"
-                  side="left"
-                  sideOffset={0}
-                >
-                  <DropdownMenuLabel>
-                    {session.data?.user?.name}
-                  </DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuGroup>
-                    <Link href={`/`}></Link>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => router.push(`/in`)}
-                    >
-                      <IoPersonOutline />
-                      <span>Profile</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => router.push(`/history`)}
-                      disabled
-                    >
-                      <IoTimeOutline />
-                      <span>History</span>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      className="cursor-pointer"
-                      onClick={() => router.push(`/settings`)}
-                      disabled
-                    >
-                      <IoSettingsOutline />
-                      <span>Settings</span>
-                    </DropdownMenuItem>
-                  </DropdownMenuGroup>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuSub>
-                    <DropdownMenuSubTrigger>
-                      <IoContrastOutline />
-                      <span>Theme</span>
-                    </DropdownMenuSubTrigger>
-                    <DropdownMenuPortal>
-                      <DropdownMenuSubContent>
-                        <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "system" && "bg-accent"}`}
-                          onClick={() => setTheme("system")}
-                        >
-                          <IoLaptopOutline />
-                          <span>System</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "light" && "bg-accent"}`}
-                          onClick={() => setTheme("light")}
-                        >
-                          <IoSunnyOutline />
-                          <span>Light</span>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                          className={`cursor-pointer ${theme === "dark" && "bg-accent"}`}
-                          onClick={() => setTheme("dark")}
-                        >
-                          <IoMoonOutline />
-                          <span>Dark</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuSubContent>
-                    </DropdownMenuPortal>
-                  </DropdownMenuSub>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    className="cursor-pointer"
-                    onClick={() => signOut({ redirectTo: "/" })}
-                  >
-                    <IoLogOutOutline />
-                    <span>Log out</span>
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <AvatarDropdownMenu
+                image={session.data?.user.image ?? ""}
+                name={session.data?.user.name ?? ""}
+              />
             </div>
           )}
         </div>
       </header>
-
-      <CommandDialog
-        open={open}
-        onOpenChange={setOpen}
-        className={cn(
-          "top-[calc(var(--header-height)+8px)] w-[calc(100%-24px)] max-w-[calc(var(--main-content-width)+2*8px)] -translate-x-1/2 translate-y-0 rounded-md",
-          "md:top-[calc(var(--header-height)+8px)] md:w-full"
-        )}
-      >
-        <CommandInput
-          placeholder="Search"
-          className="flex w-[200rem] flex-shrink-0"
-        />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            <CommandItem>
-              <IoSearchOutline />
-              <span>interview tips</span>
-            </CommandItem>
-            <CommandItem>
-              <IoSearchOutline />
-              <span>latest in ai</span>
-            </CommandItem>
-            <CommandItem>
-              <IoSearchOutline />
-              <span>balancing work and life balance</span>
-            </CommandItem>
-            <CommandItem>
-              <IoSearchOutline />
-              <span>remote work</span>
-            </CommandItem>
-            <CommandItem>
-              <IoSearchOutline />
-              <span>when&apos;s the best time to switch jobs</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          {/* <CommandGroup heading="History">
-          </CommandGroup> */}
-        </CommandList>
-      </CommandDialog>
 
       <nav className="fixed bottom-0 z-50 flex h-[var(--header-height)] w-screen flex-row bg-background md:hidden">
         {navigationItems.map((item) => (

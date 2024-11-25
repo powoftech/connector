@@ -31,7 +31,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
 import { ProfileInputs, ProfileSchema } from "@/lib/definitions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Role } from "@prisma/client";
@@ -41,6 +40,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { IoEnterOutline } from "react-icons/io5";
 import { LuLoader2 } from "react-icons/lu";
+import { toast } from "sonner";
 
 export const metadata: Metadata = {
   title: "Get Started",
@@ -52,7 +52,6 @@ const roles = Object.values(Role).map((role) => ({
 }));
 
 export default function Main({ user }: { user: User }) {
-  const { toast } = useToast();
   const router = useRouter();
 
   const profileForm = useForm<ProfileInputs>({
@@ -67,28 +66,13 @@ export default function Main({ user }: { user: User }) {
       if (!user?.id) {
         throw new Error("User ID is missing.");
       }
-
       await submitProfileForm(user.id, data);
-
-      toast({
-        title: "Success",
-        description: (
-          <p className="whitespace-pre">
-            {
-              "Your profile has been submitted.\nYou can now access the platform."
-            }
-          </p>
-        ),
-      });
+      toast.success("Your profile has been submitted successfully.");
+      toast.info("You will be redirected to the feed shortly.");
       router.push("/feed");
     } catch (error) {
-      console.error("Error signing in:", error);
-
-      toast({
-        title: "Error",
-        description: "An error occurred while submitting your profile.",
-        variant: "destructive",
-      });
+      console.error("Error submitting profile:", error);
+      toast.error("An error occurred while submitting your profile.");
     }
   }
 
@@ -114,7 +98,7 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>Display name</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input autoComplete="name" {...field} />
                     </FormControl>
                     {/* <FormDescription>
                       This is your public display name.
@@ -132,6 +116,7 @@ export default function Main({ user }: { user: User }) {
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
+                      name="role"
                     >
                       <FormControl>
                         <SelectTrigger>

@@ -2,48 +2,9 @@
 
 import { ProfileInputs } from "@/lib/definitions";
 import prisma from "@/lib/prisma";
-import { cache } from "react";
-
-export const getCountries = cache(async () => {
-  const countries = await prisma.country.findMany({
-    select: {
-      id: true,
-      name: true,
-    },
-    orderBy: {
-      name: "asc",
-    },
-  });
-
-  return countries;
-});
-
-export const getCities = cache(async (countryName: string) => {
-  const country = await prisma.country.findFirst({
-    where: {
-      name: countryName,
-    },
-    select: {
-      id: true,
-      cities: {
-        select: {
-          id: true,
-          name: true,
-        },
-        orderBy: {
-          name: "asc",
-        },
-      },
-    },
-  });
-
-  const cities = country?.cities;
-
-  return cities;
-});
 
 export async function submitProfileForm(userId: string, data: ProfileInputs) {
-  const country = await prisma.country.findFirst({
+  const country = await prisma.country.findUnique({
     where: {
       name: data.country,
     },

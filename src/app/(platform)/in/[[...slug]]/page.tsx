@@ -1,8 +1,8 @@
+import { getUserWithProfile } from "@/app/(platform)/in/[[...slug]]/actions";
 import MainProfile from "@/app/(platform)/in/[[...slug]]/main-profile";
 import getSession from "@/lib/get-session";
 import { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { getUserWithProfile } from "./actions";
 
 export const metadata: Metadata = {};
 

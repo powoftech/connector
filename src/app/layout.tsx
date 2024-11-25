@@ -1,9 +1,7 @@
-import { Toaster } from "@/components/ui/toaster";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Inter, Roboto_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 // Setup Inter and Roboto Mono from next/font/google
@@ -11,12 +9,6 @@ const inter = Inter({
   subsets: ["latin"],
   weight: "variable",
   variable: "--font-inter",
-});
-
-const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-roboto-mono",
 });
 
 export const metadata: Metadata = {
@@ -34,17 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} ${roboto_mono.variable} ${GeistSans.variable} ${GeistMono.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${inter.variable}`}>
       <head>
         <meta name="color-scheme" content="light dark" />
       </head>
       <body
-        className={`${inter.className} antialiased`}
         dir="ltr"
+        className={`${inter.className} antialiased`}
         style={
           {
             "--header-height": `56px`,
@@ -65,7 +53,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <Toaster />
+        <Toaster expand={true} />
       </body>
     </html>
   );
