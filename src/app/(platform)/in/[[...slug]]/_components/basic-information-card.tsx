@@ -1,28 +1,27 @@
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import EditProfileForm from "@/app/(platform)/in/[[...slug]]/_components/edit-profile-button";
+import OpenToWorkCard from "@/app/(platform)/in/[[...slug]]/_components/open-to-work-card";
+import { UserWithProfile } from "@/app/(platform)/in/[[...slug]]/data";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Profile, User } from "@prisma/client";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { IoCamera, IoPaperPlane, IoPersonAdd } from "react-icons/io5";
-import { LuContact, LuPencil } from "react-icons/lu";
-
-type BasicInformationCardProps = {
-  isSelfProfile: boolean;
-  image: User["image"] | undefined | null;
-  name: User["name"] | undefined | null;
-  headline: Profile["headline"] | undefined | null;
-  cityName: string | undefined | null;
-  countryName: string | undefined | null;
-};
+import { LuPencil } from "react-icons/lu";
 
 export default function BasicInformationCard({
+  userWithProfile,
   isSelfProfile,
-  image,
-  name,
-  headline,
-  cityName,
-  countryName,
-}: BasicInformationCardProps) {
+}: {
+  userWithProfile: UserWithProfile;
+  isSelfProfile: boolean;
+}) {
   return (
     <section className="w-full rounded-t-md border bg-background md:rounded-md">
       <div className="relative max-h-[204px] rounded-t-md bg-chart-3">
@@ -38,28 +37,45 @@ export default function BasicInformationCard({
       <div className="px-6 pb-6">
         <div className="relative flex h-14 flex-row items-end justify-between">
           <Avatar className="-mt-28 h-32 w-32 shrink-0 select-none border-4 border-background bg-background p-0 md:h-36 md:w-36 lg:h-40 lg:w-40">
-            <AvatarImage src={image ?? undefined} />
-            <AvatarFallback>{name?.charAt(0).toUpperCase()}</AvatarFallback>
+            <AvatarImage src={userWithProfile?.image ?? undefined} />
+            <AvatarFallback>
+              {userWithProfile?.name?.charAt(0).toUpperCase()}
+            </AvatarFallback>
           </Avatar>
           {isSelfProfile && (
-            <Button
-              size="icon"
-              variant="ghost"
-              className="rounded-full [&_svg]:size-6"
-            >
-              <LuPencil />
-            </Button>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className="rounded-full [&_svg]:size-6"
+                >
+                  <LuPencil />
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="md:max-w-[var(--main-content-width)]">
+                <DialogHeader>
+                  <DialogTitle>Edit profile</DialogTitle>
+                  <DialogDescription>
+                    Make changes to your profile here.
+                  </DialogDescription>
+                </DialogHeader>
+                <EditProfileForm />
+              </DialogContent>
+            </Dialog>
           )}
         </div>
 
         <div className="mt-2 flex h-fit min-h-20 flex-row">
           <div className="flex flex-col justify-start">
-            <h1 className="text-2xl font-semibold leading-tight">{name}</h1>
-            <p className="text-base font-normal leading-tight">{headline}</p>
+            <h1 className="text-2xl font-semibold leading-tight">
+              {userWithProfile?.name}
+            </h1>
+            <p className="text-base font-normal leading-tight">
+              {userWithProfile?.profile?.headline}
+            </p>
             <p className="mt-1 text-sm font-normal text-muted-foreground">
-              {cityName}
-              {", "}
-              {countryName}
+              {`${userWithProfile?.profile?.city?.name}, ${userWithProfile?.profile?.country?.name}`}
             </p>
           </div>
 
@@ -111,29 +127,7 @@ export default function BasicInformationCard({
           )}
         </div>
 
-        {isSelfProfile && (
-          <Alert
-            onClick={() => {}}
-            className="mt-6 w-full cursor-pointer border-0 bg-secondary lg:w-4/5 xl:w-3/4"
-          >
-            <LuContact className="h-5 w-5" />
-            <AlertTitle className="font-semibold leading-tight">
-              Open to work
-            </AlertTitle>
-            <AlertDescription>
-              <p className="truncate text-nowrap">
-                Data Engineer and Software Engineer roles
-              </p>
-              <p
-                onClick={() => {}}
-                className="h-fit w-fit cursor-pointer font-medium text-muted-foreground hover:text-foreground hover:underline"
-              >
-                Show details
-              </p>
-            </AlertDescription>
-            <AlertDescription></AlertDescription>
-          </Alert>
-        )}
+        {isSelfProfile && <OpenToWorkCard />}
       </div>
     </section>
   );

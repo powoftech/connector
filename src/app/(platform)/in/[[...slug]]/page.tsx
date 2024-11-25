@@ -1,4 +1,4 @@
-import { getUserWithProfile } from "@/app/(platform)/in/[[...slug]]/actions";
+import { fetchUserWithProfile } from "@/app/(platform)/in/[[...slug]]/data";
 import MainProfile from "@/app/(platform)/in/[[...slug]]/main-profile";
 import getSession from "@/lib/get-session";
 import { Metadata } from "next";
@@ -21,7 +21,7 @@ export default async function Page({ params }: Props) {
 
   const profileUrl = params.slug[0];
 
-  const foundUser = await getUserWithProfile(profileUrl);
+  const foundUser = await fetchUserWithProfile(profileUrl);
 
   if (!foundUser) notFound();
 
@@ -31,7 +31,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <MainProfile profileUrl={profileUrl} isSelfProfile={isSelfProfile} />
+      <MainProfile userWithProfile={foundUser} isSelfProfile={isSelfProfile} />
     </>
   );
 }

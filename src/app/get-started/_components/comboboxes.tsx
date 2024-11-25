@@ -21,9 +21,11 @@ import { LuChevronsUpDown } from "react-icons/lu";
 
 export function CountryCombobox({
   field,
+  className,
   onCountryChange,
 }: {
   field: { value: string; onChange: (value: string) => void };
+  className?: string;
   onCountryChange?: () => void;
 }) {
   const [open, setOpen] = useState(false);
@@ -49,7 +51,7 @@ export function CountryCombobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="flex w-full justify-between"
+          className={cn("flex w-full justify-between", className)}
         >
           {field.value
             ? countries.current.find((country) => country.value === field.value)
@@ -98,9 +100,11 @@ export function CountryCombobox({
 
 export function CityCombobox({
   field,
+  className,
   countryName,
 }: {
   field: { value: string; onChange: (value: string) => void };
+  className?: string;
   countryName: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -126,7 +130,7 @@ export function CityCombobox({
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="flex w-full justify-between"
+          className={cn("flex w-full justify-between", className)}
           disabled={!countryName}
         >
           {field.value && field.value !== ""

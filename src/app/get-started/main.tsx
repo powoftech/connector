@@ -4,7 +4,7 @@ import {
   CityCombobox,
   CountryCombobox,
 } from "@/app/get-started/_components/comboboxes";
-import { submitProfileForm } from "@/app/get-started/actions";
+import { createProfile } from "@/app/get-started/actions";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -66,13 +66,13 @@ export default function Main({ user }: { user: User }) {
       if (!user?.id) {
         throw new Error("User ID is missing.");
       }
-      await submitProfileForm(user.id, data);
+      await createProfile(user.id, data);
       toast.success("Your profile has been submitted successfully.");
       toast.info("You will be redirected to the feed shortly.");
       router.push("/feed");
     } catch (error) {
-      console.error("Error submitting profile:", error);
-      toast.error("An error occurred while submitting your profile.");
+      console.error("Error creating profile:", error);
+      toast.error("An error occurred while creating your profile.");
     }
   }
 
@@ -87,7 +87,7 @@ export default function Main({ user }: { user: User }) {
         <CardContent>
           <Form {...profileForm}>
             <form
-              id="profile-form"
+              id="create-profile-form"
               onSubmit={profileForm.handleSubmit(onSubmit)}
               className="grid gap-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4"
             >
@@ -98,7 +98,7 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>Display name</FormLabel>
                     <FormControl>
-                      <Input autoComplete="name" {...field} />
+                      <Input {...field} autoComplete="name" />
                     </FormControl>
                     {/* <FormDescription>
                       This is your public display name.
@@ -228,7 +228,7 @@ export default function Main({ user }: { user: User }) {
 
         <CardFooter className="justify-end">
           <Button
-            form="profile-form"
+            form="create-profile-form"
             type="submit"
             disabled={profileForm.formState.isSubmitting}
           >

@@ -1,6 +1,6 @@
-import { getProfileExisted } from "@/app/(platform)/actions";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
+import { fetchProfileId } from "@/app/data";
 import Main from "@/app/get-started/main";
 import getSession from "@/lib/get-session";
 import { redirect } from "next/navigation";
@@ -12,9 +12,9 @@ export default async function Page() {
     redirect("/join");
   }
 
-  const isProfileExisted = await getProfileExisted(session.user.id);
+  const isUserProfileAvailable = await fetchProfileId(session.user.id);
 
-  if (isProfileExisted) {
+  if (isUserProfileAvailable) {
     redirect("/feed");
   }
 

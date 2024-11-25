@@ -1,39 +1,14 @@
-"use client";
-
 import BasicInformationCard from "@/app/(platform)/in/[[...slug]]/_components/basic-information-card";
-import {
-  getUserWithProfile,
-  UserWithProfile,
-} from "@/app/(platform)/in/[[...slug]]/actions";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Skeleton } from "@/components/ui/skeleton";
+import { UserWithProfile } from "@/app/(platform)/in/[[...slug]]/data";
 import { cn } from "@/lib/utils";
-import { useSession } from "next-auth/react";
-import { notFound } from "next/navigation";
-import { useEffect, useRef } from "react";
 
 export default function MainProfile({
-  profileUrl,
+  userWithProfile,
   isSelfProfile,
 }: {
-  profileUrl: string;
+  userWithProfile: UserWithProfile;
   isSelfProfile: boolean;
 }) {
-  const session = useSession();
-  const otherUser = useRef<UserWithProfile | null>(null);
-
-  useEffect(() => {
-    if (!isSelfProfile) {
-      getUserWithProfile(profileUrl).then((foundUser) => {
-        if (foundUser) {
-          otherUser.current = foundUser;
-        } else {
-          notFound();
-        }
-      });
-    }
-  });
-
   return (
     <div className="py-4 md:px-6">
       <div
@@ -43,33 +18,10 @@ export default function MainProfile({
         )}
       >
         <main className="flex w-full flex-initial flex-shrink flex-col items-center justify-start gap-4">
-          {session.status === "loading" ? (
-            <AspectRatio ratio={3 / 2}>
-              <Skeleton className="h-full w-full rounded-t-md border md:rounded-md" />
-            </AspectRatio>
-          ) : (
-            <>
-              {isSelfProfile ? (
-                <BasicInformationCard
-                  isSelfProfile={isSelfProfile}
-                  image={session.data?.user.image}
-                  name={session.data?.user.name}
-                  headline={session.data?.user.profile.headline}
-                  cityName={session.data?.user.profile.city.name}
-                  countryName={session.data?.user.profile.country.name}
-                />
-              ) : (
-                <BasicInformationCard
-                  isSelfProfile={isSelfProfile}
-                  image={otherUser?.current?.image}
-                  name={otherUser?.current?.name}
-                  headline={otherUser?.current?.profile?.headline}
-                  cityName={otherUser?.current?.profile?.city?.name}
-                  countryName={otherUser?.current?.profile?.country?.name}
-                />
-              )}
-            </>
-          )}
+          <BasicInformationCard
+            userWithProfile={userWithProfile}
+            isSelfProfile={isSelfProfile}
+          />
 
           <section className="w-full">
             <div className="relative h-48 w-full bg-chart-4 md:rounded-md"></div>

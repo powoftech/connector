@@ -3,7 +3,7 @@
 import { ProfileInputs } from "@/lib/definitions";
 import prisma from "@/lib/prisma";
 
-export async function submitProfileForm(userId: string, data: ProfileInputs) {
+export async function createProfile(userId: string, data: ProfileInputs) {
   const country = await prisma.country.findUnique({
     where: {
       name: data.country,

@@ -1,5 +1,5 @@
 import PlatformHeader from "@/app/(platform)/_components/platform-header";
-import { getProfileExisted } from "@/app/(platform)/actions";
+import { fetchProfileId } from "@/app/data";
 import getSession from "@/lib/get-session";
 import { SessionProvider } from "next-auth/react";
 import { redirect } from "next/navigation";
@@ -15,9 +15,9 @@ export default async function PlatformLayout({
     redirect("/join");
   }
 
-  const isProfileExisted = await getProfileExisted(session.user.id);
+  const isUserProfileAvailable = await fetchProfileId(session.user.id);
 
-  if (!isProfileExisted) {
+  if (!isUserProfileAvailable) {
     redirect("/get-started");
   }
 
