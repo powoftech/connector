@@ -9,11 +9,13 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
+import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { useEffect, useRef, useState } from "react";
 import { IoCheckmark } from "react-icons/io5";
@@ -29,6 +31,7 @@ export function CountryCombobox({
   onCountryChange?: () => void;
 }) {
   const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
   const countries = useRef<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
@@ -44,14 +47,76 @@ export function CountryCombobox({
     fetchCountries();
   }, []);
 
+  if (!isMobile) {
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn(
+              "flex w-full justify-between text-base font-normal md:text-sm",
+              className
+            )}
+          >
+            {field.value
+              ? countries.current.find(
+                  (country) => country.value === field.value
+                )?.label
+              : "Select country or region..."}
+            <LuChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="p-0"
+          style={{ width: "var(--radix-popover-trigger-width)" }}
+        >
+          <Command>
+            <CommandInput placeholder="Search country or region..." />
+            <CommandList>
+              <CommandEmpty>No country or region found.</CommandEmpty>
+              <CommandGroup>
+                {countries.current.map((country) => (
+                  <CommandItem
+                    key={country.value}
+                    value={country.value}
+                    onSelect={() => {
+                      field.onChange(country.value);
+                      setOpen(false);
+                      onCountryChange?.();
+                    }}
+                  >
+                    {country.label}
+                    <IoCheckmark
+                      className={cn(
+                        "ml-auto",
+                        field.value === country.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("flex w-full justify-between", className)}
+          className={cn(
+            "flex w-full justify-between text-base font-normal md:text-sm",
+            className
+          )}
         >
           {field.value
             ? countries.current.find((country) => country.value === field.value)
@@ -59,44 +124,76 @@ export function CountryCombobox({
             : "Select country or region..."}
           <LuChevronsUpDown className="opacity-50" />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="p-0"
-        style={{ width: "var(--radix-popover-trigger-width)" }}
-      >
-        <Command>
-          <CommandInput placeholder="Search country or region..." />
-          <CommandList>
-            <CommandEmpty>No country or region found.</CommandEmpty>
-            <CommandGroup>
-              {countries.current.map((country) => (
-                <CommandItem
-                  key={country.value}
-                  value={country.value}
-                  onSelect={() => {
-                    field.onChange(country.value);
-                    setOpen(false);
-                    onCountryChange?.();
-                  }}
-                >
-                  {country.label}
-                  <IoCheckmark
-                    className={cn(
-                      "ml-auto",
-                      field.value === country.value
-                        ? "opacity-100"
-                        : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mt-4 border-t">
+          <Command>
+            <CommandInput placeholder="Search country or region..." />
+            <CommandList className="max-h-[512px]">
+              <CommandEmpty>No country or region found.</CommandEmpty>
+              <CommandGroup>
+                {countries.current.map((country) => (
+                  <CommandItem
+                    key={country.value}
+                    value={country.value}
+                    onSelect={() => {
+                      field.onChange(country.value);
+                      setOpen(false);
+                      onCountryChange?.();
+                    }}
+                  >
+                    {country.label}
+                    <IoCheckmark
+                      className={cn(
+                        "ml-auto",
+                        field.value === country.value
+                          ? "opacity-100"
+                          : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }
+
+// function StatusList({
+//   setOpen,
+//   setSelectedStatus,
+// }: {
+//   setOpen: (open: boolean) => void;
+//   setSelectedStatus: (status: Status | null) => void;
+// }) {
+//   return (
+//     <Command>
+//       <CommandInput placeholder="Filter status..." />
+//       <CommandList>
+//         <CommandEmpty>No results found.</CommandEmpty>
+//         <CommandGroup>
+//           {statuses.map((status) => (
+//             <CommandItem
+//               key={status.value}
+//               value={status.value}
+//               onSelect={(value) => {
+//                 setSelectedStatus(
+//                   statuses.find((priority) => priority.value === value) || null
+//                 );
+//                 setOpen(false);
+//               }}
+//             >
+//               {status.label}
+//             </CommandItem>
+//           ))}
+//         </CommandGroup>
+//       </CommandList>
+//     </Command>
+//   );
+// }
 
 export function CityCombobox({
   field,
@@ -108,6 +205,7 @@ export function CityCombobox({
   countryName: string;
 }) {
   const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
   const cities = useRef<{ label: string; value: string }[]>([]);
 
   useEffect(() => {
@@ -123,14 +221,72 @@ export function CityCombobox({
     fetchCountries();
   }, [countryName]);
 
+  if (!isMobile) {
+    return (
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={open}
+            className={cn(
+              "flex w-full justify-between text-base font-normal md:text-sm",
+              className
+            )}
+            disabled={!countryName}
+          >
+            {field.value && field.value !== ""
+              ? cities.current.find((city) => city.value === field.value)?.label
+              : "Select city..."}
+            <LuChevronsUpDown className="opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          className="p-0"
+          style={{ width: "var(--radix-popover-trigger-width)" }}
+        >
+          <Command>
+            <CommandInput placeholder="Search city..." />
+            <CommandList>
+              <CommandEmpty>No city found.</CommandEmpty>
+              <CommandGroup>
+                {cities.current.map((city) => (
+                  <CommandItem
+                    key={city.value}
+                    value={city.value}
+                    onSelect={() => {
+                      field.onChange(city.value);
+                      setOpen(false);
+                    }}
+                  >
+                    {city.label}
+                    <IoCheckmark
+                      className={cn(
+                        "ml-auto",
+                        field.value === city.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    );
+  }
+
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+    <Drawer open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
         <Button
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className={cn("flex w-full justify-between", className)}
+          className={cn(
+            "flex w-full justify-between text-base font-normal md:text-sm",
+            className
+          )}
           disabled={!countryName}
         >
           {field.value && field.value !== ""
@@ -138,38 +294,37 @@ export function CityCombobox({
             : "Select city..."}
           <LuChevronsUpDown className="opacity-50" />
         </Button>
-      </PopoverTrigger>
-      <PopoverContent
-        className="p-0"
-        style={{ width: "var(--radix-popover-trigger-width)" }}
-      >
-        <Command>
-          <CommandInput placeholder="Search city..." />
-          <CommandList>
-            <CommandEmpty>No city found.</CommandEmpty>
-            <CommandGroup>
-              {cities.current.map((city) => (
-                <CommandItem
-                  key={city.value}
-                  value={city.value}
-                  onSelect={() => {
-                    field.onChange(city.value);
-                    setOpen(false);
-                  }}
-                >
-                  {city.label}
-                  <IoCheckmark
-                    className={cn(
-                      "ml-auto",
-                      field.value === city.value ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-      </PopoverContent>
-    </Popover>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="mt-4 border-t">
+          <Command>
+            <CommandInput placeholder="Search city..." />
+            <CommandList className="max-h-[512px]">
+              <CommandEmpty>No city found.</CommandEmpty>
+              <CommandGroup>
+                {cities.current.map((city) => (
+                  <CommandItem
+                    key={city.value}
+                    value={city.value}
+                    onSelect={() => {
+                      field.onChange(city.value);
+                      setOpen(false);
+                    }}
+                  >
+                    {city.label}
+                    <IoCheckmark
+                      className={cn(
+                        "ml-auto",
+                        field.value === city.value ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
 }

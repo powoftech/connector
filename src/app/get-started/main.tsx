@@ -98,7 +98,7 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>Display name</FormLabel>
                     <FormControl>
-                      <Input {...field} autoComplete="name" />
+                      <Input {...field} autoComplete="name" className="text-sm" />
                     </FormControl>
                     {/* <FormDescription>
                       This is your public display name.
@@ -191,6 +191,7 @@ export default function Main({ user }: { user: User }) {
                       <Input
                         {...field}
                         placeholder="A catchy phrase to describe yourself."
+                        className="text-sm"
                       />
                     </FormControl>
                     {/* <FormDescription>
@@ -209,7 +210,7 @@ export default function Main({ user }: { user: User }) {
                     <FormControl>
                       <Textarea
                         {...field}
-                        className="min-h-[120px] sm:min-h-20"
+                        className="min-h-[120px] sm:min-h-20 text-sm"
                         placeholder="You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences."
                       />
                     </FormControl>
