@@ -162,39 +162,6 @@ export function CountryCombobox({
   );
 }
 
-// function StatusList({
-//   setOpen,
-//   setSelectedStatus,
-// }: {
-//   setOpen: (open: boolean) => void;
-//   setSelectedStatus: (status: Status | null) => void;
-// }) {
-//   return (
-//     <Command>
-//       <CommandInput placeholder="Filter status..." />
-//       <CommandList>
-//         <CommandEmpty>No results found.</CommandEmpty>
-//         <CommandGroup>
-//           {statuses.map((status) => (
-//             <CommandItem
-//               key={status.value}
-//               value={status.value}
-//               onSelect={(value) => {
-//                 setSelectedStatus(
-//                   statuses.find((priority) => priority.value === value) || null
-//                 );
-//                 setOpen(false);
-//               }}
-//             >
-//               {status.label}
-//             </CommandItem>
-//           ))}
-//         </CommandGroup>
-//       </CommandList>
-//     </Command>
-//   );
-// }
-
 export function CityCombobox({
   field,
   className,

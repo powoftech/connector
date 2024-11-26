@@ -77,8 +77,8 @@ export default function Main({ user }: { user: User }) {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center sm:p-6">
-      <Card className="h-full w-full border-none shadow-none sm:m-auto sm:max-w-screen-lg sm:border-solid sm:border-border sm:shadow">
+    <main className="flex min-h-[calc(100vh-var(--header-height))] flex-col items-center md:p-6">
+      <Card className="h-full w-full border-none shadow-none md:m-auto md:max-w-screen-lg md:border-solid md:border-border md:shadow">
         <CardHeader>
           <CardTitle>Get Started</CardTitle>
           <CardDescription>Let&apos;s create your profile.</CardDescription>
@@ -89,7 +89,7 @@ export default function Main({ user }: { user: User }) {
             <form
               id="create-profile-form"
               onSubmit={profileForm.handleSubmit(onSubmit)}
-              className="grid gap-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-4"
+              className="grid gap-4 md:grid-cols-2 md:gap-x-6 md:gap-y-4"
             >
               <FormField
                 control={profileForm.control}
@@ -98,7 +98,7 @@ export default function Main({ user }: { user: User }) {
                   <FormItem>
                     <FormLabel>Display name</FormLabel>
                     <FormControl>
-                      <Input {...field} autoComplete="name" className="text-sm" />
+                      <Input {...field} autoComplete="name" />
                     </FormControl>
                     {/* <FormDescription>
                       This is your public display name.
@@ -119,7 +119,7 @@ export default function Main({ user }: { user: User }) {
                       name="role"
                     >
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="text-base md:text-sm">
                           <SelectValue placeholder="Select role..." />
                         </SelectTrigger>
                       </FormControl>
@@ -191,7 +191,7 @@ export default function Main({ user }: { user: User }) {
                       <Input
                         {...field}
                         placeholder="A catchy phrase to describe yourself."
-                        className="text-sm"
+                        className="text-base md:text-sm"
                       />
                     </FormControl>
                     {/* <FormDescription>
@@ -210,7 +210,7 @@ export default function Main({ user }: { user: User }) {
                     <FormControl>
                       <Textarea
                         {...field}
-                        className="min-h-[120px] sm:min-h-20 text-sm"
+                        className="min-h-[120px] text-base md:text-sm"
                         placeholder="You can write about your years of experience, industry, or skills. People also talk about their achievements or previous job experiences."
                       />
                     </FormControl>

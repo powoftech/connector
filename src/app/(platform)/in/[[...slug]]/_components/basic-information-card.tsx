@@ -1,4 +1,4 @@
-import EditProfileForm from "@/app/(platform)/in/[[...slug]]/_components/edit-profile-button";
+import EditProfileForm from "@/app/(platform)/in/[[...slug]]/_components/edit-profile-form";
 import OpenToWorkCard from "@/app/(platform)/in/[[...slug]]/_components/open-to-work-card";
 import { UserWithProfile } from "@/app/(platform)/in/[[...slug]]/data";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
