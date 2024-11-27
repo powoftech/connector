@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
@@ -52,6 +53,7 @@ export default function RootLayout({
           themes={["light", "dark"]}
         >
           {children}
+          <SpeedInsights />
         </ThemeProvider>
         <Toaster expand={true} />
       </body>

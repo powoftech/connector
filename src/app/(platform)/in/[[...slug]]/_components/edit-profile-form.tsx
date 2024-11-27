@@ -1,10 +1,7 @@
 "use client";
 
 import { updateProfile } from "@/app/(platform)/in/[[...slug]]/actions";
-import {
-  CityCombobox,
-  CountryCombobox,
-} from "@/app/get-started/_components/comboboxes";
+import { CityCombobox, CountryCombobox } from "@/app/_components/comboboxes";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import {
@@ -42,6 +39,7 @@ export default function EditProfileForm() {
   const session = useSession();
   const router = useRouter();
 
+  // TODO: Fix form
   const profileForm = useForm<ProfileInputs>({
     resolver: zodResolver(ProfileSchema),
     defaultValues: {
@@ -75,18 +73,17 @@ export default function EditProfileForm() {
         <form
           id="update-profile-form"
           onSubmit={profileForm.handleSubmit(onSubmit)}
-          className="grid gap-4 md:gap-2 py-4"
+          className="grid gap-4 py-4 md:gap-2"
         >
           <FormField
             control={profileForm.control}
             name="name"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">Display name</FormLabel>
-                <FormControl autoFocus={false}>
+                <FormControl>
                   <Input
                     {...field}
-                    autoFocus={false}
                     autoComplete="name"
                     className="w-full text-base md:col-span-3 md:text-sm"
                   />
@@ -99,7 +96,7 @@ export default function EditProfileForm() {
             control={profileForm.control}
             name="role"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">Role</FormLabel>
                 <Select
                   onValueChange={field.onChange}
@@ -127,9 +124,9 @@ export default function EditProfileForm() {
             control={profileForm.control}
             name="country"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">Country/Region</FormLabel>
-                <FormControl autoFocus={false}>
+                <FormControl>
                   <CountryCombobox
                     field={field}
                     className="w-full md:col-span-3"
@@ -151,9 +148,9 @@ export default function EditProfileForm() {
             control={profileForm.control}
             name="city"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">City</FormLabel>
-                <FormControl autoFocus={false}>
+                <FormControl>
                   <CityCombobox
                     field={field}
                     className="w-full md:col-span-3"
@@ -168,12 +165,11 @@ export default function EditProfileForm() {
             control={profileForm.control}
             name="headline"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">Headline</FormLabel>
-                <FormControl autoFocus={false}>
+                <FormControl>
                   <Input
                     {...field}
-                    autoFocus={false}
                     autoComplete="headline"
                     className="w-full text-base md:col-span-3 md:text-sm"
                   />
@@ -186,12 +182,11 @@ export default function EditProfileForm() {
             control={profileForm.control}
             name="about"
             render={({ field }) => (
-              <FormItem autoFocus={false} className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
+              <FormItem className="flex flex-col md:grid md:grid-cols-4 md:items-center md:gap-4">
                 <FormLabel className="text-left">About</FormLabel>
-                <FormControl autoFocus={false}>
+                <FormControl>
                   <Textarea
                     {...field}
-                    autoFocus={false}
                     autoComplete="about"
                     className="w-full text-base md:col-span-3 md:text-sm"
                   />

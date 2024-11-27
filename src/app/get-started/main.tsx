@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  CityCombobox,
-  CountryCombobox,
-} from "@/app/get-started/_components/comboboxes";
+import { CityCombobox, CountryCombobox } from "@/app/_components/comboboxes";
 import { createProfile } from "@/app/get-started/actions";
 import { Button } from "@/components/ui/button";
 import {

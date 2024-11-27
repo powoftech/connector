@@ -1,17 +1,10 @@
-import EditProfileForm from "@/app/(platform)/in/[[...slug]]/_components/edit-profile-form";
+import EditProfileContent from "@/app/(platform)/in/[[...slug]]/_components/edit-profile-content";
 import OpenToWorkCard from "@/app/(platform)/in/[[...slug]]/_components/open-to-work-card";
 import { UserWithProfile } from "@/app/(platform)/in/[[...slug]]/data";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { IoCamera, IoPaperPlane, IoPersonAdd } from "react-icons/io5";
 import { LuPencil } from "react-icons/lu";
 
@@ -53,15 +46,7 @@ export default function BasicInformationCard({
                   <LuPencil />
                 </Button>
               </DialogTrigger>
-              <DialogContent className="md:max-w-[var(--main-content-width)]">
-                <DialogHeader>
-                  <DialogTitle>Edit profile</DialogTitle>
-                  <DialogDescription>
-                    Make changes to your profile here.
-                  </DialogDescription>
-                </DialogHeader>
-                <EditProfileForm />
-              </DialogContent>
+              <EditProfileContent />
             </Dialog>
           )}
         </div>
